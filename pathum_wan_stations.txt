@@ -1,0 +1,7191 @@
+[
+  {
+    "id": 3867,
+    "updated_at": "2025-02-08T18:15:07.088724Z",
+    "source": "tesla",
+    "types": [
+      "DC"
+    ],
+    "ocpp_status": "specific",
+    "latitude": 13.7268516,
+    "longitude": 100.5474232,
+    "name": "One Bangkok, Bangkok",
+    "address": "1 Thanon Witthayu",
+    "icon_scale": "ss",
+    "distance": 15.71,
+    "distance_per_time_kilo": "23 นาที",
+    "opening_times": [
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 0
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 1
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 2
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 3
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 4
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 5
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 6
+      }
+    ],
+    "province": {
+      "code": "10",
+      "name_th": "กรุงเทพมหานคร",
+      "name_en": "Bangkok"
+    },
+    "evses": [
+      {
+        "brand": "Supercharger",
+        "code": "Supercharger",
+        "connectors": [
+          {
+            "name": "One Bangkok, Bangkok",
+            "ocpp_status": "specific",
+            "power": "250",
+            "price": 10.1,
+            "type": "DC"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 5314,
+    "updated_at": "2025-12-15T11:03:05.982197Z",
+    "source": "pttv2",
+    "types": [
+      "AC"
+    ],
+    "ocpp_status": "available",
+    "latitude": 13.72559,
+    "longitude": 100.5459,
+    "name": "คิว-เฮาส์",
+    "address": "1 แขวงทุ่งมหาเมฆ เขตสาทร กรุงเทพมหานคร 10120",
+    "icon_scale": "ss",
+    "distance": 15.9,
+    "distance_per_time_kilo": "23 นาที",
+    "opening_times": [
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 0
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 1
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 2
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 3
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 4
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 5
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 6
+      }
+    ],
+    "province": {
+      "code": "10",
+      "name_th": "กรุงเทพมหานคร",
+      "name_en": "Bangkok"
+    },
+    "evses": [
+      {
+        "brand": "IOCharger",
+        "code": "GWC-OR-2155",
+        "connectors": [
+          {
+            "name": "Type 2",
+            "ocpp_status": "available",
+            "power": "7",
+            "price": 9,
+            "type": "AC",
+            "position": "M",
+            "status_updated_at": "2025-12-15T02:35:26.793427Z"
+          }
+        ]
+      },
+      {
+        "brand": "IOCharger",
+        "code": "GWC-OR-2154",
+        "connectors": [
+          {
+            "name": "Type 2",
+            "ocpp_status": "occupied",
+            "power": "7",
+            "price": 9,
+            "type": "AC",
+            "position": "M",
+            "status_updated_at": "2025-12-15T09:04:45.694395Z"
+          }
+        ]
+      },
+      {
+        "brand": "IOCharger",
+        "code": "GWC-OR-2156",
+        "connectors": [
+          {
+            "name": "Type 2",
+            "ocpp_status": "occupied",
+            "power": "7",
+            "price": 9,
+            "type": "AC",
+            "position": "M",
+            "status_updated_at": "2025-12-15T09:41:22.011941Z"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 4717,
+    "updated_at": "2025-12-15T11:03:05.218785Z",
+    "source": "pttv2",
+    "types": [
+      "DC",
+      "AC"
+    ],
+    "ocpp_status": "available",
+    "latitude": 13.74555,
+    "longitude": 100.531,
+    "name": "อาคารสยามสเคป",
+    "address": "215 ถ.พญาไท แขวงปทุมวัน เขตปทุมวัน กรุงเทพมหานคร 10330",
+    "icon_scale": "ss",
+    "distance": 17.2,
+    "distance_per_time_kilo": "25 นาที",
+    "opening_times": [
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 0
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 1
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 2
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 3
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 4
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 5
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 6
+      }
+    ],
+    "province": {
+      "code": "10",
+      "name_th": "กรุงเทพมหานคร",
+      "name_en": "Bangkok"
+    },
+    "evses": [
+      {
+        "brand": "Teison",
+        "code": "THPORE240312",
+        "connectors": [
+          {
+            "name": "CCS COMBO 2",
+            "ocpp_status": "occupied",
+            "power": "40",
+            "price": 8,
+            "type": "DC",
+            "position": "R",
+            "status_updated_at": "2025-12-15T09:53:00.466812Z"
+          },
+          {
+            "name": "CCS COMBO 2",
+            "ocpp_status": "occupied",
+            "power": "40",
+            "price": 8,
+            "type": "DC",
+            "position": "L",
+            "status_updated_at": "2025-12-15T10:22:00.612477Z"
+          }
+        ]
+      },
+      {
+        "brand": "IOCharger",
+        "code": "GWC-OR-2001",
+        "connectors": [
+          {
+            "name": "Type 2",
+            "ocpp_status": "available",
+            "power": "7",
+            "price": 9,
+            "type": "AC",
+            "position": "M",
+            "status_updated_at": "2025-12-14T03:18:18.185579Z"
+          }
+        ]
+      },
+      {
+        "brand": "IOCharger",
+        "code": "GWC-OR-2002",
+        "connectors": [
+          {
+            "name": "Type 2",
+            "ocpp_status": "occupied",
+            "power": "7",
+            "price": 9,
+            "type": "AC",
+            "position": "M",
+            "status_updated_at": "2025-12-15T04:58:10.430969Z"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 5353,
+    "updated_at": "2025-12-15T11:03:06.36436Z",
+    "source": "pttv2",
+    "types": [
+      "DC",
+      "AC"
+    ],
+    "ocpp_status": "available",
+    "latitude": 13.74763,
+    "longitude": 100.5304,
+    "name": "สยามปทุมวัน เฮ้าส์",
+    "address": "891/1 ถ.พระราม 1 แขวงวังใหม่ เขตปทุมวัน กรุงเทพมหานคร 10330",
+    "icon_scale": "ss",
+    "distance": 17.25,
+    "distance_per_time_kilo": "25 นาที",
+    "opening_times": [
+      {
+        "period_begin": "22:00",
+        "period_end": "16:59",
+        "weekday": 0
+      },
+      {
+        "period_begin": "22:00",
+        "period_end": "16:59",
+        "weekday": 1
+      },
+      {
+        "period_begin": "22:00",
+        "period_end": "16:59",
+        "weekday": 2
+      },
+      {
+        "period_begin": "22:00",
+        "period_end": "16:59",
+        "weekday": 3
+      },
+      {
+        "period_begin": "22:00",
+        "period_end": "16:59",
+        "weekday": 4
+      },
+      {
+        "period_begin": "22:00",
+        "period_end": "16:59",
+        "weekday": 5
+      },
+      {
+        "period_begin": "22:00",
+        "period_end": "16:59",
+        "weekday": 6
+      }
+    ],
+    "province": {
+      "code": "10",
+      "name_th": "กรุงเทพมหานคร",
+      "name_en": "Bangkok"
+    },
+    "evses": [
+      {
+        "brand": "IOCharger",
+        "code": "GWC-OR-2232",
+        "connectors": [
+          {
+            "name": "Type 2",
+            "ocpp_status": "available",
+            "power": "7",
+            "price": 9,
+            "type": "AC",
+            "position": "M",
+            "status_updated_at": "2025-12-15T02:29:22.08838Z"
+          }
+        ]
+      },
+      {
+        "brand": "IOCharger",
+        "code": "GWC-OR-2227",
+        "connectors": [
+          {
+            "name": "Type 2",
+            "ocpp_status": "available",
+            "power": "7",
+            "price": 9,
+            "type": "AC",
+            "position": "M",
+            "status_updated_at": "2025-12-04T10:32:08.867512Z"
+          }
+        ]
+      },
+      {
+        "brand": "IOCharger",
+        "code": "GWC-OR-2231",
+        "connectors": [
+          {
+            "name": "Type 2",
+            "ocpp_status": "available",
+            "power": "7",
+            "price": 9,
+            "type": "AC",
+            "position": "M",
+            "status_updated_at": "2025-12-11T02:39:22.449266Z"
+          }
+        ]
+      },
+      {
+        "brand": "IOCharger",
+        "code": "GWC-OR-2233",
+        "connectors": [
+          {
+            "name": "Type 2",
+            "ocpp_status": "available",
+            "power": "7",
+            "price": 9,
+            "type": "AC",
+            "position": "M",
+            "status_updated_at": "2025-12-12T04:56:04.450353Z"
+          }
+        ]
+      },
+      {
+        "brand": "IOCharger",
+        "code": "GWC-OR-2229",
+        "connectors": [
+          {
+            "name": "Type 2",
+            "ocpp_status": "available",
+            "power": "7",
+            "price": 9,
+            "type": "AC",
+            "position": "M",
+            "status_updated_at": "2025-12-10T09:01:13.831141Z"
+          }
+        ]
+      },
+      {
+        "brand": "IOCharger",
+        "code": "GWC-OR-2228",
+        "connectors": [
+          {
+            "name": "Type 2",
+            "ocpp_status": "available",
+            "power": "7",
+            "price": 9,
+            "type": "AC",
+            "position": "M",
+            "status_updated_at": "2025-12-15T00:28:44.27928Z"
+          }
+        ]
+      },
+      {
+        "brand": "IOCharger",
+        "code": "GWC-OR-2235",
+        "connectors": [
+          {
+            "name": "Type 2",
+            "ocpp_status": "available",
+            "power": "7",
+            "price": 9,
+            "type": "AC",
+            "position": "M",
+            "status_updated_at": "2025-12-09T03:29:41.711129Z"
+          }
+        ]
+      },
+      {
+        "brand": "IOCharger",
+        "code": "GWC-OR-2230",
+        "connectors": [
+          {
+            "name": "Type 2",
+            "ocpp_status": "available",
+            "power": "7",
+            "price": 9,
+            "type": "AC",
+            "position": "M",
+            "status_updated_at": "2025-11-22T01:05:57.515504Z"
+          }
+        ]
+      },
+      {
+        "brand": "IOCharger",
+        "code": "GWC-OR-2234",
+        "connectors": [
+          {
+            "name": "Type 2",
+            "ocpp_status": "available",
+            "power": "7",
+            "price": 9,
+            "type": "AC",
+            "position": "M",
+            "status_updated_at": "2025-11-22T02:55:01.758382Z"
+          }
+        ]
+      },
+      {
+        "brand": "Teison",
+        "code": "GWC-OR-6007",
+        "connectors": [
+          {
+            "name": "CCS COMBO 2",
+            "ocpp_status": "occupied",
+            "power": "40",
+            "price": 9,
+            "type": "DC",
+            "position": "R",
+            "status_updated_at": "2025-12-15T11:00:28.12465Z"
+          },
+          {
+            "name": "CCS COMBO 2",
+            "ocpp_status": "occupied",
+            "power": "40",
+            "price": 9,
+            "type": "DC",
+            "position": "L",
+            "status_updated_at": "2025-12-15T11:00:28.124617Z"
+          }
+        ]
+      },
+      {
+        "brand": "Teison",
+        "code": "GWC-OR-6008",
+        "connectors": [
+          {
+            "name": "CCS COMBO 2",
+            "ocpp_status": "occupied",
+            "power": "40",
+            "price": 9,
+            "type": "DC",
+            "position": "R",
+            "status_updated_at": "2025-12-15T11:00:28.124696Z"
+          },
+          {
+            "name": "CCS COMBO 2",
+            "ocpp_status": "occupied",
+            "power": "40",
+            "price": 9,
+            "type": "DC",
+            "position": "L",
+            "status_updated_at": "2025-12-15T11:00:28.124674Z"
+          }
+        ]
+      },
+      {
+        "brand": "Teison",
+        "code": "GWC-OR-6006",
+        "connectors": [
+          {
+            "name": "CCS COMBO 2",
+            "ocpp_status": "occupied",
+            "power": "40",
+            "price": 9,
+            "type": "DC",
+            "position": "L",
+            "status_updated_at": "2025-12-15T11:00:28.124561Z"
+          },
+          {
+            "name": "CCS COMBO 2",
+            "ocpp_status": "occupied",
+            "power": "40",
+            "price": 9,
+            "type": "DC",
+            "position": "R",
+            "status_updated_at": "2025-12-15T11:00:28.124583Z"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 4819,
+    "updated_at": "2025-12-15T11:03:06.753383Z",
+    "source": "pttv2",
+    "types": [
+      "AC"
+    ],
+    "ocpp_status": "available",
+    "latitude": 13.74094,
+    "longitude": 100.530195,
+    "name": "ลานจอดรถหน้าอาคารเลิศอุรัสยะนันทน์ จุฬาลงกรณ์มหาวิทยาลัย",
+    "address": "254 ถ.พญาไท แขวงปทุมวัน เขตปทุมวัน กรุงเทพมหานคร 10330",
+    "icon_scale": "l",
+    "distance": 17.32,
+    "distance_per_time_kilo": "25 นาที",
+    "opening_times": [
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 0
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 1
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 2
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 3
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 4
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 5
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 6
+      }
+    ],
+    "province": {
+      "code": "10",
+      "name_th": "กรุงเทพมหานคร",
+      "name_en": "Bangkok"
+    },
+    "evses": [
+      {
+        "brand": "IOCharger",
+        "code": "GWC-OR-2064",
+        "connectors": [
+          {
+            "name": "Type 2",
+            "ocpp_status": "available",
+            "power": "7",
+            "price": 9,
+            "type": "AC",
+            "position": "M",
+            "status_updated_at": "2025-12-13T06:35:46.116831Z"
+          }
+        ]
+      },
+      {
+        "brand": "IOCharger",
+        "code": "GWC-OR-2092",
+        "connectors": [
+          {
+            "name": "Type 2",
+            "ocpp_status": "available",
+            "power": "22",
+            "price": 9,
+            "type": "AC",
+            "position": "L",
+            "status_updated_at": "2025-12-15T06:28:45.885503Z"
+          },
+          {
+            "name": "Type 2",
+            "ocpp_status": "available",
+            "power": "22",
+            "price": 9,
+            "type": "AC",
+            "position": "R",
+            "status_updated_at": "2025-12-15T00:36:41.913901Z"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1304,
+    "updated_at": "2026-04-21T12:19:34.421995Z",
+    "source": "eaanywhere",
+    "types": [
+      "AC",
+      "DC"
+    ],
+    "ocpp_status": "available",
+    "latitude": 13.73299,
+    "longitude": 100.530401,
+    "name": "Chamchuri Square Parking Building, 7th floor",
+    "address": "Pathum Wan, Pathum Wan, Bangkok",
+    "icon_scale": "ss",
+    "distance": 17.41,
+    "distance_per_time_kilo": "25 นาที",
+    "opening_times": [
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 2
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 3
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 4
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 5
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 6
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 0
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 1
+      }
+    ],
+    "province": {
+      "code": "10",
+      "name_th": "กรุงเทพมหานคร",
+      "name_en": "Bangkok"
+    },
+    "evses": [
+      {
+        "brand": "AC Charger Plug Type",
+        "code": "1",
+        "connectors": [
+          {
+            "name": "CHAMCHURI-002",
+            "ocpp_status": "available",
+            "power": "11.04",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2026-04-21T06:48:08.842482Z"
+          },
+          {
+            "name": "CHAMCHURI-003",
+            "ocpp_status": "occupied",
+            "power": "11.04",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2026-04-21T10:32:23.105064Z"
+          }
+        ]
+      },
+      {
+        "brand": "DC 40kW",
+        "code": "6",
+        "connectors": [
+          {
+            "name": "CHAMCHURI-004",
+            "ocpp_status": "occupied",
+            "power": "30.00",
+            "price": 0,
+            "type": "DC",
+            "status_updated_at": "2026-04-21T08:59:47.906304Z"
+          },
+          {
+            "name": "CHAMCHURI-005",
+            "ocpp_status": "occupied",
+            "power": "0.00",
+            "price": 0,
+            "type": "DC",
+            "status_updated_at": "2026-02-09T20:05:42.989762Z"
+          }
+        ]
+      }
+    ],
+    "facilities": [
+      {
+        "name": "Wi-Fi"
+      },
+      {
+        "name": "ร้านกาแฟ"
+      },
+      {
+        "name": "ร้านสะดวกซื้อ"
+      }
+    ]
+  },
+  {
+    "id": 1311,
+    "updated_at": "2026-04-21T12:17:37.030612Z",
+    "source": "eaanywhere",
+    "types": [
+      "AC"
+    ],
+    "ocpp_status": "maintenance",
+    "latitude": 13.747243,
+    "longitude": 100.52851,
+    "name": "Siam Motors, Pathumwan 1st Floor",
+    "address": "Wang Mai, Pathum Wan, Bangkok",
+    "icon_scale": "ss",
+    "distance": 17.45,
+    "distance_per_time_kilo": "25 นาที",
+    "opening_times": [
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 2
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 3
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 4
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 5
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 6
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 0
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 1
+      }
+    ],
+    "province": {
+      "code": "10",
+      "name_th": "กรุงเทพมหานคร",
+      "name_en": "Bangkok"
+    },
+    "evses": [
+      {
+        "brand": "AC Charger Plug Type",
+        "code": "1",
+        "connectors": [
+          {
+            "name": "SIAM-MOTERS-001",
+            "ocpp_status": "maintenance",
+            "power": "22.08",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2026-02-27T13:00:36.551447Z"
+          },
+          {
+            "name": "SIAM-MOTERS-002",
+            "ocpp_status": "maintenance",
+            "power": "22.08",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2026-03-21T15:02:13.617354Z"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 3134,
+    "updated_at": "2026-04-01T08:05:56.834294Z",
+    "source": "elexa",
+    "types": [
+      "AC"
+    ],
+    "ocpp_status": "available",
+    "latitude": 13.732041,
+    "longitude": 100.53015,
+    "name": "MRT สามย่าน (ลานจอดหน้าวัดหัวลำโพง)",
+    "address": "ถนนพระราม 4 แขวงเขตปทุมวัน กรุงเทพฯ",
+    "icon_scale": "l",
+    "distance": 17.45,
+    "distance_per_time_kilo": "25 นาที",
+    "opening_times": [
+      {
+        "period_begin": "00:00",
+        "period_end": "23:59",
+        "weekday": 0
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "23:59",
+        "weekday": 1
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "23:59",
+        "weekday": 2
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "23:59",
+        "weekday": 3
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "23:59",
+        "weekday": 4
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "23:59",
+        "weekday": 5
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "23:59",
+        "weekday": 6
+      }
+    ],
+    "province": {
+      "code": "10",
+      "name_th": "กรุงเทพมหานคร",
+      "name_en": "Bangkok"
+    },
+    "evses": [
+      {
+        "brand": "22 kW AC Charger1",
+        "code": "22 kW AC Charger1",
+        "connectors": [
+          {
+            "name": "Connector1",
+            "ocpp_status": "available",
+            "power": "22",
+            "price": 7.5,
+            "type": "AC",
+            "status_updated_at": "2026-04-01T07:22:06.59546Z"
+          }
+        ]
+      },
+      {
+        "brand": "22 kW AC Charger2",
+        "code": "22 kW AC Charger2",
+        "connectors": [
+          {
+            "name": "Connector1",
+            "ocpp_status": "available",
+            "power": "22",
+            "price": 7.5,
+            "type": "AC",
+            "status_updated_at": "2026-03-31T18:14:55.528089Z"
+          }
+        ]
+      }
+    ],
+    "facilities": [
+      {
+        "name": "Vending Machine"
+      }
+    ]
+  },
+  {
+    "id": 3741,
+    "updated_at": "2025-07-07T06:40:47.885656Z",
+    "source": "evolt",
+    "types": [
+      "AC",
+      "DC"
+    ],
+    "ocpp_status": "available",
+    "latitude": 13.73409183,
+    "longitude": 100.52857495,
+    "name": "Samyan Mitrtown by UVBGP (AC) - 01",
+    "address": "ลานจอดรถชั้น 1A",
+    "icon_scale": "l",
+    "distance": 17.59,
+    "distance_per_time_kilo": "26 นาที",
+    "opening_times": [
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 0
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 1
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 2
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 3
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 4
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 5
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 6
+      }
+    ],
+    "province": {
+      "code": "10",
+      "name_th": "กรุงเทพมหานคร",
+      "name_en": "Bangkok"
+    },
+    "evses": [
+      {
+        "brand": "Samyan Mitrtown by UVBGP (AC) - 01",
+        "code": "226517",
+        "connectors": [
+          {
+            "name": "226517",
+            "ocpp_status": "occupied",
+            "power": "22",
+            "price": 90,
+            "type": "AC",
+            "status_updated_at": "2025-07-07T03:40:45.779426Z"
+          }
+        ]
+      },
+      {
+        "brand": "Samyan Mitrtown by UVBGP (DC) - 01",
+        "code": "226667",
+        "connectors": [
+          {
+            "name": "226667",
+            "ocpp_status": "available",
+            "power": "100",
+            "price": 11,
+            "type": "DC",
+            "status_updated_at": "2025-07-06T12:24:46.741865Z"
+          }
+        ]
+      },
+      {
+        "brand": "Samyan Mitrtown by UVBGP (DC) - 02",
+        "code": "226668",
+        "connectors": [
+          {
+            "name": "226668",
+            "ocpp_status": "available",
+            "power": "100",
+            "price": 11,
+            "type": "DC",
+            "status_updated_at": "2025-07-07T04:42:32.341125Z"
+          }
+        ]
+      },
+      {
+        "brand": "Samyan Mitrtown by UVBGP (AC) - 02",
+        "code": "226669",
+        "connectors": [
+          {
+            "name": "226669",
+            "ocpp_status": "available",
+            "power": "22",
+            "price": 90,
+            "type": "AC",
+            "status_updated_at": "2025-07-07T04:20:07.756329Z"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 6175,
+    "updated_at": "2026-04-01T08:10:57.170316Z",
+    "source": "elexa",
+    "types": [
+      "AC"
+    ],
+    "ocpp_status": "available",
+    "latitude": 13.74245,
+    "longitude": 100.52745,
+    "name": "Sasin School of Management",
+    "address": "254 Phaya Thai Rd, Pathum Wan",
+    "icon_scale": "l",
+    "distance": 17.6,
+    "distance_per_time_kilo": "26 นาที",
+    "opening_times": [
+      {
+        "period_begin": "00:00",
+        "period_end": "23:59",
+        "weekday": 0
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "23:59",
+        "weekday": 1
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "23:59",
+        "weekday": 2
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "23:59",
+        "weekday": 3
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "23:59",
+        "weekday": 4
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "23:59",
+        "weekday": 5
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "23:59",
+        "weekday": 6
+      }
+    ],
+    "province": {
+      "code": "10",
+      "name_th": "กรุงเทพมหานคร",
+      "name_en": "Bangkok"
+    },
+    "evses": [
+      {
+        "brand": "22kW AC Charger",
+        "code": "22kW AC Charger",
+        "connectors": [
+          {
+            "name": "22kW AC Charger",
+            "ocpp_status": "available",
+            "power": "22",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2026-04-01T04:17:08.534537Z"
+          }
+        ]
+      },
+      {
+        "brand": "22kW AC Charger",
+        "code": "22kW AC Charger",
+        "connectors": [
+          {
+            "name": "22kW AC Charger",
+            "ocpp_status": "available",
+            "power": "22",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2026-04-01T04:17:08.53454Z"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 3504,
+    "updated_at": "2025-10-27T02:01:30.89491Z",
+    "source": "reversharger",
+    "types": [
+      "AC"
+    ],
+    "ocpp_status": "available",
+    "latitude": 13.74245,
+    "longitude": 100.52745,
+    "name": "Sasin School of Management",
+    "address": "254 Phaya Thai Rd, Pathum Wan",
+    "icon_scale": "l",
+    "distance": 17.6,
+    "distance_per_time_kilo": "26 นาที",
+    "opening_times": [
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 0
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 1
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 2
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 3
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 4
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 5
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 6
+      }
+    ],
+    "province": {
+      "code": "10",
+      "name_th": "กรุงเทพมหานคร",
+      "name_en": "Bangkok"
+    },
+    "evses": [
+      {
+        "brand": "Sasin School 1",
+        "code": "SSSM01",
+        "connectors": [
+          {
+            "name": "Sasin School 1",
+            "ocpp_status": "available",
+            "power": "22",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2025-10-21T02:31:24.732449Z"
+          }
+        ]
+      },
+      {
+        "brand": "Sasin School 2",
+        "code": "SSSM02",
+        "connectors": [
+          {
+            "name": "Sasin School 2",
+            "ocpp_status": "available",
+            "power": "22",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2025-10-24T10:34:47.047842Z"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 3500,
+    "updated_at": "2025-10-27T02:01:30.866847Z",
+    "source": "reversharger",
+    "types": [
+      "AC"
+    ],
+    "ocpp_status": "occupied",
+    "latitude": 13.7474363,
+    "longitude": 100.526972,
+    "name": "Siam@Siam",
+    "address": "865 ถ. พระรามที่ ๑ แขวง วังใหม่ เขตปทุมวัน",
+    "icon_scale": "ss",
+    "distance": 17.62,
+    "distance_per_time_kilo": "26 นาที",
+    "opening_times": [
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 0
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 1
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 2
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 3
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 4
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 5
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 6
+      }
+    ],
+    "province": {
+      "code": "10",
+      "name_th": "กรุงเทพมหานคร",
+      "name_en": "Bangkok"
+    },
+    "evses": [
+      {
+        "brand": "Siam@Siam 02",
+        "code": "SIAM02",
+        "connectors": [
+          {
+            "name": "Siam@Siam 02",
+            "ocpp_status": "occupied",
+            "power": "22",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2025-10-27T01:00:04.009398Z"
+          }
+        ]
+      },
+      {
+        "brand": "Siam@Siam 01",
+        "code": "SIAM01",
+        "connectors": [
+          {
+            "name": "Siam@Siam 01",
+            "ocpp_status": "occupied",
+            "power": "22",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2025-10-27T01:59:09.456995Z"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1301,
+    "updated_at": "2026-04-21T12:19:51.006212Z",
+    "source": "eaanywhere",
+    "types": [
+      "AC"
+    ],
+    "ocpp_status": "available",
+    "latitude": 13.733898,
+    "longitude": 100.528156,
+    "name": "Samyan Mitrtown (Parking  B2)",
+    "address": "Wang Mai, Pathum Wan, Bangkok",
+    "icon_scale": "ss",
+    "distance": 17.63,
+    "distance_per_time_kilo": "26 นาที",
+    "opening_times": [
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 2
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 3
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 4
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 5
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 6
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 0
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 1
+      }
+    ],
+    "province": {
+      "code": "10",
+      "name_th": "กรุงเทพมหานคร",
+      "name_en": "Bangkok"
+    },
+    "evses": [
+      {
+        "brand": "AC Charger Plug Type",
+        "code": "1",
+        "connectors": [
+          {
+            "name": "SAMYAN-MIT-001",
+            "ocpp_status": "occupied",
+            "power": "22.08",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2026-04-14T05:29:25.167606Z"
+          },
+          {
+            "name": "SAMYAN-MIT-002",
+            "ocpp_status": "available",
+            "power": "22.08",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2026-04-21T01:47:19.680905Z"
+          }
+        ]
+      }
+    ],
+    "facilities": [
+      {
+        "name": "Wi-Fi"
+      },
+      {
+        "name": "ร้านกาแฟ"
+      },
+      {
+        "name": "ร้านสะดวกซื้อ"
+      }
+    ]
+  },
+  {
+    "id": 4820,
+    "updated_at": "2025-12-15T11:03:06.757583Z",
+    "source": "pttv2",
+    "types": [
+      "AC"
+    ],
+    "ocpp_status": "available",
+    "latitude": 13.744082,
+    "longitude": 100.526044,
+    "name": "อาคารจอดรถ 4 จุฬาลงกรณ์มหาวิทยาลัย",
+    "address": "อาคารจอดรถ 4 ซ.จุฬาลงกรณ์ 12 แขวงวังใหม่ เขตปทุมวัน กรุงเทพมหานคร 10330",
+    "icon_scale": "l",
+    "distance": 17.74,
+    "distance_per_time_kilo": "26 นาที",
+    "opening_times": [
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 0
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 1
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 2
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 3
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 4
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 5
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 6
+      }
+    ],
+    "province": {
+      "code": "10",
+      "name_th": "กรุงเทพมหานคร",
+      "name_en": "Bangkok"
+    },
+    "evses": [
+      {
+        "brand": "IOCharger",
+        "code": "GWC-OR-2096",
+        "connectors": [
+          {
+            "name": "Type 2",
+            "ocpp_status": "available",
+            "power": "22",
+            "price": 9,
+            "type": "AC",
+            "position": "R",
+            "status_updated_at": "2025-12-15T01:13:47.392369Z"
+          },
+          {
+            "name": "Type 2",
+            "ocpp_status": "occupied",
+            "power": "22",
+            "price": 9,
+            "type": "AC",
+            "position": "L",
+            "status_updated_at": "2025-12-15T03:05:00.432464Z"
+          }
+        ]
+      },
+      {
+        "brand": "IOCharger",
+        "code": "GWC-OR-2068",
+        "connectors": [
+          {
+            "name": "Type 2",
+            "ocpp_status": "occupied",
+            "power": "7",
+            "price": 9,
+            "type": "AC",
+            "position": "M",
+            "status_updated_at": "2025-12-15T03:29:07.070919Z"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 4822,
+    "updated_at": "2025-12-15T11:03:06.769419Z",
+    "source": "pttv2",
+    "types": [
+      "AC"
+    ],
+    "ocpp_status": "available",
+    "latitude": 13.7361251862,
+    "longitude": 100.5261791805,
+    "name": "อาคารจอดรถ 1 (ข้างจามจุรี 9) จุฬาลงกรณ์มหาวิทยาลัย",
+    "address": "215 ถ.พญาไท แขวงปทุมวัน เขตปทุมวัน กรุงเทพมหานคร 10330",
+    "icon_scale": "l",
+    "distance": 17.81,
+    "distance_per_time_kilo": "26 นาที",
+    "opening_times": [
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 0
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 1
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 2
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 3
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 4
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 5
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 6
+      }
+    ],
+    "province": {
+      "code": "10",
+      "name_th": "กรุงเทพมหานคร",
+      "name_en": "Bangkok"
+    },
+    "evses": [
+      {
+        "brand": "IOCharger",
+        "code": "GWC-OR-2069",
+        "connectors": [
+          {
+            "name": "Type 2",
+            "ocpp_status": "available",
+            "power": "7",
+            "price": 9,
+            "type": "AC",
+            "position": "M",
+            "status_updated_at": "2025-12-15T04:43:01.546598Z"
+          }
+        ]
+      },
+      {
+        "brand": "IOCharger",
+        "code": "GWC-OR-2095",
+        "connectors": [
+          {
+            "name": "Type 2",
+            "ocpp_status": "available",
+            "power": "22",
+            "price": 9,
+            "type": "AC",
+            "position": "R",
+            "status_updated_at": "2025-12-15T01:24:51.400708Z"
+          },
+          {
+            "name": "Type 2",
+            "ocpp_status": "available",
+            "power": "22",
+            "price": 9,
+            "type": "AC",
+            "position": "L",
+            "status_updated_at": "2025-12-15T00:54:48.655617Z"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 6171,
+    "updated_at": "2025-07-07T06:40:47.891405Z",
+    "source": "evolt",
+    "types": [
+      "AC"
+    ],
+    "ocpp_status": "occupied",
+    "latitude": 13.74162691,
+    "longitude": 100.52556337,
+    "name": "CU iHouse - 01",
+    "address": "ลานจอดรถชั้น 2, 268 ซอยจุฬา 9 ถนนจรัสเมือง แขวงวังใหม่ เขตปทุมวัน",
+    "icon_scale": "l",
+    "distance": 17.81,
+    "distance_per_time_kilo": "26 นาที",
+    "opening_times": [
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 0
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 1
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 2
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 3
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 4
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 5
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 6
+      }
+    ],
+    "province": {
+      "code": "10",
+      "name_th": "กรุงเทพมหานคร",
+      "name_en": "Bangkok"
+    },
+    "evses": [
+      {
+        "brand": "CU iHouse - 01",
+        "code": "272233",
+        "connectors": [
+          {
+            "name": "272233",
+            "ocpp_status": "occupied",
+            "power": "7",
+            "price": 7,
+            "type": "AC",
+            "status_updated_at": "2025-07-07T04:14:06.349457Z"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 989,
+    "updated_at": "2026-04-21T12:20:49.042291Z",
+    "source": "mea",
+    "types": [
+      "AC"
+    ],
+    "ocpp_status": "available",
+    "latitude": 13.746715,
+    "longitude": 100.524946,
+    "name": "สนามศุภชลาศัย",
+    "address": "เลขที่ 154 ถนนพระราม 1 แขวงวังใหม่ เขตปทุมวัน กรุงเทพฯ 10330",
+    "icon_scale": "ss",
+    "distance": 17.84,
+    "distance_per_time_kilo": "26 นาที",
+    "opening_times": [
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 0
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 1
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 2
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 3
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 4
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 5
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 6
+      }
+    ],
+    "province": {
+      "code": "10",
+      "name_th": "กรุงเทพมหานคร",
+      "name_en": "Bangkok"
+    },
+    "evses": [
+      {
+        "brand": "MEA Normal Charger 22kW NO.1",
+        "code": "MEA Normal Charger 22kW NO.1",
+        "connectors": [
+          {
+            "name": "TYPE 2",
+            "ocpp_status": "available",
+            "power": "22",
+            "price": 7.5,
+            "type": "AC",
+            "status_updated_at": "2026-04-21T08:37:45.589399Z"
+          }
+        ]
+      },
+      {
+        "brand": "MEA Normal Charger 22kW NO.2",
+        "code": "MEA Normal Charger 22kW NO.2",
+        "connectors": [
+          {
+            "name": "TYPE 2",
+            "ocpp_status": "occupied",
+            "power": "22",
+            "price": 7.5,
+            "type": "AC",
+            "status_updated_at": "2026-04-21T12:07:25.37621Z"
+          }
+        ]
+      }
+    ],
+    "facilities": [
+      {
+        "name": "ลานจอดรถ"
+      },
+      {
+        "name": "ร้านกาแฟ"
+      },
+      {
+        "name": "ห้องน้ำ"
+      },
+      {
+        "name": "ร้านค้า"
+      }
+    ]
+  },
+  {
+    "id": 3743,
+    "updated_at": "2025-07-07T06:40:47.908619Z",
+    "source": "evolt",
+    "types": [
+      "AC"
+    ],
+    "ocpp_status": "available",
+    "latitude": 13.740354,
+    "longitude": 100.52536,
+    "name": "CU Terrace - 01",
+    "address": "ลานจอดรถชั้น 4",
+    "icon_scale": "ss",
+    "distance": 17.85,
+    "distance_per_time_kilo": "26 นาที",
+    "opening_times": [
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 0
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 1
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 2
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 3
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 4
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 5
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 6
+      }
+    ],
+    "province": {
+      "code": "10",
+      "name_th": "กรุงเทพมหานคร",
+      "name_en": "Bangkok"
+    },
+    "evses": [
+      {
+        "brand": "CU Terrace - 01",
+        "code": "53235",
+        "connectors": [
+          {
+            "name": "53235",
+            "ocpp_status": "available",
+            "power": "7",
+            "price": 7,
+            "type": "AC",
+            "status_updated_at": "2025-07-06T13:29:38.323257Z"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1302,
+    "updated_at": "2026-04-21T12:19:51.023125Z",
+    "source": "eaanywhere",
+    "types": [
+      "AC",
+      "DC"
+    ],
+    "ocpp_status": "maintenance",
+    "latitude": 13.741238,
+    "longitude": 100.524702,
+    "name": "ZY Walk",
+    "address": "Wang Mai, Pathum Wan, Bangkok",
+    "icon_scale": "l",
+    "distance": 17.91,
+    "distance_per_time_kilo": "26 นาที",
+    "opening_times": [
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 2
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 3
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 4
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 5
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 6
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 0
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 1
+      }
+    ],
+    "province": {
+      "code": "10",
+      "name_th": "กรุงเทพมหานคร",
+      "name_en": "Bangkok"
+    },
+    "evses": [
+      {
+        "brand": "AC Charger Plug Type",
+        "code": "1",
+        "connectors": [
+          {
+            "name": "ZY-WALK-1001",
+            "ocpp_status": "maintenance",
+            "power": "22.08",
+            "price": 0,
+            "type": "AC"
+          }
+        ]
+      },
+      {
+        "brand": "AC-DC Combo เทา",
+        "code": "5",
+        "connectors": [
+          {
+            "name": "C",
+            "ocpp_status": "maintenance",
+            "power": "22.08",
+            "price": 0,
+            "type": "AC"
+          },
+          {
+            "name": "D",
+            "ocpp_status": "maintenance",
+            "power": "22.08",
+            "price": 0,
+            "type": "AC"
+          }
+        ]
+      },
+      {
+        "brand": "AC-DC Combo เทา",
+        "code": "5",
+        "connectors": [
+          {
+            "name": "A",
+            "ocpp_status": "maintenance",
+            "power": "60.00",
+            "price": 0,
+            "type": "DC"
+          },
+          {
+            "name": "B",
+            "ocpp_status": "maintenance",
+            "power": "60.00",
+            "price": 0,
+            "type": "DC"
+          }
+        ]
+      }
+    ],
+    "facilities": [
+      {
+        "name": "Wi-Fi"
+      },
+      {
+        "name": "คาร์แคร์"
+      },
+      {
+        "name": "ร้านกาแฟ"
+      },
+      {
+        "name": "ร้านสะดวกซื้อ"
+      }
+    ]
+  },
+  {
+    "id": 4708,
+    "updated_at": "2025-12-15T11:03:05.108025Z",
+    "source": "pttv2",
+    "types": [
+      "DC"
+    ],
+    "ocpp_status": "occupied",
+    "latitude": 13.7346,
+    "longitude": 100.5249,
+    "name": "พีทีที สเตชั่น สาขาสามย่าน",
+    "address": "1323 ถ.พระราม 4 แขวงวังใหม่ เขตปทุมวัน กรุงเทพมหานคร 10330",
+    "icon_scale": "l",
+    "distance": 17.97,
+    "distance_per_time_kilo": "26 นาที",
+    "opening_times": [
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 0
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 1
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 2
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 3
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 4
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 5
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 6
+      }
+    ],
+    "province": {
+      "code": "10",
+      "name_th": "กรุงเทพมหานคร",
+      "name_en": "Bangkok"
+    },
+    "evses": [
+      {
+        "brand": "Chargecore",
+        "code": "GWC-OR-0118",
+        "connectors": [
+          {
+            "name": "CCS COMBO 2",
+            "ocpp_status": "occupied",
+            "power": "120",
+            "price": 6.6,
+            "type": "DC",
+            "position": "R",
+            "status_updated_at": "2025-12-15T08:50:41.24144Z"
+          },
+          {
+            "name": "CCS COMBO 2",
+            "ocpp_status": "occupied",
+            "power": "120",
+            "price": 6.6,
+            "type": "DC",
+            "position": "M",
+            "status_updated_at": "2025-12-15T09:59:06.645712Z"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 4720,
+    "updated_at": "2025-12-15T11:03:03.382997Z",
+    "source": "pttv2",
+    "types": [
+      "DC",
+      "AC"
+    ],
+    "ocpp_status": "occupied",
+    "latitude": 13.74436,
+    "longitude": 100.5239,
+    "name": "ลานจอดรถ ซียู สปอร์ต",
+    "address": "215 ซ.จุฬาลงกรณ์ 10 แขวงวังใหม่ เขตปทุมวัน กรุงเทพมหานคร 10330",
+    "icon_scale": "ss",
+    "distance": 17.97,
+    "distance_per_time_kilo": "26 นาที",
+    "opening_times": [
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 0
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 1
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 2
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 3
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 4
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 5
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 6
+      }
+    ],
+    "province": {
+      "code": "10",
+      "name_th": "กรุงเทพมหานคร",
+      "name_en": "Bangkok"
+    },
+    "evses": [
+      {
+        "brand": "Teison",
+        "code": "THPORE240319",
+        "connectors": [
+          {
+            "name": "CCS COMBO 2",
+            "ocpp_status": "occupied",
+            "power": "40",
+            "price": 8,
+            "type": "DC",
+            "position": "R",
+            "status_updated_at": "2025-12-15T10:35:46.434246Z"
+          },
+          {
+            "name": "CCS COMBO 2",
+            "ocpp_status": "occupied",
+            "power": "40",
+            "price": 8,
+            "type": "DC",
+            "position": "L",
+            "status_updated_at": "2025-12-15T10:35:46.434221Z"
+          }
+        ]
+      },
+      {
+        "brand": "IOCharger",
+        "code": "GWC-OR-2009",
+        "connectors": [
+          {
+            "name": "Type 2",
+            "ocpp_status": "occupied",
+            "power": "7",
+            "price": 9,
+            "type": "AC",
+            "position": "M",
+            "status_updated_at": "2025-12-15T10:12:56.177247Z"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 4719,
+    "updated_at": "2025-12-15T11:03:05.25679Z",
+    "source": "pttv2",
+    "types": [
+      "AC"
+    ],
+    "ocpp_status": "available",
+    "latitude": 13.73963,
+    "longitude": 100.5239,
+    "name": "อุทยาน100 ปี จุฬา",
+    "address": "1701 ถ.พระราม 6 แขวงวังใหม่ เขตปทุมวัน กรุงเทพมหานคร 10330",
+    "icon_scale": "l",
+    "distance": 18.01,
+    "distance_per_time_kilo": "26 นาที",
+    "opening_times": [
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 0
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 1
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 2
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 3
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 4
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 5
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 6
+      }
+    ],
+    "province": {
+      "code": "10",
+      "name_th": "กรุงเทพมหานคร",
+      "name_en": "Bangkok"
+    },
+    "evses": [
+      {
+        "brand": "IOCharger",
+        "code": "GWC-OR-2008",
+        "connectors": [
+          {
+            "name": "Type 2",
+            "ocpp_status": "occupied",
+            "power": "7",
+            "price": 9,
+            "type": "AC",
+            "position": "M",
+            "status_updated_at": "2025-12-15T06:13:06.664543Z"
+          }
+        ]
+      },
+      {
+        "brand": "IOCharger",
+        "code": "GWC-OR-2006",
+        "connectors": [
+          {
+            "name": "Type 2",
+            "ocpp_status": "available",
+            "power": "7",
+            "price": 9,
+            "type": "AC",
+            "position": "M",
+            "status_updated_at": "2025-12-15T10:04:16.053616Z"
+          }
+        ]
+      },
+      {
+        "brand": "IOCharger",
+        "code": "GWC-OR-2007",
+        "connectors": [
+          {
+            "name": "Type 2",
+            "ocpp_status": "available",
+            "power": "7",
+            "price": 9,
+            "type": "AC",
+            "position": "M",
+            "status_updated_at": "2025-12-15T07:30:44.703095Z"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 3747,
+    "updated_at": "2025-07-07T06:40:47.978335Z",
+    "source": "evolt",
+    "types": [
+      "AC"
+    ],
+    "ocpp_status": "available",
+    "latitude": 13.736241,
+    "longitude": 100.52369,
+    "name": "Samyan Market - 01",
+    "address": "Parking Block 28",
+    "icon_scale": "l",
+    "distance": 18.08,
+    "distance_per_time_kilo": "26 นาที",
+    "opening_times": [
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 0
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 1
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 2
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 3
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 4
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 5
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 6
+      }
+    ],
+    "province": {
+      "code": "10",
+      "name_th": "กรุงเทพมหานคร",
+      "name_en": "Bangkok"
+    },
+    "evses": [
+      {
+        "brand": "Samyan Market - 01",
+        "code": "139646",
+        "connectors": [
+          {
+            "name": "139646",
+            "ocpp_status": "occupied",
+            "power": "22",
+            "price": 7,
+            "type": "AC",
+            "status_updated_at": "2025-07-07T05:05:49.942177Z"
+          }
+        ]
+      },
+      {
+        "brand": "Samyan Market - 02",
+        "code": "139647",
+        "connectors": [
+          {
+            "name": "139647",
+            "ocpp_status": "available",
+            "power": "7",
+            "price": 7,
+            "type": "AC",
+            "status_updated_at": "2025-07-07T00:36:49.08032Z"
+          }
+        ]
+      },
+      {
+        "brand": "Samyan Market - 03",
+        "code": "272840",
+        "connectors": [
+          {
+            "name": "272840",
+            "ocpp_status": "occupied",
+            "power": "7",
+            "price": 7,
+            "type": "AC",
+            "status_updated_at": "2025-07-07T02:54:25.755204Z"
+          }
+        ]
+      },
+      {
+        "brand": "Samyan Market - 04",
+        "code": "272844",
+        "connectors": [
+          {
+            "name": "272844",
+            "ocpp_status": "occupied",
+            "power": "7",
+            "price": 7,
+            "type": "AC",
+            "status_updated_at": "2025-07-07T02:32:38.017254Z"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 29756,
+    "updated_at": "2025-12-15T11:02:59.077788Z",
+    "source": "pttv2",
+    "types": [
+      "DC"
+    ],
+    "ocpp_status": "occupied",
+    "latitude": 13.7354695,
+    "longitude": 100.5236717,
+    "name": "บล็อก 28 @สามย่าน",
+    "address": "924 ซ.จุฬา 7 แขวงวังใหม่ เขตปทุมวัน กรุงเทพมหานคร 10330",
+    "icon_scale": "l",
+    "distance": 18.09,
+    "distance_per_time_kilo": "26 นาที",
+    "opening_times": [
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 0
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 1
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 2
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 3
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 4
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 5
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 6
+      }
+    ],
+    "province": {
+      "code": "10",
+      "name_th": "กรุงเทพมหานคร",
+      "name_en": "Bangkok"
+    },
+    "evses": [
+      {
+        "brand": "Chargecore",
+        "code": "THPORE240051",
+        "connectors": [
+          {
+            "name": "CCS COMBO 2",
+            "ocpp_status": "occupied",
+            "power": "120",
+            "price": 7.9,
+            "type": "DC",
+            "position": "L",
+            "status_updated_at": "2025-12-15T10:26:59.201282Z"
+          },
+          {
+            "name": "CCS COMBO 2",
+            "ocpp_status": "occupied",
+            "power": "120",
+            "price": 7.9,
+            "type": "DC",
+            "position": "R",
+            "status_updated_at": "2025-12-15T11:00:50.2944Z"
+          }
+        ]
+      },
+      {
+        "brand": "Chargecore",
+        "code": "THPORE240017",
+        "connectors": [
+          {
+            "name": "CCS COMBO 2",
+            "ocpp_status": "occupied",
+            "power": "120",
+            "price": 7.9,
+            "type": "DC",
+            "position": "R",
+            "status_updated_at": "2025-12-15T11:00:50.29431Z"
+          },
+          {
+            "name": "CCS COMBO 2",
+            "ocpp_status": "occupied",
+            "power": "120",
+            "price": 7.9,
+            "type": "DC",
+            "position": "L",
+            "status_updated_at": "2025-12-15T11:00:50.294267Z"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 4250,
+    "updated_at": "2026-04-09T21:49:34.272762Z",
+    "source": "onecharge",
+    "types": [
+      "AC"
+    ],
+    "ocpp_status": "close",
+    "latitude": 13.747707876282917,
+    "longitude": 100.5215520569941,
+    "name": "Metalion Parking",
+    "address": "50/1-2 ถนนพระราม 1 แขวงรองเมือง เขตปทุมวัน กรุงเทพมหานคร 10330",
+    "icon_scale": "ss",
+    "distance": 18.2,
+    "distance_per_time_kilo": "26 นาที",
+    "opening_times": [
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 0
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 1
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 2
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 3
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 4
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 5
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 6
+      }
+    ],
+    "province": {
+      "code": "10",
+      "name_th": "กรุงเทพมหานคร",
+      "name_en": "Bangkok"
+    },
+    "evses": [
+      {
+        "brand": "บริษัท กิจนำอิมปอร์ต จำกัด Charger 1",
+        "code": "บริษัท กิจนำอิมปอร์ต จำกัด Charger 1",
+        "connectors": [
+          {
+            "name": "Type 2",
+            "ocpp_status": "close",
+            "power": "22 ",
+            "price": 8,
+            "type": "AC"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 2395,
+    "updated_at": "2026-04-21T12:19:19.659021Z",
+    "source": "pupa",
+    "types": [
+      "AC"
+    ],
+    "ocpp_status": "close",
+    "latitude": 13.7464637,
+    "longitude": 100.5211584,
+    "name": "โรงแรมทองพูน",
+    "address": "130  พระราม6   ซอย 8 (รองเมือง ซอย 4)",
+    "icon_scale": "l",
+    "distance": 18.25,
+    "distance_per_time_kilo": "27 นาที",
+    "opening_times": [
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 0
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 1
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 2
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 3
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 4
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 5
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 6
+      }
+    ],
+    "province": {
+      "code": "10",
+      "name_th": "กรุงเทพมหานคร",
+      "name_en": "Bangkok"
+    },
+    "evses": [
+      {
+        "code": "841",
+        "connectors": [
+          {
+            "name": "โรงแรมทองพูน",
+            "ocpp_status": "close",
+            "power": "3.7",
+            "price": 7,
+            "type": "AC",
+            "status_updated_at": "2025-08-04T06:27:34.32693Z"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1299,
+    "updated_at": "2026-04-21T12:19:51.036924Z",
+    "source": "eaanywhere",
+    "types": [
+      "AC",
+      "DC"
+    ],
+    "ocpp_status": "occupied",
+    "latitude": 13.742579,
+    "longitude": 100.521029,
+    "name": "7-Eleven Sithabut (7661)",
+    "address": "Rong Mueang, Pathum Wan, Bangkok",
+    "icon_scale": "ss",
+    "distance": 18.29,
+    "distance_per_time_kilo": "27 นาที",
+    "opening_times": [
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 2
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 3
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 4
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 5
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 6
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 0
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 1
+      }
+    ],
+    "province": {
+      "code": "10",
+      "name_th": "กรุงเทพมหานคร",
+      "name_en": "Bangkok"
+    },
+    "evses": [
+      {
+        "brand": "AC-DC Combo เขียว",
+        "code": "15",
+        "connectors": [
+          {
+            "name": "C",
+            "ocpp_status": "occupied",
+            "power": "150.00",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2026-04-20T19:59:55.36208Z"
+          },
+          {
+            "name": "D",
+            "ocpp_status": "occupied",
+            "power": "150.00",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2026-04-20T19:59:55.362084Z"
+          }
+        ]
+      },
+      {
+        "brand": "AC-DC Combo เขียว",
+        "code": "15",
+        "connectors": [
+          {
+            "name": "A",
+            "ocpp_status": "occupied",
+            "power": "60.00",
+            "price": 0,
+            "type": "DC",
+            "status_updated_at": "2026-04-20T19:59:55.362091Z"
+          },
+          {
+            "name": "B",
+            "ocpp_status": "occupied",
+            "power": "60.00",
+            "price": 0,
+            "type": "DC",
+            "status_updated_at": "2026-04-19T01:32:32.28937Z"
+          }
+        ]
+      }
+    ],
+    "facilities": [
+      {
+        "name": "Wi-Fi"
+      },
+      {
+        "name": "ร้านกาแฟ"
+      }
+    ]
+  },
+  {
+    "id": 3503,
+    "updated_at": "2025-10-27T02:01:30.884534Z",
+    "source": "reversharger",
+    "types": [
+      "AC"
+    ],
+    "ocpp_status": "available",
+    "latitude": 13.747860032037368,
+    "longitude": 100.52010748430465,
+    "name": "Srijulsub Building",
+    "address": "44 Rama I R,Rongmuang,Pathumwan",
+    "icon_scale": "ss",
+    "distance": 18.36,
+    "distance_per_time_kilo": "27 นาที",
+    "opening_times": [
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 0
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 1
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 2
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 3
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 4
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 5
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 6
+      }
+    ],
+    "province": {
+      "code": "10",
+      "name_th": "กรุงเทพมหานคร",
+      "name_en": "Bangkok"
+    },
+    "evses": [
+      {
+        "brand": "Srijulsub Building AC-01",
+        "code": "JULS01",
+        "connectors": [
+          {
+            "name": "Srijulsub Building AC-01",
+            "ocpp_status": "available",
+            "power": "22",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2025-10-25T03:43:06.095421Z"
+          }
+        ]
+      },
+      {
+        "brand": "Srijulsub Building AC-02",
+        "code": "JULS02",
+        "connectors": [
+          {
+            "name": "Srijulsub Building AC-02",
+            "ocpp_status": "occupied",
+            "power": "22",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2025-10-27T00:08:08.732645Z"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 4455,
+    "updated_at": "2026-02-06T08:16:46.694523Z",
+    "source": "igreen",
+    "types": [
+      "AC"
+    ],
+    "ocpp_status": "available",
+    "latitude": 13.743656,
+    "longitude": 100.51837,
+    "name": "Baan Rong Muang Condominium",
+    "address": "1 ถ.จรัสเมือง แขวงรองเมือง เขตปทุมวัน กรุงเทพมหานคร 10330",
+    "icon_scale": "ss",
+    "distance": 18.57,
+    "distance_per_time_kilo": "27 นาที",
+    "opening_times": [
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 0
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 1
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 2
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 3
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 4
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 5
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 6
+      }
+    ],
+    "province": {
+      "code": "10",
+      "name_th": "กรุงเทพมหานคร",
+      "name_en": "Bangkok"
+    },
+    "evses": [
+      {
+        "code": "0001116201",
+        "connectors": [
+          {
+            "name": "124070002619",
+            "ocpp_status": "available",
+            "power": "22",
+            "price": 9,
+            "type": "AC",
+            "status_updated_at": "2026-02-05T05:31:40.777908Z"
+          },
+          {
+            "name": "124070002632",
+            "ocpp_status": "available",
+            "power": "22",
+            "price": 9,
+            "type": "AC",
+            "status_updated_at": "2026-02-02T05:38:40.112081Z"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 29408,
+    "updated_at": "2026-04-21T12:19:51.076321Z",
+    "source": "eaanywhere",
+    "types": [
+      "AC"
+    ],
+    "ocpp_status": "available",
+    "latitude": 13.747506,
+    "longitude": 100.54796,
+    "name": "BDMS Wellness Clinic Building",
+    "address": "Lumphini, Pathum Wan, Bangkok",
+    "icon_scale": "l",
+    "distance": 15.35,
+    "distance_per_time_kilo": "22 นาที",
+    "opening_times": [
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 2
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 3
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 4
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 5
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 6
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 0
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 1
+      }
+    ],
+    "province": {
+      "code": "10",
+      "name_th": "กรุงเทพมหานคร",
+      "name_en": "Bangkok"
+    },
+    "evses": [
+      {
+        "brand": "AC Charger Socket Type",
+        "code": "3",
+        "connectors": [
+          {
+            "name": "BDMS CLN-A01",
+            "ocpp_status": "available",
+            "power": "7.36",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2026-04-19T01:32:43.453099Z"
+          },
+          {
+            "name": "BDMS CLN-A02",
+            "ocpp_status": "available",
+            "power": "7.36",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2026-04-18T03:29:42.400543Z"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 3736,
+    "updated_at": "2025-07-07T06:40:47.850184Z",
+    "source": "evolt",
+    "types": [
+      "AC"
+    ],
+    "ocpp_status": "available",
+    "latitude": 13.74270586,
+    "longitude": 100.54805345,
+    "name": "Park Venture by UVBGP - 01",
+    "address": "Car Parking Floor @B1, 57 Witthayu Rd, Lumphini, Pathum Wan",
+    "icon_scale": "l",
+    "distance": 15.38,
+    "distance_per_time_kilo": "22 นาที",
+    "opening_times": [
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 0
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 1
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 2
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 3
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 4
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 5
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 6
+      }
+    ],
+    "province": {
+      "code": "10",
+      "name_th": "กรุงเทพมหานคร",
+      "name_en": "Bangkok"
+    },
+    "evses": [
+      {
+        "brand": "Park Venture by UVBGP - 01",
+        "code": "257757",
+        "connectors": [
+          {
+            "name": "257757",
+            "ocpp_status": "available",
+            "power": "22",
+            "price": 99,
+            "type": "AC",
+            "status_updated_at": "2025-07-02T01:57:34.04299Z"
+          }
+        ]
+      },
+      {
+        "brand": "Park Venture by UVBGP - 02",
+        "code": "257758",
+        "connectors": [
+          {
+            "name": "257758",
+            "ocpp_status": "available",
+            "power": "22",
+            "price": 99,
+            "type": "AC",
+            "status_updated_at": "2025-06-27T23:46:38.007464Z"
+          }
+        ]
+      },
+      {
+        "brand": "Park Venture by UVBGP - 03",
+        "code": "257759",
+        "connectors": [
+          {
+            "name": "257759",
+            "ocpp_status": "available",
+            "power": "22",
+            "price": 99,
+            "type": "AC",
+            "status_updated_at": "2025-06-27T23:46:38.007471Z"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 3734,
+    "updated_at": "2025-07-07T06:40:47.846515Z",
+    "source": "evolt",
+    "types": [
+      "AC"
+    ],
+    "ocpp_status": "close",
+    "latitude": 13.73926805,
+    "longitude": 100.54839677,
+    "name": "BMW Exclusive Parking @ All Seasons Place - 01",
+    "address": "ลานจอดรถชั้น B2",
+    "icon_scale": "ss",
+    "distance": 15.39,
+    "distance_per_time_kilo": "22 นาที",
+    "opening_times": [
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 0
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 1
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 2
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 3
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 4
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 5
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 6
+      }
+    ],
+    "province": {
+      "code": "10",
+      "name_th": "กรุงเทพมหานคร",
+      "name_en": "Bangkok"
+    },
+    "evses": [
+      {
+        "brand": "BMW Exclusive Parking @ All Seasons Place - 01",
+        "code": "123575",
+        "connectors": [
+          {
+            "name": "123575",
+            "ocpp_status": "close",
+            "power": "7",
+            "price": 0,
+            "type": "AC"
+          }
+        ]
+      },
+      {
+        "brand": "BMW Exclusive Parking @ All Seasons Place - 02",
+        "code": "123585",
+        "connectors": [
+          {
+            "name": "123585",
+            "ocpp_status": "close",
+            "power": "7",
+            "price": 0,
+            "type": "AC"
+          }
+        ]
+      },
+      {
+        "brand": "BMW Exclusive Parking @ All Seasons Place - 03",
+        "code": "146652",
+        "connectors": [
+          {
+            "name": "146652",
+            "ocpp_status": "close",
+            "power": "7",
+            "price": 0,
+            "type": "AC"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 3745,
+    "updated_at": "2025-07-07T06:40:47.967193Z",
+    "source": "evolt",
+    "types": [
+      "AC"
+    ],
+    "ocpp_status": "available",
+    "latitude": 13.73994033,
+    "longitude": 100.5482116,
+    "name": "Conrad Bangkok - 01",
+    "address": "ลานจอดรถ B2  87/3 Witthayu Rd, Lumphini, Pathum Wan, Bangkok",
+    "icon_scale": "l",
+    "distance": 15.4,
+    "distance_per_time_kilo": "22 นาที",
+    "opening_times": [
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 0
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 1
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 2
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 3
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 4
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 5
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 6
+      }
+    ],
+    "province": {
+      "code": "10",
+      "name_th": "กรุงเทพมหานคร",
+      "name_en": "Bangkok"
+    },
+    "evses": [
+      {
+        "brand": "Conrad Bangkok - 01",
+        "code": "216597",
+        "connectors": [
+          {
+            "name": "216597",
+            "ocpp_status": "available",
+            "power": "7",
+            "price": 9,
+            "type": "AC",
+            "status_updated_at": "2025-07-05T01:47:55.812388Z"
+          }
+        ]
+      },
+      {
+        "brand": "Conrad Bangkok - 02",
+        "code": "216598",
+        "connectors": [
+          {
+            "name": "216598",
+            "ocpp_status": "available",
+            "power": "7",
+            "price": 9,
+            "type": "AC",
+            "status_updated_at": "2025-07-05T06:19:05.068975Z"
+          }
+        ]
+      },
+      {
+        "brand": "Conrad Bangkok - 03",
+        "code": "216612",
+        "connectors": [
+          {
+            "name": "216612",
+            "ocpp_status": "available",
+            "power": "7",
+            "price": 9,
+            "type": "AC",
+            "status_updated_at": "2025-07-04T04:18:40.342843Z"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 29409,
+    "updated_at": "2026-04-21T12:19:51.080752Z",
+    "source": "eaanywhere",
+    "types": [
+      "AC"
+    ],
+    "ocpp_status": "available",
+    "latitude": 13.747651,
+    "longitude": 100.547332,
+    "name": "Movenpick BDMS Wellness Resort",
+    "address": "Lumphini, Pathum Wan, Bangkok",
+    "icon_scale": "l",
+    "distance": 15.42,
+    "distance_per_time_kilo": "22 นาที",
+    "opening_times": [
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 2
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 3
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 4
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 5
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 6
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 0
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 1
+      }
+    ],
+    "province": {
+      "code": "10",
+      "name_th": "กรุงเทพมหานคร",
+      "name_en": "Bangkok"
+    },
+    "evses": [
+      {
+        "brand": "AC Charger Socket Type",
+        "code": "3",
+        "connectors": [
+          {
+            "name": "MVP BDMS-A01",
+            "ocpp_status": "available",
+            "power": "7.36",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2026-04-17T10:32:29.44834Z"
+          },
+          {
+            "name": "MVP BDMS-A02",
+            "ocpp_status": "available",
+            "power": "7.36",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2026-04-14T15:47:34.266637Z"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 29410,
+    "updated_at": "2026-04-21T12:17:37.022499Z",
+    "source": "eaanywhere",
+    "types": [
+      "AC"
+    ],
+    "ocpp_status": "available",
+    "latitude": 13.748047,
+    "longitude": 100.546455,
+    "name": "BDMS Connect Center",
+    "address": "Lumphini, Pathum Wan, Bangkok",
+    "icon_scale": "l",
+    "distance": 15.51,
+    "distance_per_time_kilo": "22 นาที",
+    "opening_times": [
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 2
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 3
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 4
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 5
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 6
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 0
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 1
+      }
+    ],
+    "province": {
+      "code": "10",
+      "name_th": "กรุงเทพมหานคร",
+      "name_en": "Bangkok"
+    },
+    "evses": [
+      {
+        "brand": "AC Charger Socket Type",
+        "code": "3",
+        "connectors": [
+          {
+            "name": "BDMS CNCT-A01",
+            "ocpp_status": "available",
+            "power": "7.36",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2026-03-27T09:36:38.504884Z"
+          },
+          {
+            "name": "BDMS CNCT-A02",
+            "ocpp_status": "available",
+            "power": "7.36",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2026-04-18T05:41:22.688394Z"
+          },
+          {
+            "name": "BDMS CNCT-A03",
+            "ocpp_status": "available",
+            "power": "7.36",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2026-04-01T05:24:02.730781Z"
+          },
+          {
+            "name": "BDMS CNCT-A04",
+            "ocpp_status": "available",
+            "power": "7.36",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2026-03-31T07:00:41.990578Z"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 3752,
+    "updated_at": "2025-07-07T06:40:47.896553Z",
+    "source": "evolt",
+    "types": [
+      "AC"
+    ],
+    "ocpp_status": "available",
+    "latitude": 13.74264583,
+    "longitude": 100.54653573,
+    "name": "OCC - One City Centre - 01",
+    "address": "ลานจอดรถชั้น B1  One City Centre  548 Phloen Chit Rd, Lumphini, Pathum Wan, Bangkok",
+    "icon_scale": "sss",
+    "distance": 15.55,
+    "distance_per_time_kilo": "22 นาที",
+    "opening_times": [
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 0
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 1
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 2
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 3
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 4
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 5
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 6
+      }
+    ],
+    "province": {
+      "code": "10",
+      "name_th": "กรุงเทพมหานคร",
+      "name_en": "Bangkok"
+    },
+    "evses": [
+      {
+        "brand": "OCC - One City Centre - 01",
+        "code": "216729",
+        "connectors": [
+          {
+            "name": "216729",
+            "ocpp_status": "occupied",
+            "power": "7",
+            "price": 10,
+            "type": "AC",
+            "status_updated_at": "2025-07-07T06:27:05.929533Z"
+          }
+        ]
+      },
+      {
+        "brand": "OCC - One City Centre - 02",
+        "code": "216730",
+        "connectors": [
+          {
+            "name": "216730",
+            "ocpp_status": "occupied",
+            "power": "7",
+            "price": 10,
+            "type": "AC",
+            "status_updated_at": "2025-07-07T01:32:12.545434Z"
+          }
+        ]
+      },
+      {
+        "brand": "OCC - One City Centre - 03",
+        "code": "216734",
+        "connectors": [
+          {
+            "name": "216734",
+            "ocpp_status": "available",
+            "power": "7",
+            "price": 10,
+            "type": "AC",
+            "status_updated_at": "2025-07-03T02:19:03.995731Z"
+          }
+        ]
+      },
+      {
+        "brand": "OCC - One City Centre - 04",
+        "code": "216745",
+        "connectors": [
+          {
+            "name": "216745",
+            "ocpp_status": "available",
+            "power": "7",
+            "price": 10,
+            "type": "AC",
+            "status_updated_at": "2025-07-04T08:42:07.182796Z"
+          }
+        ]
+      },
+      {
+        "brand": "OCC - One City Centre - 05",
+        "code": "216749",
+        "connectors": [
+          {
+            "name": "216749",
+            "ocpp_status": "available",
+            "power": "7",
+            "price": 10,
+            "type": "AC",
+            "status_updated_at": "2025-07-03T01:34:19.773444Z"
+          }
+        ]
+      },
+      {
+        "brand": "OCC - One City Centre - 06",
+        "code": "216752",
+        "connectors": [
+          {
+            "name": "216752",
+            "ocpp_status": "available",
+            "power": "7",
+            "price": 10,
+            "type": "AC",
+            "status_updated_at": "2025-07-07T02:05:15.65638Z"
+          }
+        ]
+      },
+      {
+        "brand": "OCC - One City Centre - 07",
+        "code": "216758",
+        "connectors": [
+          {
+            "name": "216758",
+            "ocpp_status": "available",
+            "power": "7",
+            "price": 10,
+            "type": "AC",
+            "status_updated_at": "2025-02-01T07:28:16.117311Z"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 29751,
+    "updated_at": "2025-12-15T11:02:58.862845Z",
+    "source": "pttv2",
+    "types": [
+      "DC"
+    ],
+    "ocpp_status": "available",
+    "latitude": 13.7383449,
+    "longitude": 100.5464055,
+    "name": "โอเรียนเต็ล เรสซิเดนซ์ กรุงเทพ",
+    "address": "110 ถ.วิทยุ แขวงลุมพินี เขตปทุมวัน กรุงเทพมหานคร 10330",
+    "icon_scale": "ss",
+    "distance": 15.61,
+    "distance_per_time_kilo": "23 นาที",
+    "opening_times": [
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 0
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 1
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 2
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 3
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 4
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 5
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 6
+      }
+    ],
+    "province": {
+      "code": "10",
+      "name_th": "กรุงเทพมหานคร",
+      "name_en": "Bangkok"
+    },
+    "evses": [
+      {
+        "brand": "Teison",
+        "code": "THPORE240303",
+        "connectors": [
+          {
+            "name": "CCS COMBO 2",
+            "ocpp_status": "available",
+            "power": "40",
+            "price": 8,
+            "type": "DC",
+            "position": "L",
+            "status_updated_at": "2025-12-15T08:56:58.924332Z"
+          },
+          {
+            "name": "CCS COMBO 2",
+            "ocpp_status": "available",
+            "power": "40",
+            "price": 8,
+            "type": "DC",
+            "position": "R",
+            "status_updated_at": "2025-12-15T05:07:34.12529Z"
+          }
+        ]
+      },
+      {
+        "brand": "Teison",
+        "code": "THPORE240309",
+        "connectors": [
+          {
+            "name": "CCS COMBO 2",
+            "ocpp_status": "available",
+            "power": "40",
+            "price": 8,
+            "type": "DC",
+            "position": "R",
+            "status_updated_at": "2025-12-15T09:59:43.121726Z"
+          },
+          {
+            "name": "CCS COMBO 2",
+            "ocpp_status": "available",
+            "power": "40",
+            "price": 8,
+            "type": "DC",
+            "position": "L",
+            "status_updated_at": "2025-12-15T05:49:44.225738Z"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 3482,
+    "updated_at": "2025-10-27T02:01:29.467591Z",
+    "source": "reversharger",
+    "types": [
+      "AC"
+    ],
+    "ocpp_status": "close",
+    "latitude": 13.74409,
+    "longitude": 100.545854,
+    "name": "Central Embassy",
+    "address": "1031 Phloen Chit Rd, Pathumwan",
+    "icon_scale": "sss",
+    "distance": 15.61,
+    "distance_per_time_kilo": "23 นาที",
+    "opening_times": [
+      {
+        "period_begin": "10:00",
+        "period_end": "22:00",
+        "weekday": 1
+      },
+      {
+        "period_begin": "10:00",
+        "period_end": "22:00",
+        "weekday": 2
+      },
+      {
+        "period_begin": "10:00",
+        "period_end": "22:00",
+        "weekday": 3
+      },
+      {
+        "period_begin": "10:00",
+        "period_end": "22:00",
+        "weekday": 4
+      },
+      {
+        "period_begin": "10:00",
+        "period_end": "22:00",
+        "weekday": 5
+      },
+      {
+        "period_begin": "10:00",
+        "period_end": "22:00",
+        "weekday": 6
+      },
+      {
+        "period_begin": "10:00",
+        "period_end": "22:00",
+        "weekday": 0
+      },
+      {
+        "period_begin": "10:00",
+        "period_end": "22:00",
+        "weekday": 6
+      },
+      {
+        "period_begin": "10:00",
+        "period_end": "22:00",
+        "weekday": 0
+      }
+    ],
+    "province": {
+      "code": "10",
+      "name_th": "กรุงเทพมหานคร",
+      "name_en": "Bangkok"
+    },
+    "evses": [
+      {
+        "brand": "Central Embassy 10",
+        "code": "CTEB10",
+        "connectors": [
+          {
+            "name": "Central Embassy 10",
+            "ocpp_status": "close",
+            "power": "22",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2025-10-26T07:50:24.448779Z"
+          }
+        ]
+      },
+      {
+        "brand": "Central Embassy 9",
+        "code": "CTEB09",
+        "connectors": [
+          {
+            "name": "Central Embassy 9",
+            "ocpp_status": "close",
+            "power": "22",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2025-10-26T05:32:39.234394Z"
+          }
+        ]
+      },
+      {
+        "brand": "Central Embassy 7",
+        "code": "CTEB07",
+        "connectors": [
+          {
+            "name": "Central Embassy 7",
+            "ocpp_status": "close",
+            "power": "22",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2025-10-25T11:28:58.734554Z"
+          }
+        ]
+      },
+      {
+        "brand": "Central Embassy 11",
+        "code": "CTEB11",
+        "connectors": [
+          {
+            "name": "Central Embassy 11",
+            "ocpp_status": "close",
+            "power": "22",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2025-10-26T09:01:06.203341Z"
+          }
+        ]
+      },
+      {
+        "brand": "Central Embassy 6",
+        "code": "CTEB06",
+        "connectors": [
+          {
+            "name": "Central Embassy 6",
+            "ocpp_status": "close",
+            "power": "22",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2025-10-26T09:28:23.261721Z"
+          }
+        ]
+      },
+      {
+        "brand": "Central Embassy 12",
+        "code": "CTEB12",
+        "connectors": [
+          {
+            "name": "Central Embassy 12",
+            "ocpp_status": "close",
+            "power": "22",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2025-10-26T05:59:20.406412Z"
+          }
+        ]
+      },
+      {
+        "brand": "Central Embassy 5",
+        "code": "CTEB05",
+        "connectors": [
+          {
+            "name": "Central Embassy 5",
+            "ocpp_status": "close",
+            "power": "22",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2025-10-26T10:54:53.924492Z"
+          }
+        ]
+      },
+      {
+        "brand": "Central Embassy 8",
+        "code": "CTEB08",
+        "connectors": [
+          {
+            "name": "Central Embassy 8",
+            "ocpp_status": "close",
+            "power": "22",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2025-10-26T10:28:41.165804Z"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 3483,
+    "updated_at": "2025-10-27T02:01:29.488009Z",
+    "source": "reversharger",
+    "types": [
+      "AC"
+    ],
+    "ocpp_status": "close",
+    "latitude": 13.744002,
+    "longitude": 100.544332,
+    "name": "Central Chidlom Floor.3",
+    "address": "1027 Thanon Phloen Chit, Khet Pathum Wan",
+    "icon_scale": "l",
+    "distance": 15.77,
+    "distance_per_time_kilo": "23 นาที",
+    "opening_times": [
+      {
+        "period_begin": "10:00",
+        "period_end": "22:00",
+        "weekday": 1
+      },
+      {
+        "period_begin": "10:00",
+        "period_end": "22:00",
+        "weekday": 2
+      },
+      {
+        "period_begin": "10:00",
+        "period_end": "22:00",
+        "weekday": 3
+      },
+      {
+        "period_begin": "10:00",
+        "period_end": "22:00",
+        "weekday": 4
+      },
+      {
+        "period_begin": "10:00",
+        "period_end": "22:00",
+        "weekday": 5
+      },
+      {
+        "period_begin": "10:00",
+        "period_end": "22:00",
+        "weekday": 6
+      },
+      {
+        "period_begin": "10:00",
+        "period_end": "22:00",
+        "weekday": 0
+      },
+      {
+        "period_begin": "10:00",
+        "period_end": "22:00",
+        "weekday": 6
+      },
+      {
+        "period_begin": "10:00",
+        "period_end": "22:00",
+        "weekday": 0
+      }
+    ],
+    "province": {
+      "code": "10",
+      "name_th": "กรุงเทพมหานคร",
+      "name_en": "Bangkok"
+    },
+    "evses": [
+      {
+        "brand": "Central Chidlom Floor.3 AC-03",
+        "code": "CLFT03",
+        "connectors": [
+          {
+            "name": "Central Chidlom Floor.3 AC-03",
+            "ocpp_status": "close",
+            "power": "22",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2025-10-26T08:12:56.834778Z"
+          }
+        ]
+      },
+      {
+        "brand": "Central Chidlom Floor.3 AC-04",
+        "code": "CLFT04",
+        "connectors": [
+          {
+            "name": "Central Chidlom Floor.3 AC-04",
+            "ocpp_status": "close",
+            "power": "22",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2025-10-26T03:13:31.811415Z"
+          }
+        ]
+      },
+      {
+        "brand": "Central Chidlom Floor.3 AC-09",
+        "code": "CLFT09",
+        "connectors": [
+          {
+            "name": "Central Chidlom Floor.3 AC-09",
+            "ocpp_status": "close",
+            "power": "22",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2025-10-12T03:40:18.656605Z"
+          }
+        ]
+      },
+      {
+        "brand": "Central Chidlom Floor.3 AC-08",
+        "code": "CLFT08",
+        "connectors": [
+          {
+            "name": "Central Chidlom Floor.3 AC-08",
+            "ocpp_status": "close",
+            "power": "22",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2025-10-26T08:35:27.306477Z"
+          }
+        ]
+      },
+      {
+        "brand": "Central Chidlom Floor.3 AC-06",
+        "code": "CLFT06",
+        "connectors": [
+          {
+            "name": "Central Chidlom Floor.3 AC-06",
+            "ocpp_status": "close",
+            "power": "22",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2025-10-19T06:30:33.973394Z"
+          }
+        ]
+      },
+      {
+        "brand": "Central Chidlom Floor.3 AC-07",
+        "code": "CLFT07",
+        "connectors": [
+          {
+            "name": "Central Chidlom Floor.3 AC-07",
+            "ocpp_status": "close",
+            "power": "22",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2025-10-11T08:56:13.641644Z"
+          }
+        ]
+      },
+      {
+        "brand": "Central Chidlom Floor.3 AC-05",
+        "code": "CLFT05",
+        "connectors": [
+          {
+            "name": "Central Chidlom Floor.3 AC-05",
+            "ocpp_status": "close",
+            "power": "22",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2025-10-26T10:19:35.595465Z"
+          }
+        ]
+      },
+      {
+        "brand": "Central Chidlom Floor.3 AC-01",
+        "code": "CLFT01",
+        "connectors": [
+          {
+            "name": "Central Chidlom Floor.3 AC-01",
+            "ocpp_status": "close",
+            "power": "22",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2025-10-26T09:07:27.047276Z"
+          }
+        ]
+      },
+      {
+        "brand": "Central Chidlom Floor.3 AC-02",
+        "code": "CLFT02",
+        "connectors": [
+          {
+            "name": "Central Chidlom Floor.3 AC-02",
+            "ocpp_status": "close",
+            "power": "22",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2025-10-25T10:38:12.944453Z"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 3495,
+    "updated_at": "2025-10-27T02:01:30.627971Z",
+    "source": "reversharger",
+    "types": [
+      "AC"
+    ],
+    "ocpp_status": "available",
+    "latitude": 13.73599207807781,
+    "longitude": 100.54512167089852,
+    "name": "SINDHORN BUILDING",
+    "address": "Floor.GB 130,132 Rd.,Lumpini ,Pathumwan",
+    "icon_scale": "ss",
+    "distance": 15.79,
+    "distance_per_time_kilo": "23 นาที",
+    "opening_times": [
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 0
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 1
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 2
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 3
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 4
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 5
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 6
+      }
+    ],
+    "province": {
+      "code": "10",
+      "name_th": "กรุงเทพมหานคร",
+      "name_en": "Bangkok"
+    },
+    "evses": [
+      {
+        "brand": "SINDHORN BUILDING 01",
+        "code": "SHBD01",
+        "connectors": [
+          {
+            "name": "SINDHORN BUILDING 01",
+            "ocpp_status": "available",
+            "power": "22",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2025-10-26T07:01:59.440352Z"
+          }
+        ]
+      },
+      {
+        "brand": "SINDHORN BUILDING 02",
+        "code": "SHBD02",
+        "connectors": [
+          {
+            "name": "SINDHORN BUILDING 02",
+            "ocpp_status": "occupied",
+            "power": "22",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2025-10-27T00:20:12.252907Z"
+          }
+        ]
+      },
+      {
+        "brand": "SINDHORN BUILDING 03",
+        "code": "SHBD03",
+        "connectors": [
+          {
+            "name": "SINDHORN BUILDING 03",
+            "ocpp_status": "occupied",
+            "power": "22",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2025-10-27T01:55:15.906252Z"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 3744,
+    "updated_at": "2025-07-07T06:40:47.905321Z",
+    "source": "evolt",
+    "types": [
+      "AC"
+    ],
+    "ocpp_status": "available",
+    "latitude": 13.74370073,
+    "longitude": 100.54404964,
+    "name": "The Mercury Ville @ Chidlom - 01",
+    "address": "ลานจอดรถชั้น A1 ,In partnership with BMW  540 Phloen Chit Rd, Lumphini, Pathum Wan, Bangkok",
+    "icon_scale": "ss",
+    "distance": 15.81,
+    "distance_per_time_kilo": "23 นาที",
+    "opening_times": [
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 0
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 1
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 2
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 3
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 4
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 5
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 6
+      }
+    ],
+    "province": {
+      "code": "10",
+      "name_th": "กรุงเทพมหานคร",
+      "name_en": "Bangkok"
+    },
+    "evses": [
+      {
+        "brand": "The Mercury Ville @ Chidlom - 01",
+        "code": "147308",
+        "connectors": [
+          {
+            "name": "147308",
+            "ocpp_status": "available",
+            "power": "7",
+            "price": 9,
+            "type": "AC",
+            "status_updated_at": "2025-07-06T11:46:01.020455Z"
+          }
+        ]
+      },
+      {
+        "brand": "The Mercury Ville @ Chidlom - 02",
+        "code": "174924",
+        "connectors": [
+          {
+            "name": "174924",
+            "ocpp_status": "available",
+            "power": "7",
+            "price": 9,
+            "type": "AC",
+            "status_updated_at": "2025-07-06T09:15:52.794316Z"
+          }
+        ]
+      },
+      {
+        "brand": "The Mercury Ville @ Chidlom - 03",
+        "code": "174925",
+        "connectors": [
+          {
+            "name": "174925",
+            "ocpp_status": "available",
+            "power": "7",
+            "price": 9,
+            "type": "AC",
+            "status_updated_at": "2025-07-06T12:51:23.682453Z"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 29246,
+    "updated_at": "2026-04-21T12:20:50.227486Z",
+    "source": "mea",
+    "types": [
+      "AC"
+    ],
+    "ocpp_status": "available",
+    "latitude": 13.745436,
+    "longitude": 100.543412,
+    "name": "สถานีเพลินจิต (Plug ME EV)",
+    "address": "30   ซ. ชิดลม ถ. เพลินจิต ลุมพินี ปทุมวัน กรุงเทพมหานคร 10330",
+    "icon_scale": "sss",
+    "distance": 15.86,
+    "distance_per_time_kilo": "23 นาที",
+    "opening_times": [
+      {
+        "period_begin": "07:00",
+        "period_end": "00:00",
+        "weekday": 1
+      },
+      {
+        "period_begin": "07:00",
+        "period_end": "00:00",
+        "weekday": 2
+      },
+      {
+        "period_begin": "07:00",
+        "period_end": "00:00",
+        "weekday": 3
+      },
+      {
+        "period_begin": "07:00",
+        "period_end": "00:00",
+        "weekday": 4
+      },
+      {
+        "period_begin": "07:00",
+        "period_end": "00:00",
+        "weekday": 5
+      },
+      {
+        "period_begin": "07:00",
+        "period_end": "00:00",
+        "weekday": 6
+      },
+      {
+        "period_begin": "07:00",
+        "period_end": "00:00",
+        "weekday": 0
+      }
+    ],
+    "province": {
+      "code": "10",
+      "name_th": "กรุงเทพมหานคร",
+      "name_en": "Bangkok"
+    },
+    "evses": [
+      {
+        "brand": "KEN CHARGER NO.1",
+        "code": "KEN CHARGER NO.1",
+        "connectors": [
+          {
+            "name": "TYPE 2",
+            "ocpp_status": "close",
+            "power": "7",
+            "price": 7.5,
+            "type": "AC",
+            "status_updated_at": "2026-04-01T03:49:24.529785Z"
+          }
+        ]
+      },
+      {
+        "brand": "KEN CHARGER NO.2",
+        "code": "KEN CHARGER NO.2",
+        "connectors": [
+          {
+            "name": "TYPE 2",
+            "ocpp_status": "close",
+            "power": "7",
+            "price": 7.5,
+            "type": "AC",
+            "status_updated_at": "2026-02-28T06:31:34.654277Z"
+          }
+        ]
+      },
+      {
+        "brand": "KEN CHARGER NO.3",
+        "code": "KEN CHARGER NO.3",
+        "connectors": [
+          {
+            "name": "TYPE 2",
+            "ocpp_status": "close",
+            "power": "7",
+            "price": 7.5,
+            "type": "AC",
+            "status_updated_at": "2026-04-01T04:18:27.934158Z"
+          }
+        ]
+      },
+      {
+        "brand": "KEN CHARGER NO.4",
+        "code": "KEN CHARGER NO.4",
+        "connectors": [
+          {
+            "name": "TYPE 2",
+            "ocpp_status": "available",
+            "power": "7",
+            "price": 7.5,
+            "type": "AC",
+            "status_updated_at": "2026-04-01T02:56:37.676084Z"
+          }
+        ]
+      },
+      {
+        "brand": "KEN CHARGER NO.5",
+        "code": "KEN CHARGER NO.5",
+        "connectors": [
+          {
+            "name": "TYPE 2",
+            "ocpp_status": "close",
+            "power": "7",
+            "price": 7.5,
+            "type": "AC",
+            "status_updated_at": "2026-04-01T02:40:47.193148Z"
+          }
+        ]
+      },
+      {
+        "brand": "KEN CHARGER NO.6",
+        "code": "KEN CHARGER NO.6",
+        "connectors": [
+          {
+            "name": "TYPE 2",
+            "ocpp_status": "close",
+            "power": "7",
+            "price": 7.5,
+            "type": "AC",
+            "status_updated_at": "2026-04-01T03:57:47.891286Z"
+          }
+        ]
+      },
+      {
+        "brand": "KEN CHARGER NO.7",
+        "code": "KEN CHARGER NO.7",
+        "connectors": [
+          {
+            "name": "TYPE 2",
+            "ocpp_status": "close",
+            "power": "7",
+            "price": 7.5,
+            "type": "AC",
+            "status_updated_at": "2026-04-10T07:55:12.143477Z"
+          }
+        ]
+      },
+      {
+        "brand": "KEN CHARGER NO.8",
+        "code": "KEN CHARGER NO.8",
+        "connectors": [
+          {
+            "name": "TYPE 2",
+            "ocpp_status": "close",
+            "power": "7",
+            "price": 7.5,
+            "type": "AC",
+            "status_updated_at": "2026-04-01T03:21:36.660709Z"
+          }
+        ]
+      },
+      {
+        "brand": "KEN CHARGER NO.9",
+        "code": "KEN CHARGER NO.9",
+        "connectors": [
+          {
+            "name": "TYPE 2",
+            "ocpp_status": "close",
+            "power": "7",
+            "price": 7.5,
+            "type": "AC",
+            "status_updated_at": "2026-03-01T04:48:18.622889Z"
+          }
+        ]
+      },
+      {
+        "brand": "KEN CHARGER NO.10",
+        "code": "KEN CHARGER NO.10",
+        "connectors": [
+          {
+            "name": "TYPE 2",
+            "ocpp_status": "close",
+            "power": "7",
+            "price": 7.5,
+            "type": "AC",
+            "status_updated_at": "2026-04-01T03:17:28.294438Z"
+          }
+        ]
+      },
+      {
+        "brand": "KEN CHARGER NO.11",
+        "code": "KEN CHARGER NO.11",
+        "connectors": [
+          {
+            "name": "TYPE 2",
+            "ocpp_status": "close",
+            "power": "7",
+            "price": 7.5,
+            "type": "AC",
+            "status_updated_at": "2026-03-01T08:08:17.946581Z"
+          }
+        ]
+      },
+      {
+        "brand": "KEN CHARGER NO.12",
+        "code": "KEN CHARGER NO.12",
+        "connectors": [
+          {
+            "name": "TYPE 2",
+            "ocpp_status": "close",
+            "power": "7",
+            "price": 7.5,
+            "type": "AC",
+            "status_updated_at": "2026-04-01T03:21:36.660717Z"
+          }
+        ]
+      },
+      {
+        "brand": "PLUG ME EV_TYPE2",
+        "code": "PLUG ME EV_TYPE2",
+        "connectors": [
+          {
+            "name": "TYPE 2",
+            "ocpp_status": "available",
+            "power": "7",
+            "price": 7.5,
+            "type": "AC",
+            "status_updated_at": "2026-04-21T02:47:44.231716Z"
+          },
+          {
+            "name": "TYPE 2",
+            "ocpp_status": "available",
+            "power": "7",
+            "price": 7.5,
+            "type": "AC",
+            "status_updated_at": "2026-04-17T06:49:16.659287Z"
+          },
+          {
+            "name": "TYPE 2",
+            "ocpp_status": "available",
+            "power": "7",
+            "price": 7.5,
+            "type": "AC",
+            "status_updated_at": "2026-04-20T22:55:58.576506Z"
+          },
+          {
+            "name": "TYPE 2",
+            "ocpp_status": "available",
+            "power": "7",
+            "price": 7.5,
+            "type": "AC",
+            "status_updated_at": "2026-04-14T05:05:51.612652Z"
+          },
+          {
+            "name": "TYPE 2",
+            "ocpp_status": "available",
+            "power": "7",
+            "price": 7.5,
+            "type": "AC",
+            "status_updated_at": "2026-04-21T00:28:12.028224Z"
+          },
+          {
+            "name": "TYPE 2",
+            "ocpp_status": "available",
+            "power": "7",
+            "price": 7.5,
+            "type": "AC",
+            "status_updated_at": "2026-04-20T00:22:40.70614Z"
+          },
+          {
+            "name": "TYPE 2",
+            "ocpp_status": "available",
+            "power": "7",
+            "price": 7.5,
+            "type": "AC",
+            "status_updated_at": "2026-04-19T04:59:11.443872Z"
+          },
+          {
+            "name": "TYPE 2",
+            "ocpp_status": "available",
+            "power": "7",
+            "price": 7.5,
+            "type": "AC",
+            "status_updated_at": "2026-04-21T02:44:18.23242Z"
+          },
+          {
+            "name": "TYPE 2",
+            "ocpp_status": "available",
+            "power": "7",
+            "price": 7.5,
+            "type": "AC",
+            "status_updated_at": "2026-04-01T00:41:01.414444Z"
+          },
+          {
+            "name": "TYPE 2",
+            "ocpp_status": "available",
+            "power": "7",
+            "price": 7.5,
+            "type": "AC",
+            "status_updated_at": "2026-04-20T00:22:40.70615Z"
+          },
+          {
+            "name": "TYPE 2",
+            "ocpp_status": "available",
+            "power": "7",
+            "price": 7.5,
+            "type": "AC",
+            "status_updated_at": "2026-04-20T08:37:06.754263Z"
+          },
+          {
+            "name": "TYPE 2",
+            "ocpp_status": "available",
+            "power": "7",
+            "price": 7.5,
+            "type": "AC",
+            "status_updated_at": "2026-04-21T01:49:36.076509Z"
+          },
+          {
+            "name": "TYPE 2",
+            "ocpp_status": "available",
+            "power": "7",
+            "price": 7.5,
+            "type": "AC",
+            "status_updated_at": "2026-04-21T01:14:30.973121Z"
+          },
+          {
+            "name": "TYPE 2",
+            "ocpp_status": "available",
+            "power": "7",
+            "price": 7.5,
+            "type": "AC",
+            "status_updated_at": "2026-04-20T05:29:00.504164Z"
+          },
+          {
+            "name": "TYPE 2",
+            "ocpp_status": "available",
+            "power": "7",
+            "price": 7.5,
+            "type": "AC",
+            "status_updated_at": "2026-04-21T04:31:25.100943Z"
+          },
+          {
+            "name": "TYPE 2",
+            "ocpp_status": "available",
+            "power": "7",
+            "price": 7.5,
+            "type": "AC",
+            "status_updated_at": "2026-04-20T00:10:24.191898Z"
+          },
+          {
+            "name": "TYPE 2",
+            "ocpp_status": "occupied",
+            "power": "7",
+            "price": 7.5,
+            "type": "AC",
+            "status_updated_at": "2026-04-21T08:53:39.22651Z"
+          },
+          {
+            "name": "TYPE 2",
+            "ocpp_status": "available",
+            "power": "7",
+            "price": 7.5,
+            "type": "AC",
+            "status_updated_at": "2026-04-21T00:21:43.647026Z"
+          }
+        ]
+      }
+    ],
+    "facilities": [
+      {
+        "name": "ลานจอดรถ"
+      }
+    ]
+  },
+  {
+    "id": 991,
+    "updated_at": "2026-04-21T12:20:49.071283Z",
+    "source": "mea",
+    "types": [
+      "AC",
+      "DC"
+    ],
+    "ocpp_status": "available",
+    "latitude": 13.74436,
+    "longitude": 100.543503,
+    "name": "การไฟฟ้านครหลวง สำนักงานเพลินจิต",
+    "address": "30   ซ. ชิดลม ถ. เพลินจิต ลุมพินี ปทุมวัน กรุงเทพมหานคร 10330",
+    "icon_scale": "l",
+    "distance": 15.86,
+    "distance_per_time_kilo": "23 นาที",
+    "opening_times": [
+      {
+        "period_begin": "05:00",
+        "period_end": "23:30",
+        "weekday": 1
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "08:00",
+        "weekday": 2
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "08:00",
+        "weekday": 3
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "08:00",
+        "weekday": 4
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "08:00",
+        "weekday": 5
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "08:00",
+        "weekday": 6
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "08:00",
+        "weekday": 0
+      }
+    ],
+    "province": {
+      "code": "10",
+      "name_th": "กรุงเทพมหานคร",
+      "name_en": "Bangkok"
+    },
+    "evses": [
+      {
+        "brand": "Normal Charge 44kW No.1",
+        "code": "Normal Charge 44kW No.1",
+        "connectors": [
+          {
+            "name": "TYPE 2",
+            "ocpp_status": "occupied",
+            "power": "44",
+            "price": 7.5,
+            "type": "AC",
+            "status_updated_at": "2026-04-21T11:46:42.756385Z"
+          }
+        ]
+      },
+      {
+        "brand": "Normal Charge 44kW No.2",
+        "code": "Normal Charge 44kW No.2",
+        "connectors": [
+          {
+            "name": "TYPE 2",
+            "ocpp_status": "occupied",
+            "power": "44",
+            "price": 7.5,
+            "type": "AC",
+            "status_updated_at": "2026-04-21T10:09:49.121356Z"
+          }
+        ]
+      },
+      {
+        "brand": "MEA Quick Charger 120 kW",
+        "code": "MEA Quick Charger 120 kW",
+        "connectors": [
+          {
+            "name": "CCS 2",
+            "ocpp_status": "available",
+            "power": "180",
+            "price": 7.5,
+            "type": "DC",
+            "status_updated_at": "2026-04-21T10:30:14.873863Z"
+          },
+          {
+            "name": "CCS 2",
+            "ocpp_status": "available",
+            "power": "180",
+            "price": 7.5,
+            "type": "DC",
+            "status_updated_at": "2026-04-21T11:41:55.56025Z"
+          }
+        ]
+      },
+      {
+        "brand": "MEA Quick Charger 180 kW",
+        "code": "MEA Quick Charger 180 kW",
+        "connectors": [
+          {
+            "name": "CCS 2",
+            "ocpp_status": "available",
+            "power": "180",
+            "price": 7.5,
+            "type": "DC",
+            "status_updated_at": "2026-04-21T10:54:26.99297Z"
+          },
+          {
+            "name": "CCS 2",
+            "ocpp_status": "occupied",
+            "power": "180",
+            "price": 7.5,
+            "type": "DC",
+            "status_updated_at": "2026-04-21T12:07:26.759457Z"
+          }
+        ]
+      }
+    ],
+    "facilities": [
+      {
+        "name": "ลานจอดรถ"
+      }
+    ]
+  },
+  {
+    "id": 3496,
+    "updated_at": "2025-10-27T02:01:30.650148Z",
+    "source": "reversharger",
+    "types": [
+      "AC"
+    ],
+    "ocpp_status": "available",
+    "latitude": 13.73673,
+    "longitude": 100.54394,
+    "name": "Sindhorn Kempinski Hotel",
+    "address": "80 Soi Ton Son, Pathum Wan",
+    "icon_scale": "ss",
+    "distance": 15.9,
+    "distance_per_time_kilo": "23 นาที",
+    "opening_times": [
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 0
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 1
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 2
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 3
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 4
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 5
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 6
+      }
+    ],
+    "province": {
+      "code": "10",
+      "name_th": "กรุงเทพมหานคร",
+      "name_en": "Bangkok"
+    },
+    "evses": [
+      {
+        "brand": "Sindhorn Kempinski Hotel 04",
+        "code": "SIDH04",
+        "connectors": [
+          {
+            "name": "Sindhorn Kempinski Hotel 04",
+            "ocpp_status": "available",
+            "power": "22",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2025-10-23T23:55:21.250351Z"
+          }
+        ]
+      },
+      {
+        "brand": "Sindhorn Kempinski Hotel-5",
+        "code": "SIDH05",
+        "connectors": [
+          {
+            "name": "Sindhorn Kempinski Hotel-5",
+            "ocpp_status": "occupied",
+            "power": "22",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2025-10-27T01:51:53.247303Z"
+          }
+        ]
+      },
+      {
+        "brand": "Sindhorn Kempinski Hotel 06",
+        "code": "SIDH06",
+        "connectors": [
+          {
+            "name": "Sindhorn Kempinski Hotel 06",
+            "ocpp_status": "available",
+            "power": "22",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2025-10-26T07:01:59.461176Z"
+          }
+        ]
+      },
+      {
+        "brand": "Sindhorn Kempinski Hotel 03",
+        "code": "SIDH03",
+        "connectors": [
+          {
+            "name": "Sindhorn Kempinski Hotel 03",
+            "ocpp_status": "available",
+            "power": "22",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2025-10-22T01:14:53.277192Z"
+          }
+        ]
+      },
+      {
+        "brand": "Sindhorn Kempinski Hotel 01",
+        "code": "SIDH01",
+        "connectors": [
+          {
+            "name": "Sindhorn Kempinski Hotel 01",
+            "ocpp_status": "available",
+            "power": "22",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2025-10-23T23:58:12.248768Z"
+          }
+        ]
+      },
+      {
+        "brand": "Sindhorn Kempinski Hotel 02",
+        "code": "SIDH02",
+        "connectors": [
+          {
+            "name": "Sindhorn Kempinski Hotel 02",
+            "ocpp_status": "available",
+            "power": "22",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2025-10-26T06:48:11.934182Z"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 3498,
+    "updated_at": "2025-10-27T02:01:30.709443Z",
+    "source": "reversharger",
+    "types": [
+      "AC"
+    ],
+    "ocpp_status": "available",
+    "latitude": 13.736727428657382,
+    "longitude": 100.54291098417173,
+    "name": "Velaa Sindhorn Village (Schneider)",
+    "address": "87 Lang Suan Road แขวง ลุมพินี เขตปทุมวัน",
+    "icon_scale": "sss",
+    "distance": 16.01,
+    "distance_per_time_kilo": "23 นาที",
+    "opening_times": [
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 0
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 1
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 2
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 3
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 4
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 5
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 6
+      }
+    ],
+    "province": {
+      "code": "10",
+      "name_th": "กรุงเทพมหานคร",
+      "name_en": "Bangkok"
+    },
+    "evses": [
+      {
+        "brand": "Velaa Sindhorn Village -01",
+        "code": "VLSH01",
+        "connectors": [
+          {
+            "name": "Velaa Sindhorn Village -01",
+            "ocpp_status": "available",
+            "power": "22",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2025-10-26T16:12:09.019171Z"
+          }
+        ]
+      },
+      {
+        "brand": "Velaa Sindhorn Village -02",
+        "code": "VLSH02",
+        "connectors": [
+          {
+            "name": "Velaa Sindhorn Village -02",
+            "ocpp_status": "available",
+            "power": "22",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2025-10-27T01:25:09.508291Z"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 3497,
+    "updated_at": "2025-10-27T02:01:30.681679Z",
+    "source": "reversharger",
+    "types": [
+      "AC"
+    ],
+    "ocpp_status": "available",
+    "latitude": 13.7367696,
+    "longitude": 100.5429052,
+    "name": "Velaa Sindhorn Village (ABB)",
+    "address": "87 Lang Suan Road แขวง ลุมพินี เขตปทุมวัน",
+    "icon_scale": "l",
+    "distance": 16.01,
+    "distance_per_time_kilo": "23 นาที",
+    "opening_times": [
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 0
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 1
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 2
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 3
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 4
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 5
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 6
+      }
+    ],
+    "province": {
+      "code": "10",
+      "name_th": "กรุงเทพมหานคร",
+      "name_en": "Bangkok"
+    },
+    "evses": [
+      {
+        "brand": "Velaa Sindhorn Village 03",
+        "code": "VLSH03",
+        "connectors": [
+          {
+            "name": "Velaa Sindhorn Village 03",
+            "ocpp_status": "available",
+            "power": "22",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2025-10-26T12:00:00.117357Z"
+          }
+        ]
+      },
+      {
+        "brand": "Velaa Sindhorn Village 04",
+        "code": "VLSH04",
+        "connectors": [
+          {
+            "name": "Velaa Sindhorn Village 04",
+            "ocpp_status": "available",
+            "power": "22",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2025-10-26T06:31:12.234151Z"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 3746,
+    "updated_at": "2025-07-07T06:40:47.974543Z",
+    "source": "evolt",
+    "types": [
+      "AC"
+    ],
+    "ocpp_status": "available",
+    "latitude": 13.74587485,
+    "longitude": 100.54177655,
+    "name": "InterContinental Bangkok - 01",
+    "address": "ลานจอดรถชั้น 2,973 Phloen Chit Rd, Lumphini, Pathum Wan, Bangkok",
+    "icon_scale": "l",
+    "distance": 16.03,
+    "distance_per_time_kilo": "23 นาที",
+    "opening_times": [
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 0
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 1
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 2
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 3
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 4
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 5
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 6
+      }
+    ],
+    "province": {
+      "code": "10",
+      "name_th": "กรุงเทพมหานคร",
+      "name_en": "Bangkok"
+    },
+    "evses": [
+      {
+        "brand": "InterContinental Bangkok - 01",
+        "code": "234348",
+        "connectors": [
+          {
+            "name": "234348",
+            "ocpp_status": "available",
+            "power": "22",
+            "price": 9,
+            "type": "AC",
+            "status_updated_at": "2025-07-07T03:12:02.104229Z"
+          }
+        ]
+      },
+      {
+        "brand": "InterContinental Bangkok - 02",
+        "code": "234349",
+        "connectors": [
+          {
+            "name": "234349",
+            "ocpp_status": "available",
+            "power": "22",
+            "price": 9,
+            "type": "AC",
+            "status_updated_at": "2025-07-06T07:57:23.018445Z"
+          }
+        ]
+      },
+      {
+        "brand": "InterContinental Bangkok - 03",
+        "code": "234350",
+        "connectors": [
+          {
+            "name": "234350",
+            "ocpp_status": "occupied",
+            "power": "22",
+            "price": 9,
+            "type": "AC",
+            "status_updated_at": "2025-07-07T01:26:49.931359Z"
+          }
+        ]
+      },
+      {
+        "brand": "InterContinental Bangkok - 04",
+        "code": "234352",
+        "connectors": [
+          {
+            "name": "234352",
+            "ocpp_status": "available",
+            "power": "22",
+            "price": 9,
+            "type": "AC",
+            "status_updated_at": "2025-07-07T03:28:51.604329Z"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 29387,
+    "updated_at": "2025-10-27T02:01:29.755208Z",
+    "source": "reversharger",
+    "types": [
+      "AC"
+    ],
+    "ocpp_status": "available",
+    "latitude": 13.742511376663527,
+    "longitude": 100.54196961892102,
+    "name": "Renaissance Bangkok Ratchaprasong Floor.P1",
+    "address": "518 8 Ploenchit Road,Lumphini,Pathumwan",
+    "icon_scale": "ss",
+    "distance": 16.04,
+    "distance_per_time_kilo": "23 นาที",
+    "opening_times": [
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 0
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 1
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 2
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 3
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 4
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 5
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 6
+      }
+    ],
+    "province": {
+      "code": "10",
+      "name_th": "กรุงเทพมหานคร",
+      "name_en": "Bangkok"
+    },
+    "evses": [
+      {
+        "brand": "Renaissance Bangkok Ratchaprasong Floor.P1 AC-01",
+        "code": "RCPS01",
+        "connectors": [
+          {
+            "name": "Renaissance Bangkok Ratchaprasong Floor.P1 AC-01",
+            "ocpp_status": "occupied",
+            "power": "7",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2025-10-27T00:54:32.985989Z"
+          }
+        ]
+      },
+      {
+        "brand": "Renaissance Bangkok Ratchaprasong Floor.P1 AC-03",
+        "code": "RCPS03",
+        "connectors": [
+          {
+            "name": "Renaissance Bangkok Ratchaprasong Floor.P1 AC-03",
+            "ocpp_status": "available",
+            "power": "7",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2025-10-21T01:52:25.205714Z"
+          }
+        ]
+      },
+      {
+        "brand": "Renaissance Bangkok Ratchaprasong Floor.P1 AC-02",
+        "code": "RCPS02",
+        "connectors": [
+          {
+            "name": "Renaissance Bangkok Ratchaprasong Floor.P1 AC-02",
+            "ocpp_status": "available",
+            "power": "7",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2025-10-25T14:38:10.272286Z"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 5599,
+    "updated_at": "2025-12-15T11:03:07.164258Z",
+    "source": "pttv2",
+    "types": [
+      "AC"
+    ],
+    "ocpp_status": "available",
+    "latitude": 13.7409942385,
+    "longitude": 100.5418740897,
+    "name": "คอร์ทยาร์ด บาย แมริออท กรุงเทพ",
+    "address": "155/1 แขวงลุมพินี เขตปทุมวัน กรุงเทพมหานคร 10330",
+    "icon_scale": "l",
+    "distance": 16.07,
+    "distance_per_time_kilo": "23 นาที",
+    "opening_times": [
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 0
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 1
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 2
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 3
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 4
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 5
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 6
+      }
+    ],
+    "province": {
+      "code": "10",
+      "name_th": "กรุงเทพมหานคร",
+      "name_en": "Bangkok"
+    },
+    "evses": [
+      {
+        "brand": "IOCharger",
+        "code": "GWC-OR-2200",
+        "connectors": [
+          {
+            "name": "Type 2",
+            "ocpp_status": "available",
+            "power": "22",
+            "price": 9,
+            "type": "AC",
+            "position": "L",
+            "status_updated_at": "2025-12-08T05:55:01.304694Z"
+          },
+          {
+            "name": "Type 2",
+            "ocpp_status": "available",
+            "power": "22",
+            "price": 9,
+            "type": "AC",
+            "position": "R",
+            "status_updated_at": "2025-12-13T03:38:25.670344Z"
+          }
+        ]
+      },
+      {
+        "brand": "IOCharger",
+        "code": "GWC-OR-2238",
+        "connectors": [
+          {
+            "name": "Type 2",
+            "ocpp_status": "available",
+            "power": "7",
+            "price": 9,
+            "type": "AC",
+            "position": "M",
+            "status_updated_at": "2025-11-28T04:47:38.290607Z"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 3731,
+    "updated_at": "2025-07-07T06:40:47.946518Z",
+    "source": "evolt",
+    "types": [
+      "AC"
+    ],
+    "ocpp_status": "available",
+    "latitude": 13.747168,
+    "longitude": 100.541271,
+    "name": "Big C Ratchadamri",
+    "address": "PARKING LOT B FLOOR,  ZONE C, 97/11 Ratchadamri Rd, Lumphini, Pathum Wan",
+    "icon_scale": "sss",
+    "distance": 16.08,
+    "distance_per_time_kilo": "23 นาที",
+    "opening_times": [
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 0
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 1
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 2
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 3
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 4
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 5
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 6
+      }
+    ],
+    "province": {
+      "code": "10",
+      "name_th": "กรุงเทพมหานคร",
+      "name_en": "Bangkok"
+    },
+    "evses": [
+      {
+        "brand": "Big C Ratchadamri",
+        "code": "225605",
+        "connectors": [
+          {
+            "name": "225605",
+            "ocpp_status": "available",
+            "power": "22",
+            "price": 9,
+            "type": "AC",
+            "status_updated_at": "2025-07-07T02:38:23.954171Z"
+          }
+        ]
+      },
+      {
+        "brand": "Big C Ratchadamri -2",
+        "code": "225606",
+        "connectors": [
+          {
+            "name": "225606",
+            "ocpp_status": "occupied",
+            "power": "22",
+            "price": 9,
+            "type": "AC",
+            "status_updated_at": "2025-07-07T06:38:23.263254Z"
+          }
+        ]
+      },
+      {
+        "brand": "Big C Ratchadamri -3",
+        "code": "225607",
+        "connectors": [
+          {
+            "name": "225607",
+            "ocpp_status": "available",
+            "power": "22",
+            "price": 9,
+            "type": "AC",
+            "status_updated_at": "2025-07-03T12:18:50.238418Z"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 29753,
+    "updated_at": "2025-12-15T11:02:58.899727Z",
+    "source": "pttv2",
+    "types": [
+      "DC"
+    ],
+    "ocpp_status": "occupied",
+    "latitude": 13.7471551409,
+    "longitude": 100.541199277,
+    "name": "บิ๊กซี ราชดำริ",
+    "address": "97/11 ถ.ราชดำริ แขวงลุมพินี เขตปทุมวัน กรุงเทพมหานคร 10330",
+    "icon_scale": "sss",
+    "distance": 16.09,
+    "distance_per_time_kilo": "23 นาที",
+    "opening_times": [
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 0
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 1
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 2
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 3
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 4
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 5
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 6
+      }
+    ],
+    "province": {
+      "code": "10",
+      "name_th": "กรุงเทพมหานคร",
+      "name_en": "Bangkok"
+    },
+    "evses": [
+      {
+        "brand": "Teison",
+        "code": "THPORE240310",
+        "connectors": [
+          {
+            "name": "CCS COMBO 2",
+            "ocpp_status": "occupied",
+            "power": "40",
+            "price": 9,
+            "type": "DC",
+            "position": "R",
+            "status_updated_at": "2025-12-15T10:37:46.580272Z"
+          },
+          {
+            "name": "CCS COMBO 2",
+            "ocpp_status": "occupied",
+            "power": "40",
+            "price": 9,
+            "type": "DC",
+            "position": "L",
+            "status_updated_at": "2025-12-15T10:02:54.067282Z"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 3742,
+    "updated_at": "2025-07-07T06:40:47.930972Z",
+    "source": "evolt",
+    "types": [
+      "AC"
+    ],
+    "ocpp_status": "available",
+    "latitude": 13.74604453,
+    "longitude": 100.54120036,
+    "name": "Gaysorn Tower - Parking P5 - 01",
+    "address": "ชั้น 5 ,127 Ratchadamri Rd, Lumphini, Pathum Wan",
+    "icon_scale": "sss",
+    "distance": 16.09,
+    "distance_per_time_kilo": "23 นาที",
+    "opening_times": [
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 0
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 1
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 2
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 3
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 4
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 5
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 6
+      }
+    ],
+    "province": {
+      "code": "10",
+      "name_th": "กรุงเทพมหานคร",
+      "name_en": "Bangkok"
+    },
+    "evses": [
+      {
+        "brand": "Gaysorn Tower - Parking P5 - 01",
+        "code": "232372",
+        "connectors": [
+          {
+            "name": "232372",
+            "ocpp_status": "available",
+            "power": "22",
+            "price": 9,
+            "type": "AC",
+            "status_updated_at": "2025-07-07T01:38:16.104183Z"
+          }
+        ]
+      },
+      {
+        "brand": "Gaysorn Tower - Parking P5 - 02",
+        "code": "232375",
+        "connectors": [
+          {
+            "name": "232375",
+            "ocpp_status": "available",
+            "power": "22",
+            "price": 9,
+            "type": "AC",
+            "status_updated_at": "2025-07-07T03:00:43.986891Z"
+          }
+        ]
+      },
+      {
+        "brand": "Gaysorn Tower - Parking P5 - 03",
+        "code": "232389",
+        "connectors": [
+          {
+            "name": "232389",
+            "ocpp_status": "available",
+            "power": "22",
+            "price": 9,
+            "type": "AC",
+            "status_updated_at": "2025-07-04T02:27:35.977055Z"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 29285,
+    "updated_at": "2025-07-07T06:40:47.958914Z",
+    "source": "evolt",
+    "types": [
+      "AC"
+    ],
+    "ocpp_status": "available",
+    "latitude": 13.74362658,
+    "longitude": 100.54129207,
+    "name": "Gaysorn Amarin - Parking P6 - 01",
+    "address": "ชั้น6 ตรงข้ามทางเข้าอาคาร,500 Phloen Chit Rd, Lumphini, Pathum Wan",
+    "icon_scale": "l",
+    "distance": 16.1,
+    "distance_per_time_kilo": "23 นาที",
+    "opening_times": [
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 0
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 1
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 2
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 3
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 4
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 5
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 6
+      }
+    ],
+    "province": {
+      "code": "10",
+      "name_th": "กรุงเทพมหานคร",
+      "name_en": "Bangkok"
+    },
+    "evses": [
+      {
+        "brand": "Gaysorn Amarin - Parking P6 - 01",
+        "code": "232392",
+        "connectors": [
+          {
+            "name": "232392",
+            "ocpp_status": "occupied",
+            "power": "22",
+            "price": 9,
+            "type": "AC",
+            "status_updated_at": "2025-07-07T06:27:21.063785Z"
+          }
+        ]
+      },
+      {
+        "brand": "Gaysorn Amarin - Parking P6 - 02",
+        "code": "232410",
+        "connectors": [
+          {
+            "name": "232410",
+            "ocpp_status": "occupied",
+            "power": "22",
+            "price": 9,
+            "type": "AC",
+            "status_updated_at": "2025-07-07T02:05:18.01417Z"
+          }
+        ]
+      },
+      {
+        "brand": "Gaysorn Amarin - Parking P6 - 03",
+        "code": "256779",
+        "connectors": [
+          {
+            "name": "256779",
+            "ocpp_status": "available",
+            "power": "22",
+            "price": 9,
+            "type": "AC",
+            "status_updated_at": "2025-07-07T01:09:56.541179Z"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 3737,
+    "updated_at": "2025-07-07T06:40:47.91296Z",
+    "source": "evolt",
+    "types": [
+      "AC"
+    ],
+    "ocpp_status": "available",
+    "latitude": 13.74527478,
+    "longitude": 100.54079332,
+    "name": "Gaysorn Centre - Parking B2 - 01",
+    "address": "Parking B2 เสา C2 ก่อนถึงทางเข้าอาคาร",
+    "icon_scale": "ss",
+    "distance": 16.14,
+    "distance_per_time_kilo": "23 นาที",
+    "opening_times": [
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 0
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 1
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 2
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 3
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 4
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 5
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 6
+      }
+    ],
+    "province": {
+      "code": "10",
+      "name_th": "กรุงเทพมหานคร",
+      "name_en": "Bangkok"
+    },
+    "evses": [
+      {
+        "brand": "Gaysorn Centre - Parking B2 - 01",
+        "code": "112723",
+        "connectors": [
+          {
+            "name": "112723",
+            "ocpp_status": "available",
+            "power": "22",
+            "price": 9,
+            "type": "AC",
+            "status_updated_at": "2025-07-04T07:13:34.103464Z"
+          }
+        ]
+      },
+      {
+        "brand": "Gaysorn Centre - Parking B2 - 02",
+        "code": "112724",
+        "connectors": [
+          {
+            "name": "112724",
+            "ocpp_status": "available",
+            "power": "22",
+            "price": 9,
+            "type": "AC",
+            "status_updated_at": "2025-07-07T05:05:32.605128Z"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 3727,
+    "updated_at": "2025-07-07T06:40:47.970469Z",
+    "source": "evolt",
+    "types": [
+      "AC"
+    ],
+    "ocpp_status": "available",
+    "latitude": 13.74353024,
+    "longitude": 100.54048686,
+    "name": "Erawan Bangkok - 01",
+    "address": "มี2 ชั้น,ลานจอดรถชั้น B1(E1) ติดทางเข้าอาคาร และ B2(C1) ติดทางเข้าอาคาร ,In partnership with BMW 494 Phloen Chit Rd, Khwaeng Lumphini, Pathum Wan, Bangkok",
+    "icon_scale": "ss",
+    "distance": 16.19,
+    "distance_per_time_kilo": "23 นาที",
+    "opening_times": [
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 0
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 1
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 2
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 3
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 4
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 5
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 6
+      }
+    ],
+    "province": {
+      "code": "10",
+      "name_th": "กรุงเทพมหานคร",
+      "name_en": "Bangkok"
+    },
+    "evses": [
+      {
+        "brand": "Erawan Bangkok - 01",
+        "code": "170934",
+        "connectors": [
+          {
+            "name": "170934",
+            "ocpp_status": "available",
+            "power": "22",
+            "price": 9,
+            "type": "AC",
+            "status_updated_at": "2025-07-04T10:12:11.332545Z"
+          }
+        ]
+      },
+      {
+        "brand": "Erawan Bangkok - 02",
+        "code": "170935",
+        "connectors": [
+          {
+            "name": "170935",
+            "ocpp_status": "available",
+            "power": "22",
+            "price": 9,
+            "type": "AC",
+            "status_updated_at": "2025-07-07T03:22:42.463193Z"
+          }
+        ]
+      },
+      {
+        "brand": "Erawan Bangkok - 03",
+        "code": "175926",
+        "connectors": [
+          {
+            "name": "175926",
+            "ocpp_status": "available",
+            "power": "22",
+            "price": 9,
+            "type": "AC",
+            "status_updated_at": "2025-07-05T20:14:43.266036Z"
+          }
+        ]
+      },
+      {
+        "brand": "Erawan Bangkok - 04",
+        "code": "178218",
+        "connectors": [
+          {
+            "name": "178218",
+            "ocpp_status": "available",
+            "power": "22",
+            "price": 9,
+            "type": "AC",
+            "status_updated_at": "2025-07-06T07:20:48.889299Z"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 3865,
+    "updated_at": "2025-02-08T18:10:06.794714Z",
+    "source": "tesla",
+    "types": [
+      "DC"
+    ],
+    "ocpp_status": "specific",
+    "latitude": 13.7467377,
+    "longitude": 100.5398451,
+    "name": "Central World, Bangkok",
+    "address": "Central World, Bangkok4 4/1-4/2 Rama I Rd",
+    "icon_scale": "l",
+    "distance": 16.23,
+    "distance_per_time_kilo": "23 นาที",
+    "opening_times": [
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 0
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 1
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 2
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 3
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 4
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 5
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 6
+      }
+    ],
+    "province": {
+      "code": "10",
+      "name_th": "กรุงเทพมหานคร",
+      "name_en": "Bangkok"
+    },
+    "evses": [
+      {
+        "brand": "Supercharger",
+        "code": "Supercharger",
+        "connectors": [
+          {
+            "name": "Central World, Bangkok (Pay to Park)",
+            "ocpp_status": "specific",
+            "power": "250",
+            "price": 10.1,
+            "type": "DC"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 3738,
+    "updated_at": "2025-07-07T06:40:47.940133Z",
+    "source": "evolt",
+    "types": [
+      "AC"
+    ],
+    "ocpp_status": "available",
+    "latitude": 13.747548,
+    "longitude": 100.539104,
+    "name": "BMW Exclusive Parking @ centralwOrld - 01",
+    "address": "ลานจอดรถ ชั้น B1 โซน U 27-29 999/9 Rama I Rd, Pathum Wan, Bangkok",
+    "icon_scale": "l",
+    "distance": 16.31,
+    "distance_per_time_kilo": "24 นาที",
+    "opening_times": [
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 0
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 1
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 2
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 3
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 4
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 5
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 6
+      }
+    ],
+    "province": {
+      "code": "10",
+      "name_th": "กรุงเทพมหานคร",
+      "name_en": "Bangkok"
+    },
+    "evses": [
+      {
+        "brand": "BMW Exclusive Parking @ centralwOrld - 01",
+        "code": "172184",
+        "connectors": [
+          {
+            "name": "172184",
+            "ocpp_status": "available",
+            "power": "7",
+            "price": 45,
+            "type": "AC",
+            "status_updated_at": "2025-07-06T11:40:01.532457Z"
+          }
+        ]
+      },
+      {
+        "brand": "BMW Exclusive Parking @ centralwOrld - 02",
+        "code": "172185",
+        "connectors": [
+          {
+            "name": "172185",
+            "ocpp_status": "available",
+            "power": "7",
+            "price": 45,
+            "type": "AC",
+            "status_updated_at": "2025-07-06T12:40:03.248839Z"
+          }
+        ]
+      },
+      {
+        "brand": "BMW Exclusive Parking @ centralwOrld - 03",
+        "code": "172186",
+        "connectors": [
+          {
+            "name": "172186",
+            "ocpp_status": "available",
+            "power": "7",
+            "price": 45,
+            "type": "AC",
+            "status_updated_at": "2025-07-07T02:27:02.698827Z"
+          }
+        ]
+      },
+      {
+        "brand": "BMW Exclusive Parking @ centralwOrld - 04",
+        "code": "172187",
+        "connectors": [
+          {
+            "name": "172187",
+            "ocpp_status": "occupied",
+            "power": "7",
+            "price": 45,
+            "type": "AC",
+            "status_updated_at": "2025-07-07T06:27:15.45729Z"
+          }
+        ]
+      },
+      {
+        "brand": "BMW Exclusive Parking @ centralwOrld - 05",
+        "code": "172188",
+        "connectors": [
+          {
+            "name": "172188",
+            "ocpp_status": "available",
+            "power": "7",
+            "price": 45,
+            "type": "AC",
+            "status_updated_at": "2025-07-07T03:00:30.716253Z"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 3748,
+    "updated_at": "2025-07-07T06:40:47.866676Z",
+    "source": "evolt",
+    "types": [
+      "AC"
+    ],
+    "ocpp_status": "available",
+    "latitude": 13.74542986,
+    "longitude": 100.53917738,
+    "name": "CentralwOrld - 02",
+    "address": "ชั้น B1 เสา P27-28  และ Q26-28  999/9 Rama I Rd, Pathum Wan",
+    "icon_scale": "ss",
+    "distance": 16.32,
+    "distance_per_time_kilo": "24 นาที",
+    "opening_times": [
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 0
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 1
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 2
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 3
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 4
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 5
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 6
+      }
+    ],
+    "province": {
+      "code": "10",
+      "name_th": "กรุงเทพมหานคร",
+      "name_en": "Bangkok"
+    },
+    "evses": [
+      {
+        "brand": "CentralwOrld - 02",
+        "code": "157851",
+        "connectors": [
+          {
+            "name": "157851",
+            "ocpp_status": "available",
+            "power": "7",
+            "price": 60,
+            "type": "AC",
+            "status_updated_at": "2025-07-07T01:59:08.004835Z"
+          }
+        ]
+      },
+      {
+        "brand": "CentralwOrld - 03",
+        "code": "157863",
+        "connectors": [
+          {
+            "name": "157863",
+            "ocpp_status": "occupied",
+            "power": "7",
+            "price": 60,
+            "type": "AC",
+            "status_updated_at": "2025-07-07T03:00:17.284464Z"
+          }
+        ]
+      },
+      {
+        "brand": "CentralwOrld - 04",
+        "code": "157868",
+        "connectors": [
+          {
+            "name": "157868",
+            "ocpp_status": "occupied",
+            "power": "7",
+            "price": 60,
+            "type": "AC",
+            "status_updated_at": "2025-07-07T03:22:40.655103Z"
+          }
+        ]
+      },
+      {
+        "brand": "CentralwOrld - 06",
+        "code": "157870",
+        "connectors": [
+          {
+            "name": "157870",
+            "ocpp_status": "occupied",
+            "power": "7",
+            "price": 60,
+            "type": "AC",
+            "status_updated_at": "2025-07-07T01:31:56.231777Z"
+          }
+        ]
+      },
+      {
+        "brand": "CentralwOrld - 07",
+        "code": "157871",
+        "connectors": [
+          {
+            "name": "157871",
+            "ocpp_status": "occupied",
+            "power": "7",
+            "price": 60,
+            "type": "AC",
+            "status_updated_at": "2025-07-07T03:11:32.561487Z"
+          }
+        ]
+      },
+      {
+        "brand": "CentralwOrld - 08",
+        "code": "157878",
+        "connectors": [
+          {
+            "name": "157878",
+            "ocpp_status": "occupied",
+            "power": "7",
+            "price": 60,
+            "type": "AC",
+            "status_updated_at": "2025-07-07T06:32:42.904883Z"
+          }
+        ]
+      },
+      {
+        "brand": "CentralwOrld - 09",
+        "code": "220148",
+        "connectors": [
+          {
+            "name": "220148",
+            "ocpp_status": "occupied",
+            "power": "7",
+            "price": 60,
+            "type": "AC",
+            "status_updated_at": "2025-07-07T06:21:57.875055Z"
+          }
+        ]
+      },
+      {
+        "brand": "CentralwOrld - 01",
+        "code": "243157",
+        "connectors": [
+          {
+            "name": "243157",
+            "ocpp_status": "occupied",
+            "power": "7",
+            "price": 60,
+            "type": "AC",
+            "status_updated_at": "2025-07-07T06:38:05.875865Z"
+          }
+        ]
+      },
+      {
+        "brand": "CentralwOrld - 05",
+        "code": "281214",
+        "connectors": [
+          {
+            "name": "281214",
+            "ocpp_status": "occupied",
+            "power": "7",
+            "price": 60,
+            "type": "AC",
+            "status_updated_at": "2025-07-07T02:26:49.614359Z"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 4372,
+    "updated_at": "2026-04-21T12:20:06.845113Z",
+    "source": "onion",
+    "types": [
+      "AC"
+    ],
+    "ocpp_status": "available",
+    "latitude": 13.746867,
+    "longitude": 100.539027,
+    "name": "4, 4/5 ถนน ราชดำริ แขวง ปทุมวัน เขตปทุมวัน กรุงเทพมหานคร 10330o",
+    "address": "4, 4/5 ถนน ราชดำริ แขวง ปทุมวัน เขตปทุมวัน กรุงเทพมหานคร 10330o",
+    "icon_scale": "l",
+    "distance": 16.32,
+    "distance_per_time_kilo": "24 นาที",
+    "opening_times": [
+      {
+        "period_begin": "06:00",
+        "period_end": "22:00",
+        "weekday": 1
+      },
+      {
+        "period_begin": "06:00",
+        "period_end": "22:00",
+        "weekday": 2
+      },
+      {
+        "period_begin": "06:00",
+        "period_end": "22:00",
+        "weekday": 3
+      },
+      {
+        "period_begin": "06:00",
+        "period_end": "22:00",
+        "weekday": 4
+      },
+      {
+        "period_begin": "06:00",
+        "period_end": "22:00",
+        "weekday": 5
+      },
+      {
+        "period_begin": "06:00",
+        "period_end": "22:00",
+        "weekday": 6
+      },
+      {
+        "period_begin": "06:00",
+        "period_end": "22:00",
+        "weekday": 7
+      }
+    ],
+    "province": {
+      "code": "10",
+      "name_th": "กรุงเทพมหานคร",
+      "name_en": "Bangkok"
+    },
+    "evses": [
+      {
+        "code": "24",
+        "connectors": [
+          {
+            "name": "09",
+            "ocpp_status": "available",
+            "power": "7",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2026-04-21T06:33:46.057849Z"
+          },
+          {
+            "name": "05",
+            "ocpp_status": "close",
+            "power": "7",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2026-04-18T05:46:05.344615Z"
+          },
+          {
+            "name": "07",
+            "ocpp_status": "occupied",
+            "power": "7",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2026-04-21T11:08:56.28238Z"
+          },
+          {
+            "name": "06",
+            "ocpp_status": "occupied",
+            "power": "7",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2026-04-21T06:44:07.416121Z"
+          },
+          {
+            "name": "02",
+            "ocpp_status": "occupied",
+            "power": "7",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2026-04-20T10:48:27.019681Z"
+          },
+          {
+            "name": "12",
+            "ocpp_status": "available",
+            "power": "7",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2026-04-21T09:47:56.042158Z"
+          },
+          {
+            "name": "13",
+            "ocpp_status": "occupied",
+            "power": "7",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2026-04-21T11:24:00.940166Z"
+          },
+          {
+            "name": "04",
+            "ocpp_status": "close",
+            "power": "7",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2026-02-09T08:27:43.463122Z"
+          },
+          {
+            "name": "01",
+            "ocpp_status": "available",
+            "power": "7",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2026-04-21T10:06:49.350258Z"
+          },
+          {
+            "name": "14",
+            "ocpp_status": "occupied",
+            "power": "7",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2026-04-20T10:48:27.019727Z"
+          },
+          {
+            "name": "17",
+            "ocpp_status": "occupied",
+            "power": "7",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2026-04-21T10:55:32.069586Z"
+          },
+          {
+            "name": "18",
+            "ocpp_status": "close",
+            "power": "7",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2026-04-07T10:03:34.775122Z"
+          },
+          {
+            "name": "03",
+            "ocpp_status": "occupied",
+            "power": "7",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2026-04-20T10:48:27.019685Z"
+          },
+          {
+            "name": "11",
+            "ocpp_status": "occupied",
+            "power": "7",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2026-04-21T11:46:07.350317Z"
+          },
+          {
+            "name": "16",
+            "ocpp_status": "occupied",
+            "power": "7",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2026-04-21T05:47:58.382555Z"
+          },
+          {
+            "name": "10",
+            "ocpp_status": "available",
+            "power": "7",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2026-04-20T10:48:27.019711Z"
+          },
+          {
+            "name": "15",
+            "ocpp_status": "occupied",
+            "power": "7",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2026-04-21T10:20:50.380363Z"
+          },
+          {
+            "name": "08",
+            "ocpp_status": "occupied",
+            "power": "7",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2026-04-21T11:53:09.014785Z"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 4374,
+    "updated_at": "2026-04-21T12:20:06.876603Z",
+    "source": "onion",
+    "types": [
+      "AC"
+    ],
+    "ocpp_status": "occupied",
+    "latitude": 13.747203,
+    "longitude": 100.535676,
+    "name": "991 ถ. พระรามที่ 1 แขวงปทุมวัน เขตปทุมวัน กรุงเทพมหานคร 10330",
+    "address": "991 ถ. พระรามที่ 1 แขวงปทุมวัน เขตปทุมวัน กรุงเทพมหานคร 10330",
+    "icon_scale": "ss",
+    "distance": 16.68,
+    "distance_per_time_kilo": "24 นาที",
+    "opening_times": [
+      {
+        "period_begin": "10:00",
+        "period_end": "22:00",
+        "weekday": 1
+      },
+      {
+        "period_begin": "10:00",
+        "period_end": "22:00",
+        "weekday": 2
+      },
+      {
+        "period_begin": "10:00",
+        "period_end": "22:00",
+        "weekday": 3
+      },
+      {
+        "period_begin": "10:00",
+        "period_end": "22:00",
+        "weekday": 4
+      },
+      {
+        "period_begin": "10:00",
+        "period_end": "22:00",
+        "weekday": 5
+      },
+      {
+        "period_begin": "10:00",
+        "period_end": "22:00",
+        "weekday": 6
+      },
+      {
+        "period_begin": "10:00",
+        "period_end": "22:00",
+        "weekday": 7
+      }
+    ],
+    "province": {
+      "code": "10",
+      "name_th": "กรุงเทพมหานคร",
+      "name_en": "Bangkok"
+    },
+    "evses": [
+      {
+        "code": "111",
+        "connectors": [
+          {
+            "name": "06",
+            "ocpp_status": "occupied",
+            "power": "7",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2026-04-21T08:56:58.178244Z"
+          },
+          {
+            "name": "01",
+            "ocpp_status": "occupied",
+            "power": "7",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2026-04-21T11:37:56.431131Z"
+          },
+          {
+            "name": "04",
+            "ocpp_status": "occupied",
+            "power": "7",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2026-04-21T08:44:21.274533Z"
+          },
+          {
+            "name": "02",
+            "ocpp_status": "close",
+            "power": "7",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2026-01-07T07:11:47.285473Z"
+          },
+          {
+            "name": "05",
+            "ocpp_status": "occupied",
+            "power": "7",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2026-04-21T10:36:19.711634Z"
+          },
+          {
+            "name": "03",
+            "ocpp_status": "occupied",
+            "power": "7",
+            "price": 0,
+            "type": "AC",
+            "status_updated_at": "2026-04-21T10:50:10.059881Z"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 4818,
+    "updated_at": "2025-12-15T11:03:06.749055Z",
+    "source": "pttv2",
+    "types": [
+      "AC"
+    ],
+    "ocpp_status": "occupied",
+    "latitude": 13.7395629145,
+    "longitude": 100.5339758829,
+    "name": "อาคารจอดรถ 2 คณะอักษรศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย",
+    "address": "254 ถ.พญาไท แขวงปทุมวัน เขตปทุมวัน กรุงเทพมหานคร 10330",
+    "icon_scale": "l",
+    "distance": 16.93,
+    "distance_per_time_kilo": "25 นาที",
+    "opening_times": [
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 0
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 1
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 2
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 3
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 4
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 5
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 6
+      }
+    ],
+    "province": {
+      "code": "10",
+      "name_th": "กรุงเทพมหานคร",
+      "name_en": "Bangkok"
+    },
+    "evses": [
+      {
+        "brand": "IOCharger",
+        "code": "GWC-OR-2093",
+        "connectors": [
+          {
+            "name": "Type 2",
+            "ocpp_status": "occupied",
+            "power": "22",
+            "price": 9,
+            "type": "AC",
+            "position": "R",
+            "status_updated_at": "2025-12-15T04:13:25.331927Z"
+          },
+          {
+            "name": "Type 2",
+            "ocpp_status": "occupied",
+            "power": "22",
+            "price": 9,
+            "type": "AC",
+            "position": "L",
+            "status_updated_at": "2025-12-15T09:54:17.030378Z"
+          }
+        ]
+      },
+      {
+        "brand": "IOCharger",
+        "code": "GWC-OR-2065",
+        "connectors": [
+          {
+            "name": "Type 2",
+            "ocpp_status": "occupied",
+            "power": "7",
+            "price": 9,
+            "type": "AC",
+            "position": "M",
+            "status_updated_at": "2025-12-15T11:00:37.28466Z"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 4718,
+    "updated_at": "2025-12-15T11:03:05.272451Z",
+    "source": "pttv2",
+    "types": [
+      "DC",
+      "AC"
+    ],
+    "ocpp_status": "available",
+    "latitude": 13.74401,
+    "longitude": 100.5331,
+    "name": "อาคารวิทยกิตย์",
+    "address": "215 ซ.จุฬาลงกรณ์ ซ.64 ถ.พญาไท แขวงปทุมวัน เขตปทุมวัน กรุงเทพมหานคร 10330",
+    "icon_scale": "ss",
+    "distance": 16.98,
+    "distance_per_time_kilo": "25 นาที",
+    "opening_times": [
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 0
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 1
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 2
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 3
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 4
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 5
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 6
+      }
+    ],
+    "province": {
+      "code": "10",
+      "name_th": "กรุงเทพมหานคร",
+      "name_en": "Bangkok"
+    },
+    "evses": [
+      {
+        "brand": "Teison",
+        "code": "THPORE240302",
+        "connectors": [
+          {
+            "name": "CCS COMBO 2",
+            "ocpp_status": "available",
+            "power": "40",
+            "price": 8,
+            "type": "DC",
+            "position": "L",
+            "status_updated_at": "2025-12-14T10:12:47.932228Z"
+          },
+          {
+            "name": "CCS COMBO 2",
+            "ocpp_status": "available",
+            "power": "40",
+            "price": 8,
+            "type": "DC",
+            "position": "R",
+            "status_updated_at": "2025-12-15T09:22:46.533481Z"
+          }
+        ]
+      },
+      {
+        "brand": "IOCharger",
+        "code": "GWC-OR-2004",
+        "connectors": [
+          {
+            "name": "Type 2",
+            "ocpp_status": "occupied",
+            "power": "7",
+            "price": 9,
+            "type": "AC",
+            "position": "M",
+            "status_updated_at": "2025-12-15T09:45:21.33512Z"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 4814,
+    "updated_at": "2025-12-15T11:03:06.719237Z",
+    "source": "pttv2",
+    "types": [
+      "AC"
+    ],
+    "ocpp_status": "available",
+    "latitude": 13.7348860871,
+    "longitude": 100.5333056541,
+    "name": "ลานจอดรถอาคารเกษม อาคารจอดรถ 3 คณะรัฐศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย",
+    "address": "254 ถ.พญาไท แขวงปทุมวัน เขตปทุมวัน กรุงเทพมหานคร 10330",
+    "icon_scale": "l",
+    "distance": 17.07,
+    "distance_per_time_kilo": "25 นาที",
+    "opening_times": [
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 0
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 1
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 2
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 3
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 4
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 5
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 6
+      }
+    ],
+    "province": {
+      "code": "10",
+      "name_th": "กรุงเทพมหานคร",
+      "name_en": "Bangkok"
+    },
+    "evses": [
+      {
+        "brand": "IOCharger",
+        "code": "GWC-OR-2066",
+        "connectors": [
+          {
+            "name": "Type 2",
+            "ocpp_status": "available",
+            "power": "7",
+            "price": 9,
+            "type": "AC",
+            "position": "M",
+            "status_updated_at": "2025-12-15T07:43:12.232355Z"
+          }
+        ]
+      },
+      {
+        "brand": "IOCharger",
+        "code": "GWC-OR-2094",
+        "connectors": [
+          {
+            "name": "Type 2",
+            "ocpp_status": "available",
+            "power": "22",
+            "price": 9,
+            "type": "AC",
+            "position": "L",
+            "status_updated_at": "2025-12-15T07:19:00.232954Z"
+          },
+          {
+            "name": "Type 2",
+            "ocpp_status": "occupied",
+            "power": "22",
+            "price": 9,
+            "type": "AC",
+            "position": "R",
+            "status_updated_at": "2025-12-15T08:10:59.067332Z"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 4462,
+    "updated_at": "2026-02-06T08:16:52.744314Z",
+    "source": "igreen",
+    "types": [
+      "AC"
+    ],
+    "ocpp_status": "available",
+    "latitude": 13.735896,
+    "longitude": 100.550843,
+    "name": "Socio Ruamrudee by EVC x B-Charge",
+    "address": "119/9 ซ.ร่วมฤดี 2 แขวงลุมพินี เขตปทุมวัน กรุงเทพมหานคร 10330",
+    "icon_scale": "l",
+    "distance": 15.18,
+    "distance_per_time_kilo": "22 นาที",
+    "opening_times": [
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 0
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 1
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 2
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 3
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 4
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 5
+      },
+      {
+        "period_begin": "00:00",
+        "period_end": "24:00",
+        "weekday": 6
+      }
+    ],
+    "province": {
+      "code": "10",
+      "name_th": "กรุงเทพมหานคร",
+      "name_en": "Bangkok"
+    },
+    "evses": [
+      {
+        "code": "0001106501",
+        "connectors": [
+          {
+            "name": "124010003364",
+            "ocpp_status": "available",
+            "power": "7.4",
+            "price": 9,
+            "type": "AC",
+            "status_updated_at": "2026-02-03T12:44:18.285088Z"
+          }
+        ]
+      }
+    ]
+  }
+]
