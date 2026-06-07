@@ -104,3 +104,24 @@ Logs print to stdout. Each poll line looks like:
 ```
 [2026-06-06 12:00:01 UTC] polled=457 upserted=3 inserted=457 errors=0 duration=9.2s
 ```
+
+### Dry run (no Supabase, no credentials)
+
+To exercise the fetch + transform without writing anything:
+
+```bash
+cd monitor
+pip install -r requirements.txt
+
+# Live fetch from pugev.com, print what would be written, then exit:
+DRY_RUN=1 python main.py
+
+# Fully offline — replay a saved response (e.g. the reference scrape):
+DRY_RUN=1 SOURCE_FILE=../pugev_stations.txt python main.py
+```
+
+`DRY_RUN=1` runs a single poll, prints a status breakdown and a few sample
+snapshot rows, and writes nothing — no Supabase library or credentials
+required. `SOURCE_FILE` reads stations from a local JSON file (a bare list,
+or a raw `{"data":{"stations":[...]}}` response) instead of the network. Set
+`DEBUG=1` to also log the recursive quadrant-split fetch.

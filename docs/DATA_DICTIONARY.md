@@ -30,6 +30,12 @@ One row per station per poll cycle (every 5 minutes). Never updated after insert
 | `n_occupied` | int | Connectors with `ocpp_status = 'occupied'` at poll time |
 | `polled_at` | timestamptz | When this snapshot was taken (UTC) |
 
+> **Price encoding:** pugev.com reports unpriced connectors as `0`, not null.
+> The poller maps connector prices of `0` to "no price", so a station whose
+> connectors are all `0` gets `min_price = max_price = NULL` (~27% of target
+> stations). Connector counts and occupancy (`n_connectors`, `n_occupied`) are
+> unaffected — demand is still recorded even when price is unknown.
+
 ### `ocpp_status` values
 
 | Value | Meaning |

@@ -10,14 +10,18 @@ See docs/ARCHITECTURE.md for the data flow. The recursive fetch logic is
 copied (not imported) from pugev.py per CLAUDE.md; the only change is that
 the commented-out `return stations_list` is restored here.
 """
+import json
 import os
 import sys
 import time
+from collections import Counter
 from datetime import datetime, timezone
 
 import requests
 from apscheduler.schedulers.blocking import BlockingScheduler
-from supabase import create_client
+
+# supabase is imported lazily in main() so that dry-run / offline testing only
+# needs requests + APScheduler installed.
 
 # --- Configuration ---------------------------------------------------------
 
@@ -36,6 +40,12 @@ SLEEP_SECONDS = 0.3
 
 # Verbose per-quadrant fetch logging is noisy; enable with DEBUG=1.
 VERBOSE = os.environ.get("DEBUG", "").lower() in ("1", "true", "yes")
+
+# Local testing knobs (see docs/RUNBOOK.md §7):
+#   DRY_RUN=1        run one poll, print what would be written, no Supabase needed
+#   SOURCE_FILE=...  read stations from a local JSON file instead of pugev.com
+DRY_RUN = os.environ.get("DRY_RUN", "").lower() in ("1", "true", "yes")
+SOURCE_FILE = os.environ.get("SOURCE_FILE")
 
 
 # --- Logging ---------------------------------------------------------------
@@ -124,12 +134,16 @@ def reduce_station(station):
             n_connectors += 1
             if connector.get("ocpp_status") == "occupied":
                 n_occupied += 1
-            price = connector.get("price")
-            if price is not None:
-                try:
-                    prices.append(float(price))
-                except (TypeError, ValueError):
-                    pass  # skip non-numeric prices
+            # This source encodes "no price" as 0, not null (~27% of target
+            # stations have all-zero connectors — the "~26% lack prices" noted
+            # in the runbook). Treat 0 / non-numeric as missing so min/max stay
+            # meaningful and honour the schema's "NULL if no price data".
+            try:
+                price = float(connector.get("price"))
+            except (TypeError, ValueError):
+                price = 0.0
+            if price > 0:
+                prices.append(price)
     return {
         "min_price": min(prices) if prices else None,
         "max_price": max(prices) if prices else None,
@@ -158,13 +172,40 @@ def prime_station_cache(client):
 
 # --- Poll cycle ------------------------------------------------------------
 
+def load_stations():
+    """Stations for one cycle: a local JSON file when SOURCE_FILE is set
+    (offline testing), otherwise a live recursive fetch from pugev.com."""
+    if SOURCE_FILE:
+        with open(SOURCE_FILE, encoding="utf-8") as f:
+            payload = json.load(f)
+        if isinstance(payload, dict):  # a raw API response
+            return payload.get("data", {}).get("stations", [])
+        return payload  # a bare list, e.g. pugev_stations.txt
+    return collect_stations_recursive(**BBOX)
+
+
+def _report_dry_run(station_rows, snapshot_rows):
+    """Print what a real poll would have written (DRY_RUN, no Supabase)."""
+    n = len(snapshot_rows)
+    by_status = Counter(r["ocpp_status"] for r in snapshot_rows)
+    priced = sum(1 for r in snapshot_rows if r["min_price"] is not None)
+    log(f"[DRY RUN] would upsert {len(station_rows)} stations, "
+        f"insert {n} snapshots (nothing written)")
+    log(f"[DRY RUN] status: {dict(by_status)}")
+    if n:
+        log(f"[DRY RUN] with price: {priced}/{n} ({100 * priced // n}%), "
+            f"without: {n - priced}")
+    for row in snapshot_rows[:3]:
+        log(f"[DRY RUN] sample snapshot: {row}")
+
+
 def poll(client):
     started = time.monotonic()
     polled_at = datetime.now(timezone.utc).isoformat()
     errors = 0
 
     try:
-        raw_stations = collect_stations_recursive(**BBOX)
+        raw_stations = load_stations()
     except Exception as exc:  # noqa: BLE001 - skip this cycle, keep scheduler alive
         log(f"poll aborted: fetch failed ({exc})")
         return
@@ -207,19 +248,22 @@ def poll(client):
 
     upserted = 0
     inserted = 0
-    try:
-        # Upsert stations before snapshots so the snapshots FK is satisfied.
-        if station_rows:
-            client.table("stations").upsert(station_rows, on_conflict="id").execute()
-            upserted = len(station_rows)
-            for row in station_rows:
-                _station_cache[row["id"]] = (row["name"], row["address"])
-        if snapshot_rows:
-            client.table("snapshots").insert(snapshot_rows).execute()
-            inserted = len(snapshot_rows)
-    except Exception as exc:  # noqa: BLE001 - log and move on to next cycle
-        errors += 1
-        log(f"supabase write failed: {exc}")
+    if DRY_RUN:
+        _report_dry_run(station_rows, snapshot_rows)
+    else:
+        try:
+            # Upsert stations before snapshots so the snapshots FK is satisfied.
+            if station_rows:
+                client.table("stations").upsert(station_rows, on_conflict="id").execute()
+                upserted = len(station_rows)
+                for row in station_rows:
+                    _station_cache[row["id"]] = (row["name"], row["address"])
+            if snapshot_rows:
+                client.table("snapshots").insert(snapshot_rows).execute()
+                inserted = len(snapshot_rows)
+        except Exception as exc:  # noqa: BLE001 - log and move on to next cycle
+            errors += 1
+            log(f"supabase write failed: {exc}")
 
     duration = time.monotonic() - started
     log(
@@ -231,6 +275,12 @@ def poll(client):
 # --- Entry point -----------------------------------------------------------
 
 def main():
+    if DRY_RUN:
+        source = SOURCE_FILE or "pugev.com (live)"
+        log(f"DRY RUN: source={source}; one poll, no Supabase writes, then exit")
+        poll(None)
+        return
+
     url = os.environ.get("SUPABASE_URL")
     key = os.environ.get("SUPABASE_SERVICE_KEY")
     if not url or not key:
@@ -239,6 +289,8 @@ def main():
             file=sys.stderr,
         )
         sys.exit(1)
+
+    from supabase import create_client  # lazy: only needed for real writes
 
     client = create_client(url, key)
     log("ev-station-scraper poller starting")
