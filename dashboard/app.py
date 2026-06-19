@@ -246,10 +246,23 @@ with tab_station:
         else:
             hist["ts"] = pd.to_datetime(hist["polled_at"])
             hist["occupancy"] = hist["n_occupied"] / hist["n_connectors"].clip(lower=1)
+            # Coerce to float so an all-null AC (or DC) column doesn't end up a
+            # different dtype than its sibling (Plotly wide-form rejects that).
+            for c in ["ac_min_price", "dc_min_price"]:
+                hist[c] = pd.to_numeric(hist[c], errors="coerce")
             col1, col2 = st.columns(2)
             col1.plotly_chart(
                 px.line(hist, x="ts", y="occupancy", title="Occupancy")
                 .update_yaxes(tickformat=".0%"), use_container_width=True)
-            col2.plotly_chart(
-                px.line(hist, x="ts", y=["ac_min_price", "dc_min_price"], title="Price ฿/kWh"),
-                use_container_width=True)
+            price_long = hist.melt(
+                id_vars="ts", value_vars=["ac_min_price", "dc_min_price"],
+                var_name="kind", value_name="price").dropna(subset=["price"])
+            if price_long.empty:
+                col2.info("No price history for this station.")
+            else:
+                price_long["kind"] = price_long["kind"].str.replace(
+                    "_min_price", "", regex=False).str.upper()
+                col2.plotly_chart(
+                    px.line(price_long, x="ts", y="price", color="kind",
+                            title="Price ฿/kWh"),
+                    use_container_width=True)
