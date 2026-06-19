@@ -234,9 +234,16 @@ def run_cycle(supabase):
         log.exception("poll cycle failed")
 
 
+def _env(name):
+    """Read an env var, trimming stray whitespace/invisible characters
+    (e.g. a U+2028 picked up when pasting a URL)."""
+    val = os.environ.get(name)
+    return val.strip() if val else val
+
+
 def main():
-    url = os.environ.get("SUPABASE_URL")
-    key = os.environ.get("SUPABASE_SERVICE_KEY")
+    url = _env("SUPABASE_URL")
+    key = _env("SUPABASE_SERVICE_KEY")
     if not url or not key:
         log.error("SUPABASE_URL and SUPABASE_SERVICE_KEY are required")
         sys.exit(1)

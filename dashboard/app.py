@@ -29,12 +29,16 @@ st.set_page_config(page_title="EV Station Pricing & Demand", layout="wide")
 # ── Supabase client ─────────────────────────────────────────────────────────
 
 def _secret(name):
+    val = None
     try:
         if name in st.secrets:
-            return st.secrets[name]
+            val = st.secrets[name]
     except Exception:
         pass
-    return os.environ.get(name)
+    if val is None:
+        val = os.environ.get(name)
+    # Trim stray whitespace/invisible chars (e.g. a U+2028 from pasting a URL).
+    return val.strip() if isinstance(val, str) else val
 
 
 @st.cache_resource
