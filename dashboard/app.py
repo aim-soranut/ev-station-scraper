@@ -357,14 +357,28 @@ with tab_raw:
             "the browser. Narrow the provinces or shorten the date window, or pull "
             "it directly from the Supabase SQL Editor (see docs/RUNBOOK.md §4).")
     else:
-        if st.button("Generate raw CSV", key="gen_raw"):
+        fmt = st.radio("File type", ["CSV", "JSON"], horizontal=True, key="raw_fmt")
+        st.caption("JSON is one flat record per station per poll (the fields we "
+                   "store). Note: the original nested pugev format "
+                   "(evses/connectors/opening_times) is not retained at ingest.")
+        if st.button("Generate raw export", key="gen_raw"):
             with st.spinner(f"Fetching {n_rows:,} rows…"):
                 raw = apply_brand(load_raw(codes_param, start_iso, end_iso))
-                st.session_state["raw_csv"] = raw.to_csv(index=False).encode("utf-8")
+                if fmt == "JSON":
+                    data = raw.to_json(orient="records", force_ascii=False,
+                                       date_format="iso", indent=2).encode("utf-8")
+                    ext, mime = "json", "application/json"
+                else:
+                    data = raw.to_csv(index=False).encode("utf-8")
+                    ext, mime = "csv", "text/csv"
+                st.session_state["raw_data"] = data
                 st.session_state["raw_n"] = len(raw)
-        if "raw_csv" in st.session_state:
+                st.session_state["raw_ext"] = ext
+                st.session_state["raw_mime"] = mime
+        if "raw_data" in st.session_state:
             st.download_button(
-                f"⬇ Download raw snapshots CSV ({st.session_state['raw_n']:,} rows)",
-                st.session_state["raw_csv"],
-                file_name=f"raw_snapshots_{FNAME_SUFFIX}.csv",
-                mime="text/csv", key="dl_raw")
+                f"⬇ Download raw snapshots "
+                f"({st.session_state['raw_n']:,} rows, {st.session_state['raw_ext'].upper()})",
+                st.session_state["raw_data"],
+                file_name=f"raw_snapshots_{FNAME_SUFFIX}.{st.session_state['raw_ext']}",
+                mime=st.session_state["raw_mime"], key="dl_raw")
