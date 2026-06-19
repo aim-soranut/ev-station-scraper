@@ -133,6 +133,20 @@ def apply_brand(df):
     return df
 
 
+# Suffix for export filenames, e.g. 2026-06-12_2026-06-19.
+FNAME_SUFFIX = f"{start.date()}_{end.date()}"
+
+
+def csv_download(df, label, filename, key):
+    """Render a CSV download button for the (already filtered) dataframe."""
+    if df is None or df.empty:
+        return
+    st.download_button(
+        label, df.to_csv(index=False).encode("utf-8"),
+        file_name=filename, mime="text/csv", key=key,
+    )
+
+
 # ── Header KPIs ──────────────────────────────────────────────────────────────
 
 st.title("EV Station Pricing & Demand — Thailand")
@@ -181,6 +195,8 @@ with tab_map:
             layers=[layer], initial_view_state=view,
             tooltip={"text": "{name}\n{ocpp_status}  occ={n_occupied}/{n_connectors}"},
         ))
+        csv_download(latest_f, "⬇ Download current status (CSV)",
+                     "latest_status.csv", "dl_latest")
 
 # ── Occupancy over time ───────────────────────────────────────────────────────
 
@@ -194,6 +210,8 @@ with tab_occ:
                       labels={"occupancy_rate": "Occupancy rate", "ts": "Time (UTC)"})
         fig.update_yaxes(tickformat=".0%")
         st.plotly_chart(fig, use_container_width=True)
+        csv_download(df, "⬇ Download occupancy series (CSV)",
+                     f"occupancy_{FNAME_SUFFIX}.csv", "dl_occ")
 
 # ── Price over time ───────────────────────────────────────────────────────────
 
@@ -212,6 +230,8 @@ with tab_price:
         fig = px.line(melted, x="ts", y="price", color="series",
                       labels={"price": "฿/kWh", "ts": "Time (UTC)"})
         st.plotly_chart(fig, use_container_width=True)
+        csv_download(df, "⬇ Download price series (CSV)",
+                     f"prices_{FNAME_SUFFIX}.csv", "dl_price")
 
 # ── Price vs demand scatter ───────────────────────────────────────────────────
 
@@ -230,6 +250,8 @@ with tab_scatter:
         )
         fig.update_yaxes(tickformat=".0%")
         st.plotly_chart(fig, use_container_width=True)
+        csv_download(df, "⬇ Download price-vs-occupancy summary (CSV)",
+                     f"price_vs_occupancy_{FNAME_SUFFIX}.csv", "dl_scatter")
 
 # ── Per-station detail ────────────────────────────────────────────────────────
 
@@ -266,3 +288,5 @@ with tab_station:
                     px.line(price_long, x="ts", y="price", color="kind",
                             title="Price ฿/kWh"),
                     use_container_width=True)
+            csv_download(hist, "⬇ Download this station's history (CSV)",
+                         f"station_{choice}_history.csv", "dl_station")
