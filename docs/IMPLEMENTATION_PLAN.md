@@ -1,11 +1,17 @@
 # Implementation Plan — 30-min Nationwide Poller + Streamlit Dashboard
 
-> **Status: PROPOSAL — awaiting review.** Nothing below has been built yet.
-> Two deliverables: (1) switch polling to **30 minutes** and build the poller
-> that the docs describe but that does not yet exist — now collecting the
-> **whole country** (no bounding box, no province filter), and (2) add a
-> **Streamlit** dashboard to visualize price vs. occupancy, with province
-> filtering done **in the dashboard**.
+> **Status: APPROVED & IMPLEMENTED.** This document is kept as the design record.
+> Built: `monitor/main.py` (30-min nationwide poller), `supabase/schema.sql`
+> (tables + RLS + `dash_*` RPCs + purge), `dashboard/app.py` (Streamlit), and
+> doc updates across `CLAUDE.md`/`docs/`.
+>
+> **Decisions taken (review answers):**
+> 1. AC/DC price split — **adopted**.
+> 2. Dashboard read key — **anon key + read-only RLS** (service key stays in the poller).
+> 3. Hosting — **Streamlit Community Cloud**.
+> 4. Default province filter — **Nonthaburi + Pathum Thani**.
+> 5. Retention — **auto-purge at 30 days** (`RETENTION_DAYS`, configurable); note
+>    the free-tier caveat below (nationwide realistically holds ~1–2 weeks).
 
 ---
 

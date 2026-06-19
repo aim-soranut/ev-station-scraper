@@ -11,9 +11,10 @@ Populated on first sighting of a station. Updated if name or address changes.
 | `address` | text | Street address (Thai) |
 | `latitude` | float8 | WGS84 latitude |
 | `longitude` | float8 | WGS84 longitude |
-| `province_code` | text | `'12'` = Nonthaburi, `'13'` = Pathum Thani |
+| `province_code` | text | Thai province code (all provinces collected, e.g. `'12'` Nonthaburi, `'13'` Pathum Thani) |
+| `province_name` | text | English province name, used for dashboard filtering/labels |
 | `source` | text | Charging network brand: `pttv2`, `evolt`, `tesla`, `ea`, etc. |
-| `first_seen_at` | timestamptz | When we first recorded this station |
+| `first_seen_at` | timestamptz | When we first recorded this station (preserved across upserts) |
 
 ## Table: `snapshots`
 
@@ -24,11 +25,18 @@ One row per station per poll cycle (every 5 minutes). Never updated after insert
 | `id` | bigserial (PK) | Auto-increment row ID |
 | `station_id` | int (FK → stations.id) | Which station |
 | `ocpp_status` | text | Station-level status at poll time (see values below) |
-| `min_price` | numeric | Lowest price across all connectors (THB/kWh). NULL if no price data. |
-| `max_price` | numeric | Highest price across all connectors (THB/kWh). NULL if no price data. |
 | `n_connectors` | int | Total number of connectors at this station |
 | `n_occupied` | int | Connectors with `ocpp_status = 'occupied'` at poll time |
+| `n_available` | int | Connectors with `ocpp_status = 'available'` at poll time |
+| `min_price` | numeric | Lowest price across all connectors (THB/kWh). NULL if no price data. |
+| `max_price` | numeric | Highest price across all connectors (THB/kWh). NULL if no price data. |
+| `ac_min_price` | numeric | Lowest price across **AC** connectors. NULL if no AC connector. |
+| `ac_max_price` | numeric | Highest price across **AC** connectors. NULL if no AC connector. |
+| `dc_min_price` | numeric | Lowest price across **DC** connectors. NULL if no DC connector. |
+| `dc_max_price` | numeric | Highest price across **DC** connectors. NULL if no DC connector. |
 | `polled_at` | timestamptz | When this snapshot was taken (UTC) |
+
+> **Why split AC/DC?** DC (fast) charging is usually priced higher than AC, and many stations offer both. A single min/max would blur the two; the split lets the dashboard compare like-for-like and is what the price-vs-occupancy analysis relies on.
 
 ### `ocpp_status` values
 
@@ -39,6 +47,7 @@ One row per station per poll cycle (every 5 minutes). Never updated after insert
 | `close` | Station closed (outside opening hours) |
 | `maintenance` | Out of service |
 | `specific` | Restricted access (e.g. Tesla Supercharger for Tesla vehicles only) |
+| `unknown` | Connector-level only — status not reported by the operator |
 
 ### Derived analysis columns
 
