@@ -1,9 +1,11 @@
-# Implementation Plan — 30-min Poller + Streamlit Dashboard
+# Implementation Plan — 30-min Nationwide Poller + Streamlit Dashboard
 
 > **Status: PROPOSAL — awaiting review.** Nothing below has been built yet.
 > Two deliverables: (1) switch polling to **30 minutes** and build the poller
-> that the docs describe but that does not yet exist, and (2) add a **Streamlit**
-> dashboard to visualize price vs. occupancy.
+> that the docs describe but that does not yet exist — now collecting the
+> **whole country** (no bounding box, no province filter), and (2) add a
+> **Streamlit** dashboard to visualize price vs. occupancy, with province
+> filtering done **in the dashboard**.
 
 ---
 
@@ -21,10 +23,18 @@ in `CLAUDE.md` (it reduces load), but it lowers demand-signal granularity:
 occupancy is sampled 48×/day instead of 288×/day. You confirmed the idea is
 correct, so the plan uses 30 min.
 
-### Facts verified against the real scraped data (`pugev_stations.txt`, 5,597 stations)
+**Scope change (this revision):** collect **all of Thailand** instead of the
+Nonthaburi/Pathum Thani bounding box. The poller no longer filters by province
+— it stores every station and tags each with its `province_code`/`province_name`.
+The dashboard does the filtering (default view focused on Nonthaburi + Pathum
+Thani, but any province selectable).
 
-- Target box (`xmin=100.30, xmax=100.85, ymin=13.75, ymax=14.25`) holds the
-  documented provinces: **Nonthaburi (code 12) = 274**, **Pathum Thani (code 13) = 183** → ~**457 stations/poll**.
+### Facts verified against the real scraped data (`pugev_stations.txt`)
+
+- A full-country scrape returned **5,597 stations** (the bounding-box approach
+  would have been ~457). Nationwide is **~12× more data** — see §2 volume note.
+- The full-Thailand bounding box from `pugev.py` is
+  `xmin=97.3, xmax=105.7, ymin=5.5, ymax=20.6`.
 - Connector JSON shape: `evses[].connectors[]` each have
   `{name, ocpp_status, power, price, type, status_updated_at}`.
 - **Prices are per-connector and split by type**: `type` is `AC` or `DC`,
@@ -40,21 +50,29 @@ correct, so the plan uses 30 min.
 
 ---
 
-## 1. The 30-minute poller — `monitor/main.py`
+## 1. The 30-minute nationwide poller — `monitor/main.py`
 
 Port the proven logic from `pugev.py` (do **not** modify `pugev.py`; copy into
 `monitor/`). Behaviour per cycle:
 
-1. `collect_stations_recursive(xmin=100.30, xmax=100.85, ymin=13.75, ymax=14.25)`
-   — recursive quadrant split to defeat API truncation, deduped by `id`.
+1. `collect_stations_recursive(xmin=97.3, xmax=105.7, ymin=5.5, ymax=20.6)`
+   — recursive quadrant split over the **whole country** to defeat API
+   truncation, deduped by `id`.
    (Bug to fix on copy: `pugev.py:collect_stations_recursive` has its top-level
    `return stations_list` commented out — the ported version will return it.)
-2. Keep only `station["province"]["code"] in ("12", "13")`.
+2. **No province filter** — keep every returned station.
 3. For each station, flatten `evses[].connectors[]` and compute aggregates
-   (see snapshot columns below).
-4. **Upsert** into `stations` (`on_conflict="id"`); **insert** into `snapshots`.
+   (see snapshot columns below); record `province_code` + `province_name`.
+4. **Upsert** into `stations` (`on_conflict="id"`); **insert** into `snapshots`
+   in batches (one bulk insert, not 5,597 individual calls).
 5. Structured log line per cycle, e.g.
-   `[2026-06-19 12:00:01Z] polled 457 stations, inserted 457 snapshots, 0 errors`.
+   `[2026-06-19 12:00:01Z] polled 5597 stations, inserted 5597 snapshots, N api calls, 0 errors`.
+
+**API call cost:** recursing the whole country triggers many more quadrant
+splits than the old box (dense Bangkok area splits deep). Expect on the order of
+**~100–300 API calls/cycle** at 0.3s each → a few minutes of wall-clock time,
+still comfortably inside the 30-min window. The dry-run in step 5.3 will measure
+the real number before we commit to the interval.
 
 **Scheduling:** APScheduler `BlockingScheduler`, `IntervalTrigger(minutes=30)`,
 `max_instances=1`, `coalesce=True`, plus one run immediately on startup.
@@ -66,9 +84,8 @@ keep the 0.3s inter-request sleep; reuse a `requests.Session`.
 New optional: `POLL_INTERVAL_MIN` (default `30`) so the interval is tunable
 without a code change.
 
-**`monitor/requirements.txt`:** `requests`, `apscheduler`, `supabase`, `shapely`*
-(*only if we keep polygon filtering — not needed for province-code filtering,
-so it will be omitted unless you want it).
+**`monitor/requirements.txt`:** `requests`, `apscheduler`, `supabase`.
+(`shapely` is no longer needed — no polygon/box filtering at all.)
 
 **`monitor/Procfile`:** `worker: python main.py` (Railway worker).
 
@@ -76,7 +93,7 @@ so it will be omitted unless you want it).
 
 ## 2. Supabase schema — `supabase/schema.sql`
 
-`stations` (static, upserted) — as documented:
+`stations` (static, upserted):
 
 | column | type | notes |
 |---|---|---|
@@ -84,13 +101,14 @@ so it will be omitted unless you want it).
 | `name` | text | |
 | `address` | text | |
 | `latitude` / `longitude` | float8 | |
-| `province_code` | text | `'12'` / `'13'` |
+| `province_code` | text | now **all** provinces (`'12'`, `'13'`, …) |
+| `province_name` | text | e.g. `Nonthaburi` — for dashboard filtering/labels |
 | `source` | text | network brand (`evolt`, `pttv2`, `tesla`, …) |
 | `first_seen_at` | timestamptz default now() | |
 
-`snapshots` (append-only, one row per station per 30-min cycle). **Proposed
-columns — the AC/DC split is my recommended enhancement over the original
-single min/max design; flag if you'd rather keep it minimal:**
+`snapshots` (append-only, one row per station per 30-min cycle). **The AC/DC
+split is my recommended enhancement over the original single min/max design;
+flag if you'd rather keep it minimal:**
 
 | column | type | notes |
 |---|---|---|
@@ -105,9 +123,17 @@ single min/max design; flag if you'd rather keep it minimal:**
 | `ac_min_price` / `ac_max_price` | numeric | AC connectors only, null if none |
 | `dc_min_price` / `dc_max_price` | numeric | DC connectors only, null if none |
 
-Indexes: `snapshots(station_id, polled_at desc)` and `snapshots(polled_at)`
-for fast dashboard queries. Append-only growth ≈ **457 × 48 ≈ 22k rows/day**
-(far lighter than the old 5-min estimate of ~131k/day).
+Indexes: `snapshots(station_id, polled_at desc)`, `snapshots(polled_at)`, and
+`stations(province_code)` for fast filtered dashboard queries.
+
+### ⚠️ Data-volume note (nationwide changes this materially)
+
+Nationwide append-only growth ≈ **5,597 × 48 ≈ 269k rows/day ≈ 8M rows/month**
+(vs. ~22k/day for the old box). At a rough ~100 bytes/row that approaches the
+**Supabase free-tier 500 MB** limit within roughly a month. This makes
+**retention/scaling a real decision now**, not "later" — see open question #5.
+Mitigations on the table: monthly partitioning + dropping old partitions, a
+scheduled purge of snapshots older than N days, or periodic CSV export + truncate.
 
 ---
 
@@ -118,17 +144,21 @@ for fast dashboard queries. Append-only growth ≈ **457 × 48 ≈ 22k rows/day*
 
 **Data access:** read-only queries to Supabase. Use `st.cache_data(ttl=300)` so
 the UI doesn't re-query Postgres on every interaction. Uses its own env vars:
-`SUPABASE_URL` + a **read** key (anon key with RLS, or service key if private).
+`SUPABASE_URL` + a **read** key. Because the dataset is now nationwide, queries
+must be **server-side filtered** (by province + date range) before pulling into
+pandas — never load all 8M rows into the browser.
 
-**Global filters (sidebar):** date range, province (Nonthaburi/Pathum Thani),
-`source`/brand multiselect, connector type (AC/DC/both).
+**Global filters (sidebar):**
+- **Province** multiselect across all Thai provinces — **defaults to Nonthaburi
+  + Pathum Thani** (the analysis focus), with an "All Thailand" option.
+- Date range, `source`/brand multiselect, connector type (AC/DC/both).
 
 **Views — built to answer "how does competitor price relate to demand?":**
-1. **KPI header** — # stations tracked, current overall occupancy rate,
+1. **KPI header** — # stations in selection, current occupancy rate,
    median AC price, median DC price, last poll time.
-2. **Live map** (`pydeck`) — stations plotted by lat/long, colored by current
-   occupancy rate, sized by connector count.
-3. **Occupancy over time** — line chart of fleet occupancy rate
+2. **Live map** (`pydeck`) — stations in selection plotted by lat/long, colored
+   by current occupancy rate, sized by connector count (nationwide-capable).
+3. **Occupancy over time** — line chart of occupancy rate
    (`n_occupied / n_connectors`), split by province and/or brand.
 4. **Price over time** — AC and DC price trends; spot competitor price changes.
 5. **Price vs. occupancy scatter** ← the core question — each station's avg
@@ -142,22 +172,24 @@ or a second Railway service. Locally: `cd dashboard && streamlit run app.py`.
 
 ## 4. Documentation updates
 
-- **`CLAUDE.md`**: polling interval 5 → 30 min (and the "what not to change"
-  rationale); add `dashboard/` to repo layout; add dashboard env vars; add the
-  "run the dashboard" common task.
-- **`docs/ARCHITECTURE.md`**: 5 → 30 min; recompute rows/day (~22k); add the
-  dashboard box to the diagram and a Streamlit section.
-- **`docs/DATA_DICTIONARY.md`**: add connector `unknown` status; document the
-  new AC/DC price + `n_available` columns.
-- **`docs/RUNBOOK.md`**: dashboard deploy/run steps; note interval is now
-  `POLL_INTERVAL_MIN` (default 30).
+- **`CLAUDE.md`**: polling interval 5 → 30 min; scope changed to **nationwide
+  collection with dashboard-side province filtering** (the "Target provinces"
+  fact and bounding-box fact get reframed as the *analysis focus*, not a
+  collection filter); add `dashboard/` to repo layout + env vars + run task.
+- **`docs/ARCHITECTURE.md`**: 5 → 30 min; nationwide fetch; recompute rows/day
+  (~269k); add the dashboard box + a data-retention section.
+- **`docs/DATA_DICTIONARY.md`**: add connector `unknown` status; document
+  `province_name`, AC/DC price columns, and `n_available`.
+- **`docs/RUNBOOK.md`**: dashboard deploy/run steps; `POLL_INTERVAL_MIN`;
+  retention/purge procedure.
 
 ---
 
 ## 5. Suggested build order (after you approve)
 
 1. `supabase/schema.sql` 2. `monitor/` (poller + requirements + Procfile)
-3. Local dry-run of one poll cycle against the live API (verify counts/inserts)
+3. Local dry-run of one nationwide poll cycle against the live API — **measure
+   station count + API-call count + wall-clock time** before locking the interval
 4. `dashboard/` 5. Doc updates 6. Commit + push to `claude/practical-euler-7yjz8f`.
 
 ## 6. Open questions for your review
@@ -166,7 +198,10 @@ or a second Railway service. Locally: `cd dashboard && streamlit run app.py`.
    `min_price`/`max_price` only?
 2. **Dashboard read key** — use the Supabase **anon** key + a read-only RLS
    policy (safer to share), or reuse the **service** key (private dashboards only)?
-3. **Polygon filtering** — drop it (province-code filter is enough), or keep
-   `shapely` so we can also restrict to specific districts later?
-4. **Dashboard hosting** — Streamlit Community Cloud (free, recommended) or a
+3. **Dashboard hosting** — Streamlit Community Cloud (free, recommended) or a
    second Railway service?
+4. **Default dashboard province filter** — keep the default scoped to
+   Nonthaburi + Pathum Thani (recommended), or default to All Thailand?
+5. **Retention (now important at nationwide scale)** — keep all history (accept
+   eventual free-tier overflow / upgrade Supabase), or auto-purge snapshots
+   older than N days (e.g. 90)? If purge, what N?
