@@ -197,3 +197,51 @@ as $$
     where sn.station_id = p_station_id
     order by sn.polled_at;
 $$;
+
+-- Raw per-poll snapshot rows joined with station info, for CSV export.
+-- One row per station per poll cycle. Filtered by province + time window.
+create or replace function public.dash_export_raw(
+    p_codes text[] default null,
+    p_start timestamptz default now() - interval '7 days',
+    p_end   timestamptz default now()
+)
+returns table (
+    station_id integer, name text, address text,
+    province_code text, province_name text, source text,
+    latitude double precision, longitude double precision,
+    polled_at timestamptz, ocpp_status text,
+    n_connectors integer, n_occupied integer, n_available integer,
+    min_price numeric, max_price numeric,
+    ac_min_price numeric, ac_max_price numeric,
+    dc_min_price numeric, dc_max_price numeric
+)
+language sql stable
+as $$
+    select s.id, s.name, s.address, s.province_code, s.province_name, s.source,
+           s.latitude, s.longitude,
+           sn.polled_at, sn.ocpp_status, sn.n_connectors, sn.n_occupied, sn.n_available,
+           sn.min_price, sn.max_price, sn.ac_min_price, sn.ac_max_price,
+           sn.dc_min_price, sn.dc_max_price
+    from public.snapshots sn
+    join public.stations s on s.id = sn.station_id
+    where sn.polled_at between p_start and p_end
+      and (p_codes is null or s.province_code = any (p_codes))
+    order by sn.polled_at, s.id;
+$$;
+
+-- Row count for a raw export selection, so the dashboard can warn before pulling.
+create or replace function public.dash_export_count(
+    p_codes text[] default null,
+    p_start timestamptz default now() - interval '7 days',
+    p_end   timestamptz default now()
+)
+returns bigint
+language sql stable
+as $$
+    select count(*)::bigint
+    from public.snapshots sn
+    join public.stations s on s.id = sn.station_id
+    where sn.polled_at between p_start and p_end
+      and (p_codes is null or s.province_code = any (p_codes));
+$$;
+

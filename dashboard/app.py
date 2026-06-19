@@ -111,6 +111,26 @@ def load_history(station_id):
                order=("polled_at",))
 
 
+# Cap raw export size so a huge selection can't hang the browser
+# (nationwide over weeks is millions of rows — use the Supabase SQL editor for that).
+MAX_EXPORT_ROWS = 200_000
+
+
+@st.cache_data(ttl=300)
+def load_export_count(codes, start, end):
+    res = get_client().rpc(
+        "dash_export_count",
+        {"p_codes": codes, "p_start": start, "p_end": end}).execute()
+    return int(res.data or 0)
+
+
+@st.cache_data(ttl=300)
+def load_raw(codes, start, end):
+    return rpc("dash_export_raw",
+               {"p_codes": codes, "p_start": start, "p_end": end},
+               order=("polled_at", "station_id"))
+
+
 # ── Sidebar filters ─────────────────────────────────────────────────────────
 
 st.sidebar.title("Filters")
@@ -189,8 +209,9 @@ else:
     last_poll = pd.to_datetime(latest_f["polled_at"]).max()
     c5.metric("Last poll (UTC)", last_poll.strftime("%m-%d %H:%M") if pd.notna(last_poll) else "—")
 
-tab_map, tab_occ, tab_price, tab_scatter, tab_station = st.tabs(
-    ["🗺 Map", "📈 Occupancy", "💸 Price", "🎯 Price vs Demand", "🔎 Station"]
+tab_map, tab_occ, tab_price, tab_scatter, tab_station, tab_raw = st.tabs(
+    ["🗺 Map", "📈 Occupancy", "💸 Price", "🎯 Price vs Demand", "🔎 Station",
+     "📦 Raw export"]
 )
 
 # ── Map ──────────────────────────────────────────────────────────────────────
@@ -313,3 +334,37 @@ with tab_station:
                     use_container_width=True)
             csv_download(hist, "⬇ Download this station's history (CSV)",
                          f"station_{choice}_history.csv", "dl_station")
+
+# ── Raw export ────────────────────────────────────────────────────────────────
+
+with tab_raw:
+    st.caption("Every raw snapshot row (one per station per 30-min poll), joined "
+               "with station info — for your own analysis. Honors the sidebar "
+               "province + date-window filters (and brand, if set).")
+    prov_label = ", ".join(label_by_code.get(c, c).split(" (")[0]
+                           for c in selected_codes) or "All Thailand"
+    st.write(f"**Selection:** {prov_label}  ·  {start.date()} → {end.date()}"
+             + (f"  ·  brand: {', '.join(chosen_brands)}" if chosen_brands else ""))
+
+    n_rows = load_export_count(codes_param, start_iso, end_iso)
+    st.write(f"Matching rows (before brand filter): **{n_rows:,}**")
+
+    if n_rows == 0:
+        st.info("No rows match this selection.")
+    elif n_rows > MAX_EXPORT_ROWS:
+        st.warning(
+            f"That's more than {MAX_EXPORT_ROWS:,} rows — too large to export from "
+            "the browser. Narrow the provinces or shorten the date window, or pull "
+            "it directly from the Supabase SQL Editor (see docs/RUNBOOK.md §4).")
+    else:
+        if st.button("Generate raw CSV", key="gen_raw"):
+            with st.spinner(f"Fetching {n_rows:,} rows…"):
+                raw = apply_brand(load_raw(codes_param, start_iso, end_iso))
+                st.session_state["raw_csv"] = raw.to_csv(index=False).encode("utf-8")
+                st.session_state["raw_n"] = len(raw)
+        if "raw_csv" in st.session_state:
+            st.download_button(
+                f"⬇ Download raw snapshots CSV ({st.session_state['raw_n']:,} rows)",
+                st.session_state["raw_csv"],
+                file_name=f"raw_snapshots_{FNAME_SUFFIX}.csv",
+                mime="text/csv", key="dl_raw")
