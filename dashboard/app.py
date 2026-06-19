@@ -51,41 +51,64 @@ def get_client():
     return create_client(url, key)
 
 
-def rpc(fn, params):
-    return pd.DataFrame(get_client().rpc(fn, params).execute().data)
+# PostgREST caps each response at ~1000 rows, so RPC results (e.g. ~5,600
+# nationwide stations, or long time-series) must be paged. We order by a
+# unique key so limit/offset paging is stable across requests.
+PAGE = 1000
+
+
+def rpc(fn, params, order=()):
+    client = get_client()
+    rows, offset = [], 0
+    while True:
+        q = client.rpc(fn, params)
+        for col in order:
+            q = q.order(col)
+        page = q.range(offset, offset + PAGE - 1).execute().data
+        if not page:
+            break
+        rows.extend(page)
+        if len(page) < PAGE:
+            break
+        offset += PAGE
+    return pd.DataFrame(rows)
 
 
 @st.cache_data(ttl=300)
 def load_provinces():
-    return rpc("dash_provinces", {})
+    return rpc("dash_provinces", {}, order=("province_name",))
 
 
 @st.cache_data(ttl=300)
 def load_latest(codes):
-    return rpc("dash_latest_status", {"p_codes": codes})
+    return rpc("dash_latest_status", {"p_codes": codes}, order=("id",))
 
 
 @st.cache_data(ttl=300)
 def load_occupancy(codes, start, end):
     return rpc("dash_occupancy_timeseries",
-               {"p_codes": codes, "p_start": start, "p_end": end})
+               {"p_codes": codes, "p_start": start, "p_end": end},
+               order=("ts", "province_name"))
 
 
 @st.cache_data(ttl=300)
 def load_prices(codes, start, end):
     return rpc("dash_price_timeseries",
-               {"p_codes": codes, "p_start": start, "p_end": end})
+               {"p_codes": codes, "p_start": start, "p_end": end},
+               order=("ts", "province_name"))
 
 
 @st.cache_data(ttl=300)
 def load_scatter(codes, start, end):
     return rpc("dash_station_price_occupancy",
-               {"p_codes": codes, "p_start": start, "p_end": end})
+               {"p_codes": codes, "p_start": start, "p_end": end},
+               order=("id",))
 
 
 @st.cache_data(ttl=300)
 def load_history(station_id):
-    return rpc("dash_station_history", {"p_station_id": int(station_id)})
+    return rpc("dash_station_history", {"p_station_id": int(station_id)},
+               order=("polled_at",))
 
 
 # ── Sidebar filters ─────────────────────────────────────────────────────────
