@@ -128,7 +128,7 @@ def load_export_count(codes, start, end):
 def load_raw(codes, start, end):
     return rpc("dash_export_raw",
                {"p_codes": codes, "p_start": start, "p_end": end},
-               order=("polled_at", "station_id"))
+               order=("polled_at", "station_id", "connector_name"))
 
 
 # ── Sidebar filters ─────────────────────────────────────────────────────────

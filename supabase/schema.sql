@@ -1,7 +1,14 @@
--- ev-station-scraper schema
--- Run once in the Supabase SQL Editor.
--- Collects EV charging stations nationwide (Thailand) every 30 minutes.
+-- ev-station-scraper schema (connector-level)
+-- Run once in the Supabase SQL Editor (safe to re-run: tables use
+-- "if not exists", functions use "create or replace").
+--
+-- Collects EV charging stations nationwide (Thailand) every 30 minutes and
+-- stores CONNECTOR-LEVEL snapshots, faithful to the pugev API. Station-level
+-- aggregates (occupancy, price ranges) are derived in the dash_* functions.
 -- Province filtering is done in the dashboard, not at collection time.
+--
+-- MIGRATING from the old station-level schema? After running this, drop the
+-- obsolete table:  drop table if exists public.snapshots cascade;
 
 -- ─────────────────────────────────────────────────────────────────────────
 -- Tables
@@ -22,43 +29,42 @@ create table if not exists public.stations (
 
 create index if not exists stations_province_code_idx on public.stations (province_code);
 
--- Time series. One row per station per poll cycle. Append-only.
-create table if not exists public.snapshots (
-    id            bigint generated always as identity primary key,
-    station_id    integer not null references public.stations (id),
-    polled_at     timestamptz not null,
-    ocpp_status   text,                           -- station-level status
-    n_connectors  integer,
-    n_occupied    integer,
-    n_available   integer,
-    min_price     numeric,                        -- across all connectors (THB/kWh)
-    max_price     numeric,
-    ac_min_price  numeric,                        -- AC connectors only (null if none)
-    ac_max_price  numeric,
-    dc_min_price  numeric,                        -- DC connectors only (null if none)
-    dc_max_price  numeric
+-- Time series at CONNECTOR granularity. One row per connector per poll cycle.
+-- Append-only. Mirrors evses[].connectors[] from the source API.
+create table if not exists public.connector_snapshots (
+    id                bigint generated always as identity primary key,
+    station_id        integer not null references public.stations (id),
+    polled_at         timestamptz not null,       -- one timestamp per poll cycle
+    evse_code         text,                       -- evses[].code
+    connector_name    text,                       -- connectors[].name
+    connector_type    text,                       -- 'AC' / 'DC'
+    power_kw          numeric,                     -- connectors[].power
+    ocpp_status       text,                       -- connector-level status (see values below)
+    price             numeric,                     -- THB/kWh, per connector
+    status_updated_at timestamptz                  -- connectors[].status_updated_at
 );
 
-create index if not exists snapshots_station_polled_idx on public.snapshots (station_id, polled_at desc);
-create index if not exists snapshots_polled_idx on public.snapshots (polled_at);
+create index if not exists connector_snapshots_station_polled_idx
+    on public.connector_snapshots (station_id, polled_at desc);
+create index if not exists connector_snapshots_polled_idx
+    on public.connector_snapshots (polled_at);
 
 -- ─────────────────────────────────────────────────────────────────────────
 -- Row Level Security
--- The poller uses the service_role key, which bypasses RLS.
--- The dashboard uses the anon key and only needs read access.
+-- Poller uses the service_role key (bypasses RLS); dashboard uses anon (read).
 -- ─────────────────────────────────────────────────────────────────────────
 
-alter table public.stations  enable row level security;
-alter table public.snapshots enable row level security;
+alter table public.stations            enable row level security;
+alter table public.connector_snapshots enable row level security;
 
-drop policy if exists "anon read stations"  on public.stations;
-drop policy if exists "anon read snapshots" on public.snapshots;
+drop policy if exists "anon read stations"   on public.stations;
+drop policy if exists "anon read connectors" on public.connector_snapshots;
 
-create policy "anon read stations"  on public.stations  for select to anon using (true);
-create policy "anon read snapshots" on public.snapshots for select to anon using (true);
+create policy "anon read stations"   on public.stations            for select to anon using (true);
+create policy "anon read connectors" on public.connector_snapshots for select to anon using (true);
 
 -- ─────────────────────────────────────────────────────────────────────────
--- Retention: drop snapshots older than N days. Called by the poller.
+-- Retention: drop connector snapshots older than N days. Called by the poller.
 -- ─────────────────────────────────────────────────────────────────────────
 
 create or replace function public.purge_old_snapshots(retention_days integer default 30)
@@ -68,7 +74,7 @@ as $$
 declare
     deleted bigint;
 begin
-    delete from public.snapshots
+    delete from public.connector_snapshots
     where polled_at < now() - make_interval(days => retention_days);
     get diagnostics deleted = row_count;
     return deleted;
@@ -76,9 +82,9 @@ end;
 $$;
 
 -- ─────────────────────────────────────────────────────────────────────────
--- Dashboard RPC functions (aggregation happens in Postgres, not the browser).
--- All are SECURITY INVOKER so the anon read policies above apply.
--- Pass p_codes = NULL for "All Thailand", or an array like ARRAY['12','13'].
+-- Dashboard RPC functions. Station-level metrics are DERIVED from connector
+-- rows here, so status counts always reconcile to n_connectors.
+-- All SECURITY INVOKER; pass p_codes = NULL for all of Thailand.
 -- ─────────────────────────────────────────────────────────────────────────
 
 -- Provinces present in the data, with station counts (for the filter UI).
@@ -93,28 +99,53 @@ as $$
     order by province_name;
 $$;
 
--- Latest snapshot per station in the selected provinces (map + KPIs).
+-- Latest snapshot per station, aggregated from its connectors (map + KPIs).
 create or replace function public.dash_latest_status(p_codes text[] default null)
 returns table (
     id integer, name text, latitude double precision, longitude double precision,
     province_name text, source text, ocpp_status text,
-    n_connectors integer, n_occupied integer,
+    n_connectors integer, n_occupied integer, n_available integer,
+    n_close integer, n_maintenance integer, n_specific integer, n_unknown integer,
     min_price numeric, max_price numeric, ac_min_price numeric, dc_min_price numeric,
     polled_at timestamptz
 )
 language sql stable
 as $$
-    select distinct on (s.id)
+    with latest as (
+        select station_id, max(polled_at) as mp
+        from public.connector_snapshots
+        group by station_id
+    )
+    select
         s.id, s.name, s.latitude, s.longitude, s.province_name, s.source,
-        sn.ocpp_status, sn.n_connectors, sn.n_occupied,
-        sn.min_price, sn.max_price, sn.ac_min_price, sn.dc_min_price, sn.polled_at
-    from public.stations s
-    join public.snapshots sn on sn.station_id = s.id
+        case
+            when count(*) filter (where cs.ocpp_status = 'occupied')    > 0 then 'occupied'
+            when count(*) filter (where cs.ocpp_status = 'available')   > 0 then 'available'
+            when count(*) filter (where cs.ocpp_status = 'maintenance') > 0 then 'maintenance'
+            when count(*) filter (where cs.ocpp_status = 'close')       > 0 then 'close'
+            when count(*) filter (where cs.ocpp_status = 'specific')    > 0 then 'specific'
+            else 'unknown'
+        end as ocpp_status,
+        count(*)::int                                                    as n_connectors,
+        count(*) filter (where cs.ocpp_status = 'occupied')::int         as n_occupied,
+        count(*) filter (where cs.ocpp_status = 'available')::int        as n_available,
+        count(*) filter (where cs.ocpp_status = 'close')::int            as n_close,
+        count(*) filter (where cs.ocpp_status = 'maintenance')::int      as n_maintenance,
+        count(*) filter (where cs.ocpp_status = 'specific')::int         as n_specific,
+        count(*) filter (where cs.ocpp_status = 'unknown')::int          as n_unknown,
+        min(cs.price)                                                    as min_price,
+        max(cs.price)                                                    as max_price,
+        min(cs.price) filter (where cs.connector_type = 'AC')            as ac_min_price,
+        min(cs.price) filter (where cs.connector_type = 'DC')            as dc_min_price,
+        max(cs.polled_at)                                                as polled_at
+    from public.connector_snapshots cs
+    join latest l on l.station_id = cs.station_id and cs.polled_at = l.mp
+    join public.stations s on s.id = cs.station_id
     where p_codes is null or s.province_code = any (p_codes)
-    order by s.id, sn.polled_at desc;
+    group by s.id, s.name, s.latitude, s.longitude, s.province_name, s.source;
 $$;
 
--- Hourly fleet occupancy rate over time, per province.
+-- Hourly fleet occupancy rate over time (occupied connectors / total), per province.
 create or replace function public.dash_occupancy_timeseries(
     p_codes text[] default null,
     p_start timestamptz default now() - interval '7 days',
@@ -124,19 +155,20 @@ returns table (ts timestamptz, province_name text, occupancy_rate numeric, stati
 language sql stable
 as $$
     select
-        date_trunc('hour', sn.polled_at) as ts,
+        date_trunc('hour', cs.polled_at) as ts,
         s.province_name,
-        round(sum(sn.n_occupied)::numeric / nullif(sum(sn.n_connectors), 0), 4) as occupancy_rate,
-        count(distinct s.id)::bigint as stations
-    from public.snapshots sn
-    join public.stations s on s.id = sn.station_id
-    where sn.polled_at between p_start and p_end
+        round(count(*) filter (where cs.ocpp_status = 'occupied')::numeric
+              / nullif(count(*), 0), 4) as occupancy_rate,
+        count(distinct cs.station_id)::bigint as stations
+    from public.connector_snapshots cs
+    join public.stations s on s.id = cs.station_id
+    where cs.polled_at between p_start and p_end
       and (p_codes is null or s.province_code = any (p_codes))
     group by 1, 2
-    order by 1;
+    order by 1, 2;
 $$;
 
--- Hourly average AC/DC price over time, per province.
+-- Hourly average AC/DC connector price over time, per province.
 create or replace function public.dash_price_timeseries(
     p_codes text[] default null,
     p_start timestamptz default now() - interval '7 days',
@@ -146,16 +178,16 @@ returns table (ts timestamptz, province_name text, avg_ac_price numeric, avg_dc_
 language sql stable
 as $$
     select
-        date_trunc('hour', sn.polled_at) as ts,
+        date_trunc('hour', cs.polled_at) as ts,
         s.province_name,
-        round(avg(sn.ac_min_price), 2) as avg_ac_price,
-        round(avg(sn.dc_min_price), 2) as avg_dc_price
-    from public.snapshots sn
-    join public.stations s on s.id = sn.station_id
-    where sn.polled_at between p_start and p_end
+        round(avg(cs.price) filter (where cs.connector_type = 'AC'), 2) as avg_ac_price,
+        round(avg(cs.price) filter (where cs.connector_type = 'DC'), 2) as avg_dc_price
+    from public.connector_snapshots cs
+    join public.stations s on s.id = cs.station_id
+    where cs.polled_at between p_start and p_end
       and (p_codes is null or s.province_code = any (p_codes))
     group by 1, 2
-    order by 1;
+    order by 1, 2;
 $$;
 
 -- Per-station average price vs. average occupancy (the core scatter).
@@ -172,34 +204,47 @@ language sql stable
 as $$
     select
         s.id, s.name, s.source, s.province_name,
-        round(avg(sn.n_occupied::numeric / nullif(sn.n_connectors, 0)), 4) as avg_occupancy,
-        round(avg(coalesce(sn.dc_min_price, sn.ac_min_price, sn.min_price)), 2) as avg_price,
-        count(*)::bigint as samples
-    from public.snapshots sn
-    join public.stations s on s.id = sn.station_id
-    where sn.polled_at between p_start and p_end
+        round(avg(case when cs.ocpp_status = 'occupied' then 1.0 else 0 end), 4) as avg_occupancy,
+        round(avg(cs.price), 2) as avg_price,
+        count(distinct cs.polled_at)::bigint as samples
+    from public.connector_snapshots cs
+    join public.stations s on s.id = cs.station_id
+    where cs.polled_at between p_start and p_end
       and (p_codes is null or s.province_code = any (p_codes))
     group by s.id, s.name, s.source, s.province_name;
 $$;
 
--- Full snapshot history for a single station (per-station detail view).
+-- Per-poll aggregates for a single station (per-station detail view).
 create or replace function public.dash_station_history(p_station_id integer)
 returns table (
     polled_at timestamptz, ocpp_status text,
-    n_connectors integer, n_occupied integer,
+    n_connectors integer, n_occupied integer, n_available integer,
     min_price numeric, max_price numeric, ac_min_price numeric, dc_min_price numeric
 )
 language sql stable
 as $$
-    select sn.polled_at, sn.ocpp_status, sn.n_connectors, sn.n_occupied,
-           sn.min_price, sn.max_price, sn.ac_min_price, sn.dc_min_price
-    from public.snapshots sn
-    where sn.station_id = p_station_id
-    order by sn.polled_at;
+    select
+        cs.polled_at,
+        case
+            when count(*) filter (where cs.ocpp_status = 'occupied')  > 0 then 'occupied'
+            when count(*) filter (where cs.ocpp_status = 'available') > 0 then 'available'
+            else 'other'
+        end as ocpp_status,
+        count(*)::int                                              as n_connectors,
+        count(*) filter (where cs.ocpp_status = 'occupied')::int   as n_occupied,
+        count(*) filter (where cs.ocpp_status = 'available')::int  as n_available,
+        min(cs.price)                                              as min_price,
+        max(cs.price)                                              as max_price,
+        min(cs.price) filter (where cs.connector_type = 'AC')      as ac_min_price,
+        min(cs.price) filter (where cs.connector_type = 'DC')      as dc_min_price
+    from public.connector_snapshots cs
+    where cs.station_id = p_station_id
+    group by cs.polled_at
+    order by cs.polled_at;
 $$;
 
--- Raw per-poll snapshot rows joined with station info, for CSV export.
--- One row per station per poll cycle. Filtered by province + time window.
+-- Raw connector-level rows joined with station info, for CSV/JSON export.
+-- One row per connector per poll — faithful to the source granularity.
 create or replace function public.dash_export_raw(
     p_codes text[] default null,
     p_start timestamptz default now() - interval '7 days',
@@ -209,24 +254,21 @@ returns table (
     station_id integer, name text, address text,
     province_code text, province_name text, source text,
     latitude double precision, longitude double precision,
-    polled_at timestamptz, ocpp_status text,
-    n_connectors integer, n_occupied integer, n_available integer,
-    min_price numeric, max_price numeric,
-    ac_min_price numeric, ac_max_price numeric,
-    dc_min_price numeric, dc_max_price numeric
+    polled_at timestamptz, evse_code text, connector_name text,
+    connector_type text, power_kw numeric, ocpp_status text,
+    price numeric, status_updated_at timestamptz
 )
 language sql stable
 as $$
     select s.id, s.name, s.address, s.province_code, s.province_name, s.source,
            s.latitude, s.longitude,
-           sn.polled_at, sn.ocpp_status, sn.n_connectors, sn.n_occupied, sn.n_available,
-           sn.min_price, sn.max_price, sn.ac_min_price, sn.ac_max_price,
-           sn.dc_min_price, sn.dc_max_price
-    from public.snapshots sn
-    join public.stations s on s.id = sn.station_id
-    where sn.polled_at between p_start and p_end
+           cs.polled_at, cs.evse_code, cs.connector_name, cs.connector_type,
+           cs.power_kw, cs.ocpp_status, cs.price, cs.status_updated_at
+    from public.connector_snapshots cs
+    join public.stations s on s.id = cs.station_id
+    where cs.polled_at between p_start and p_end
       and (p_codes is null or s.province_code = any (p_codes))
-    order by sn.polled_at, s.id;
+    order by cs.polled_at, s.id, cs.connector_name;
 $$;
 
 -- Row count for a raw export selection, so the dashboard can warn before pulling.
@@ -239,9 +281,8 @@ returns bigint
 language sql stable
 as $$
     select count(*)::bigint
-    from public.snapshots sn
-    join public.stations s on s.id = sn.station_id
-    where sn.polled_at between p_start and p_end
+    from public.connector_snapshots cs
+    join public.stations s on s.id = cs.station_id
+    where cs.polled_at between p_start and p_end
       and (p_codes is null or s.province_code = any (p_codes));
 $$;
-

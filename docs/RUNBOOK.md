@@ -8,7 +8,7 @@ Step-by-step instructions for deploying, operating, and downloading data.
 
 1. Go to [supabase.com](https://supabase.com) → create a new project
 2. Open **SQL Editor** → paste the contents of `supabase/schema.sql` → Run
-3. Confirm tables `stations` and `snapshots` appear in **Table Editor**
+3. Confirm tables `stations` and `connector_snapshots` appear in **Table Editor**
 4. Copy your credentials from **Project Settings → API**:
    - **Project URL** → `SUPABASE_URL`
    - **service_role key** → `SUPABASE_SERVICE_KEY` (poller only)
@@ -40,37 +40,41 @@ which bypasses RLS for writes.
 
 In Supabase **Table Editor**:
 - `stations` should have ~5,600 rows after the first poll completes
-- `snapshots` should gain ~5,600 new rows every 30 minutes
+- `connector_snapshots` should gain ~16,000 new rows every 30 minutes (one per connector)
 
 Or run in **SQL Editor**:
 ```sql
-select count(*), max(polled_at) from snapshots;
+select count(*), max(polled_at) from connector_snapshots;
 ```
 
 ---
 
 ## 4. Download data for analysis
 
-### Option A — Quick CSV (Supabase Table Editor)
+### Option A — From the dashboard (easiest)
 
-1. Supabase dashboard → **Table Editor** → `snapshots`
-2. Click **Download CSV** (top-right)
-3. Open in Excel; use VLOOKUP on `station_id` to join with `stations` CSV
+Use the dashboard's **📦 Raw export** tab (CSV or JSON, filtered by province +
+date window), or the per-tab CSV download buttons. Best for bounded selections.
 
-### Option B — Pre-joined CSV (recommended)
+### Option B — Pre-joined CSV from the SQL Editor (for large/raw pulls)
 
 1. Supabase dashboard → **SQL Editor**
-2. Run this query:
+2. Run this query (raw connector-level rows):
 ```sql
-select
-  s.name, s.address, s.province_code, s.source,
-  sn.ocpp_status, sn.min_price, sn.max_price,
-  sn.n_connectors, sn.n_occupied,
-  round(sn.n_occupied::numeric / nullif(sn.n_connectors,0), 2) as occupancy_rate,
-  sn.polled_at
-from snapshots sn
-join stations s on s.id = sn.station_id
-order by sn.polled_at desc;
+select * from dash_export_raw(array['12','13'], now() - interval '7 days', now());
+```
+   Or aggregate to one row per station per poll:
+```sql
+select s.name, s.province_code, s.source, cs.polled_at,
+       count(*) as n_connectors,
+       count(*) filter (where cs.ocpp_status = 'occupied')  as n_occupied,
+       count(*) filter (where cs.ocpp_status = 'available') as n_available,
+       min(cs.price) filter (where cs.connector_type = 'AC') as ac_min_price,
+       min(cs.price) filter (where cs.connector_type = 'DC') as dc_min_price
+from connector_snapshots cs
+join stations s on s.id = cs.station_id
+group by s.id, s.name, s.province_code, s.source, cs.polled_at
+order by cs.polled_at desc;
 ```
 3. Click **Download CSV** below the results
 
@@ -117,21 +121,21 @@ In Railway dashboard → your Worker service → **Pause** (no data loss, just s
 | Price is NULL for some stations | That station has no price data | Normal — some stations lack prices |
 | Dashboard shows "No data yet" | Poller not writing, or wrong keys | Confirm snapshots exist; check dashboard `SUPABASE_ANON_KEY` |
 | Dashboard empty but poller works | RLS not applied | Re-run `supabase/schema.sql` (creates the `anon` read policies) |
-| Database near 500 MB | Free-tier full (nationwide is ~8M rows/mo) | Lower `RETENTION_DAYS`, or upgrade Supabase — see §8 |
+| Database near 500 MB | Free-tier full (connector-level nationwide is ~23M rows/mo) | Lower `RETENTION_DAYS`, scope to focus provinces, or upgrade Supabase — see §8 |
 
 ---
 
 ## 8. Data retention
 
-The poller calls `purge_old_snapshots(RETENTION_DAYS)` (default 30) every cycle,
-deleting `snapshots` older than the window. Adjust by setting `RETENTION_DAYS`
+The poller calls `purge_old_snapshots(RETENTION_DAYS)` every cycle, deleting
+`connector_snapshots` older than the window. Adjust by setting `RETENTION_DAYS`
 in Railway — no redeploy of code needed.
 
-Nationwide @ 30-min ≈ **8M rows/month**, which exceeds the Supabase **free-tier
-500 MB** within roughly 1–2 weeks. When it fills up:
-- Lower `RETENTION_DAYS` (e.g. `7`), or
-- Upgrade to Supabase Pro (8 GB), or
-- Export monthly CSVs (§4) and rely on purge to keep the live table small.
+Connector-level nationwide @ 30-min ≈ **23M rows/month**, so the Supabase
+**free-tier 500 MB** holds only a **few days**. To keep it viable:
+- Set `RETENTION_DAYS` low (e.g. `2`–`3`), or
+- Scope collection to the focus provinces (Nonthaburi + Pathum Thani) — ~1/12th the volume, or
+- Upgrade to Supabase Pro (8 GB).
 
 ---
 
@@ -150,5 +154,5 @@ python main.py
 
 Logs print to stdout. Each poll line looks like:
 ```
-2026-06-19 12:00:01Z INFO polled 5597 stations | 214 api calls | inserted 5597 snapshots | purged 0 | 78.3s
+2026-06-19 12:00:01Z INFO polled 5597 stations | 214 api calls | inserted 15937 connectors | purged 0 | 78.3s
 ```

@@ -118,34 +118,23 @@ def collect_stations_recursive(
 
 # ── Aggregation ────────────────────────────────────────────────────────────
 
-def _min_max(values):
-    vals = [v for v in values if v is not None]
-    if not vals:
-        return None, None
-    return min(vals), max(vals)
+def _to_num(value):
+    """Best-effort numeric coercion (e.g. power '150' -> 150.0)."""
+    if value is None:
+        return None
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return None
 
 
 def build_rows(station, polled_at):
-    """Return (station_row, snapshot_row) for one raw station dict."""
-    connectors = [
-        c
-        for evse in (station.get("evses") or [])
-        for c in (evse.get("connectors") or [])
-    ]
+    """Return (station_row, [connector_rows]) for one raw station dict.
 
-    n_occupied = sum(1 for c in connectors if c.get("ocpp_status") == "occupied")
-    n_available = sum(1 for c in connectors if c.get("ocpp_status") == "available")
-
-    all_prices = [c.get("price") for c in connectors]
-    ac_prices = [c.get("price") for c in connectors if c.get("type") == "AC"]
-    dc_prices = [c.get("price") for c in connectors if c.get("type") == "DC"]
-
-    min_price, max_price = _min_max(all_prices)
-    ac_min, ac_max = _min_max(ac_prices)
-    dc_min, dc_max = _min_max(dc_prices)
-
+    Connector-level rows are kept faithful to evses[].connectors[]; station
+    aggregates are derived later in the dashboard's dash_* functions.
+    """
     province = station.get("province") or {}
-
     station_row = {
         "id": station["id"],
         "name": station.get("name"),
@@ -158,21 +147,23 @@ def build_rows(station, polled_at):
         # first_seen_at intentionally omitted: DB default sets it on insert and
         # the upsert leaves it untouched on conflict.
     }
-    snapshot_row = {
-        "station_id": station["id"],
-        "polled_at": polled_at,
-        "ocpp_status": station.get("ocpp_status"),
-        "n_connectors": len(connectors),
-        "n_occupied": n_occupied,
-        "n_available": n_available,
-        "min_price": min_price,
-        "max_price": max_price,
-        "ac_min_price": ac_min,
-        "ac_max_price": ac_max,
-        "dc_min_price": dc_min,
-        "dc_max_price": dc_max,
-    }
-    return station_row, snapshot_row
+
+    connector_rows = []
+    for evse in (station.get("evses") or []):
+        evse_code = evse.get("code")
+        for c in (evse.get("connectors") or []):
+            connector_rows.append({
+                "station_id": station["id"],
+                "polled_at": polled_at,
+                "evse_code": evse_code,
+                "connector_name": c.get("name"),
+                "connector_type": c.get("type"),
+                "power_kw": _to_num(c.get("power")),
+                "ocpp_status": c.get("ocpp_status"),
+                "price": c.get("price"),
+                "status_updated_at": c.get("status_updated_at"),
+            })
+    return station_row, connector_rows
 
 
 def _chunked(seq, size):
@@ -192,20 +183,20 @@ def poll_once(supabase):
         session, THAI_XMIN, THAI_XMAX, THAI_YMIN, THAI_YMAX, stats=stats
     )
 
-    station_rows, snapshot_rows = [], []
+    station_rows, connector_rows = [], []
     for st in stations:
-        s_row, snap_row = build_rows(st, polled_at)
+        s_row, c_rows = build_rows(st, polled_at)
         station_rows.append(s_row)
-        snapshot_rows.append(snap_row)
+        connector_rows.extend(c_rows)
 
     # Upsert stations (preserves first_seen_at on conflict).
     for chunk in _chunked(station_rows, SNAPSHOT_CHUNK):
         supabase.table("stations").upsert(chunk, on_conflict="id").execute()
 
-    # Insert snapshots (append-only).
+    # Insert connector-level snapshots (append-only).
     inserted = 0
-    for chunk in _chunked(snapshot_rows, SNAPSHOT_CHUNK):
-        supabase.table("snapshots").insert(chunk).execute()
+    for chunk in _chunked(connector_rows, SNAPSHOT_CHUNK):
+        supabase.table("connector_snapshots").insert(chunk).execute()
         inserted += len(chunk)
 
     # Retention.
@@ -220,7 +211,7 @@ def poll_once(supabase):
 
     elapsed = time.monotonic() - started
     log.info(
-        "polled %d stations | %d api calls | inserted %d snapshots | "
+        "polled %d stations | %d api calls | inserted %d connectors | "
         "purged %s | %.1fs",
         len(stations), stats["api_calls"], inserted, purged, elapsed,
     )

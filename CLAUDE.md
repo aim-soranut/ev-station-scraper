@@ -42,8 +42,8 @@ ev-station-scraper/
 - The API **truncates results** when too many stations fit a bounding box — the poller handles this via recursive quadrant splitting (see `pugev.py:collect_stations_recursive`)
 - The poller collects **all of Thailand** using the bounding box `xmin=97.3, xmax=105.7, ymin=5.5, ymax=20.6` (~5,600 stations); it does **not** filter by province
 - Analysis focus (default dashboard filter): Nonthaburi (`code=12`, ~274 stations) and Pathum Thani (`code=13`, ~183 stations)
-- Station `ocpp_status` values: `available`, `occupied`, `close`, `maintenance`, `specific`. Connector-level status may also be `unknown`
-- Price is per kWh in THB, stored at connector level inside `evses[].connectors[].price`
+- Status values: `available`, `occupied`, `close`, `maintenance`, `specific`, `unknown` — these are mutually exclusive, so per station they sum to the connector count
+- Price, status, power and AC/DC type are all **connector-level** (`evses[].connectors[]`). We store one row per connector per poll in `connector_snapshots`; station-level metrics are derived at read time by the `dash_*` functions
 
 ## Stack
 

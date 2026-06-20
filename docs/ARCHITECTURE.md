@@ -13,15 +13,15 @@ Railway Worker (Python)
   - Recursive quadrant fetch (whole country)
   - NO province filter (collect all of Thailand)
   - Upsert stations
-  - Insert snapshots
+  - Insert connector_snapshots (one row per connector)
   - Purge snapshots older than RETENTION_DAYS
      │
      │  supabase-py (service key, bypasses RLS)
      ▼
 Supabase (Postgres)
-  stations       ← static info, upserted
-  snapshots      ← time series, insert-only
-  dash_* RPCs    ← server-side aggregation for the dashboard
+  stations            ← static info, upserted
+  connector_snapshots ← connector-level time series, insert-only
+  dash_* RPCs         ← derive station aggregates for the dashboard
      │
      ├─ anon key + read-only RLS ──▶ Streamlit dashboard (dashboard/app.py)
      │                                province filter, charts, map
@@ -44,13 +44,12 @@ Response: { "data": { "count": N, "stations": [...] } }
 1. `collect_stations_recursive(xmin=97.3, xmax=105.7, ymin=5.5, ymax=20.6)` — fetches **all stations in Thailand** (the dense Bangkok area triggers deep quadrant splitting, ~100–300 API calls/cycle)
 2. **No province filter** — every station is kept, tagged with `province_code` + `province_name`
 3. For each station:
-   - Flatten `evses[].connectors[]` → extract all prices/statuses
-   - Compute `min_price`/`max_price` over all connectors, plus `ac_min/ac_max` and `dc_min/dc_max` split by connector `type` (skip nulls)
-   - Compute `n_connectors`, `n_occupied`, `n_available`
-   - Upsert into `stations` (batched; `first_seen_at` preserved on conflict)
-   - Insert one row into `snapshots` (batched)
-4. Purge snapshots older than `RETENTION_DAYS` via the `purge_old_snapshots` RPC
-5. Log: `polled 5597 stations | 214 api calls | inserted 5597 snapshots | purged 0 | 78.3s`
+   - Upsert station info into `stations` (batched; `first_seen_at` preserved on conflict)
+   - Emit **one row per connector** from `evses[].connectors[]` (status, price, power, AC/DC type, `status_updated_at`) and batch-insert into `connector_snapshots` — no aggregation at write time
+4. Purge connector snapshots older than `RETENTION_DAYS` via the `purge_old_snapshots` RPC
+5. Log: `polled 5597 stations | 214 api calls | inserted 15937 connectors | purged 0 | 78.3s`
+
+Station-level metrics (occupancy, price ranges, status counts) are **derived at read time** in the `dash_*` functions, so they always reconcile to the connector data.
 
 ## Why APScheduler (not Railway Cron)
 
@@ -63,18 +62,18 @@ Each API call sleeps 0.3s (`sleep_seconds=0.3` in `fetch_stations_json`). A nati
 ## Supabase write strategy
 
 - `stations`: `upsert` with `on_conflict="id"`, batched — safe to run repeatedly; `first_seen_at` is preserved on conflict
-- `snapshots`: batched `insert` — append-only; grows ~5,600 rows every 30 min (**~269k rows/day, ~8M rows/month**)
+- `connector_snapshots`: batched `insert` — append-only; grows ~16k rows every 30 min (**~766k rows/day, ~23M rows/month** nationwide)
 
 ## Dashboard read path
 
-The dashboard (`dashboard/app.py`) connects with the **anon** key. Read-only RLS policies on both tables allow `select` for `anon`. Heavy aggregation (time bucketing, occupancy/price rollups, the price-vs-occupancy scatter) runs server-side in the `dash_*` SQL functions, so the browser only ever receives already-aggregated rows — never the full 8M-row snapshot table. Results are cached in Streamlit for 5 minutes (`st.cache_data(ttl=300)`).
+The dashboard (`dashboard/app.py`) connects with the **anon** key. Read-only RLS policies on both tables allow `select` for `anon`. The `dash_*` SQL functions derive station-level aggregates (occupancy/price rollups, status counts, the price-vs-occupancy scatter) from the connector rows server-side, so the browser receives small aggregated results — never the full connector table. Because PostgREST caps responses at 1000 rows, the dashboard pages through results (`limit`/`offset` with a stable sort). Results are cached in Streamlit for 5 minutes (`st.cache_data(ttl=300)`).
 
 ## Retention & scaling
 
-Nationwide collection at 30-min is ~8M rows/month, so the poller calls `purge_old_snapshots(RETENTION_DAYS)` (default 30) each cycle to drop old rows.
+Connector-level nationwide collection at 30-min is **~23M rows/month**, so the poller calls `purge_old_snapshots(RETENTION_DAYS)` each cycle to drop old rows.
 
-**Free-tier caveat:** at ~150–250 bytes/row incl. indexes, 30 days nationwide is well over Supabase's 500 MB free-tier limit — in practice the free tier holds roughly 1–2 weeks of nationwide history. Options when it fills up:
-- Lower `RETENTION_DAYS` (a one-line env change)
+**Free-tier caveat (now significant):** at ~150–250 bytes/row incl. indexes, the Supabase 500 MB free tier holds only a **few days** of connector-level nationwide history. Realistic options:
+- Lower `RETENTION_DAYS` aggressively (e.g. `2`–`3`)
+- Scope collection to the focus provinces (Nonthaburi + Pathum Thani) — ~1/12th the volume
 - Upgrade to Supabase Pro (8 GB)
 - Add monthly partitioning (`PARTITION BY RANGE (polled_at)`) and drop old partitions
-- Export monthly CSVs and truncate
