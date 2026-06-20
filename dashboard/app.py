@@ -184,8 +184,9 @@ def csv_download(df, label, filename, key):
     """Render a CSV download button for the (already filtered) dataframe."""
     if df is None or df.empty:
         return
+    # utf-8-sig (BOM) so Excel renders Thai text correctly instead of mojibake.
     st.download_button(
-        label, df.to_csv(index=False).encode("utf-8"),
+        label, df.to_csv(index=False).encode("utf-8-sig"),
         file_name=filename, mime="text/csv", key=key,
     )
 
@@ -369,7 +370,8 @@ with tab_raw:
                                        date_format="iso", indent=2).encode("utf-8")
                     ext, mime = "json", "application/json"
                 else:
-                    data = raw.to_csv(index=False).encode("utf-8")
+                    # utf-8-sig (BOM) so Excel renders Thai text correctly.
+                    data = raw.to_csv(index=False).encode("utf-8-sig")
                     ext, mime = "csv", "text/csv"
                 st.session_state["raw_data"] = data
                 st.session_state["raw_n"] = len(raw)
