@@ -11,69 +11,71 @@ Railway Worker (Python)
   monitor/main.py
   - APScheduler triggers poll
   - Recursive quadrant fetch (whole country)
-  - NO province filter (collect all of Thailand)
-  - Upsert stations
-  - Insert connector_snapshots (one row per connector)
-  - Purge snapshots older than RETENTION_DAYS
+  - Gzip the raw station list
+  - git commit + push to the `scrapes` branch
+  - Prune scrape files older than RETENTION_DAYS
      │
-     │  supabase-py (service key, bypasses RLS)
+     │  git push (https + GITHUB_TOKEN)
      ▼
-Supabase (Postgres)
-  stations            ← static info, upserted
-  connector_snapshots ← connector-level time series, insert-only
-  dash_* RPCs         ← derive station aggregates for the dashboard
+GitHub repo, `scrapes` branch
+  scrapes/<UTC-timestamp>.json.gz   ← one gzipped scrape per poll
      │
-     ├─ anon key + read-only RLS ──▶ Streamlit dashboard (dashboard/app.py)
-     │                                province filter, charts, map
-     │
-     └─ Table Editor → Download CSV ─▶ Excel / analysis tool
+     │  download from GitHub UI → gunzip
+     ▼
+Your analysis tool (Excel, Python, jq, …)
 ```
 
 ## How the pugev.com API works
 
-The API returns EV stations within a geographic bounding box:
 ```
 GET /api/v1/stations?xmin={lon_min}&xmax={lon_max}&ymin={lat_min}&ymax={lat_max}
 Response: { "data": { "count": N, "stations": [...] } }
 ```
 
-**Key limitation:** when a bounding box contains more stations than the API returns, `count > len(stations)`. The poller detects this and recursively splits the box into 4 quadrants until every sub-box is fully returned. This is implemented in `pugev.py:collect_stations_recursive` (and ported into `monitor/main.py`).
+**Key limitation:** when a bounding box contains more stations than the API
+returns, `count > len(stations)`. The scraper detects this and recursively
+splits the box into 4 quadrants until every sub-box is fully returned
+(`pugev.py:collect_stations_recursive`, ported into `monitor/main.py`).
 
 ## Data flow per poll cycle
 
-1. `collect_stations_recursive(xmin=97.3, xmax=105.7, ymin=5.5, ymax=20.6)` — fetches **all stations in Thailand** (the dense Bangkok area triggers deep quadrant splitting, ~100–300 API calls/cycle)
-2. **No province filter** — every station is kept, tagged with `province_code` + `province_name`
-3. For each station:
-   - Upsert station info into `stations` (batched; `first_seen_at` preserved on conflict)
-   - Emit **one row per connector** from `evses[].connectors[]` (status, price, power, AC/DC type, `status_updated_at`) and batch-insert into `connector_snapshots` — no aggregation at write time
-4. Purge connector snapshots older than `RETENTION_DAYS` via the `purge_old_snapshots` RPC
-5. Log: `polled 5597 stations | 214 api calls | inserted 15937 connectors | purged 0 | 78.3s`
+1. `collect_stations_recursive(xmin=97.3, xmax=105.7, ymin=5.5, ymax=20.6)` —
+   fetches **all stations in Thailand**, deduped by id (~100–300 API calls).
+2. Write the raw deduped station list to `scrapes/<timestamp>.json.gz`
+   (`ensure_ascii=False`, so Thai text stays readable inside the JSON).
+3. `git rm` scrape files older than `RETENTION_DAYS`.
+4. Commit and push to the `scrapes` branch (with rebase-and-retry on conflict).
+5. Log: `scraped 5597 stations | 214 api calls | wrote scrapes/…json.gz (1400 KB) | pruned 2 | 78.3s`
 
-Station-level metrics (occupancy, price ranges, status counts) are **derived at read time** in the `dash_*` functions, so they always reconcile to the connector data.
+The file content is the **original scraped JSON** — a list of station objects
+with nested `evses[].connectors[]`, `province`, `opening_times`, etc. Nothing
+is flattened or aggregated.
+
+## Why a separate `scrapes` branch
+
+Railway redeploys on every push to the branch it watches. Pushing scrape data to
+the **same** branch would trigger a rebuild every 30 minutes. The scraper pushes
+to a dedicated, code-free `scrapes` branch instead, which Railway ignores.
 
 ## Why APScheduler (not Railway Cron)
 
-Railway Cron spins up a fresh container per run, which means cold-start overhead (~5–10s) and no shared state. APScheduler runs inside a long-lived Worker process — simpler, no container overhead, and easier to debug via streaming logs.
+A long-lived Worker keeps one authenticated git clone warm in `SCRAPE_WORKDIR`
+and avoids per-run cold starts. Railway Cron would re-clone every run.
 
 ## Rate limiting
 
-Each API call sleeps 0.3s (`sleep_seconds=0.3` in `fetch_stations_json`). A nationwide poll requires ~100–300 API calls after quadrant splitting stabilises (the box covers all of Thailand). Total poll time: a few minutes — well within the 30-min window.
+Each API call sleeps 0.3s. A nationwide poll is ~100–300 calls (deep quadrant
+splitting around Bangkok) → a few minutes, well inside the 30-min window.
 
-## Supabase write strategy
+## Storage growth & retention
 
-- `stations`: `upsert` with `on_conflict="id"`, batched — safe to run repeatedly; `first_seen_at` is preserved on conflict
-- `connector_snapshots`: batched `insert` — append-only; grows ~16k rows every 30 min (**~766k rows/day, ~23M rows/month** nationwide)
+Each scrape is ~13 MB raw, ~1–2 MB gzipped. At 48 polls/day that is
+**~50–100 MB/day added to git history**. `RETENTION_DAYS` (`git rm`) keeps the
+working tree small, but **git history retains every committed blob** — deleting
+files does not reclaim space. GitHub will eventually flag repo size.
 
-## Dashboard read path
-
-The dashboard (`dashboard/app.py`) connects with the **anon** key. Read-only RLS policies on both tables allow `select` for `anon`. The `dash_*` SQL functions derive station-level aggregates (occupancy/price rollups, status counts, the price-vs-occupancy scatter) from the connector rows server-side, so the browser receives small aggregated results — never the full connector table. Because PostgREST caps responses at 1000 rows, the dashboard pages through results (`limit`/`offset` with a stable sort). Results are cached in Streamlit for 5 minutes (`st.cache_data(ttl=300)`).
-
-## Retention & scaling
-
-Connector-level nationwide collection at 30-min is **~23M rows/month**, so the poller calls `purge_old_snapshots(RETENTION_DAYS)` each cycle to drop old rows.
-
-**Free-tier caveat (now significant):** at ~150–250 bytes/row incl. indexes, the Supabase 500 MB free tier holds only a **few days** of connector-level nationwide history. Realistic options:
-- Lower `RETENTION_DAYS` aggressively (e.g. `2`–`3`)
-- Scope collection to the focus provinces (Nonthaburi + Pathum Thani) — ~1/12th the volume
-- Upgrade to Supabase Pro (8 GB)
-- Add monthly partitioning (`PARTITION BY RANGE (polled_at)`) and drop old partitions
+Mitigations:
+- Raise the interval / lower `RETENTION_DAYS`.
+- Periodically squash or recreate the `scrapes` branch (orphan + force-push) to
+  drop old history.
+- Move to object storage (e.g. Supabase Storage / S3) if long history is needed.

@@ -2,11 +2,12 @@
 
 ## What this project does
 
-Monitors EV charging station status and prices **nationwide across Thailand** by polling the pugev.com API every 30 minutes. Historical data is stored in Supabase and explored through a Streamlit dashboard (or downloaded as CSV) for pricing analysis.
+Scrapes EV charging station data **nationwide across Thailand** from the
+pugev.com API every 30 minutes and saves each scrape as a gzipped JSON file
+(the original scraped format) committed to the **`scrapes` branch** of this
+repo, so every snapshot is downloadable from GitHub.
 
-Collection is country-wide; **province filtering happens in the dashboard**, which defaults to our analysis focus of **Nonthaburi** and **Pathum Thani**.
-
-The goal is to understand the relationship between competitor prices and demand (occupancy) to inform pricing decisions for our own station.
+No database, no dashboard — just downloadable JSON snapshots over time.
 
 ## Repo layout
 
@@ -14,81 +15,69 @@ The goal is to understand the relationship between competitor prices and demand 
 ev-station-scraper/
   pugev.py                  ← original one-shot scraper (reference, do not modify)
   pugev_stations.txt        ← one-time full-Thailand scrape (reference data)
-  pathum_wan_stations.txt   ← one-time Pathum Wan scrape (reference data)
   pathum_wan_boundary.geojson
 
   monitor/
-    main.py                 ← the poller (entry point)
+    main.py                 ← the scraper/poller (entry point)
     requirements.txt
     Procfile
 
-  supabase/
-    schema.sql              ← run once in Supabase SQL editor: tables, RLS, dash_* RPCs
-
-  dashboard/
-    app.py                  ← Streamlit dashboard (price vs. occupancy)
-    requirements.txt
-    .streamlit/secrets.toml.example
-
   docs/
     ARCHITECTURE.md         ← system design and data flow
-    DATA_DICTIONARY.md      ← every field in Supabase explained
-    RUNBOOK.md              ← how to deploy, operate, and download data
+    DATA_DICTIONARY.md      ← the scraped JSON structure explained
+    RUNBOOK.md              ← how to deploy, operate, and download scrapes
 ```
+
+Scrape files land on the `scrapes` branch under `scrapes/<UTC-timestamp>.json.gz`
+(one per poll). The `scrapes` branch is data-only and separate from code branches.
 
 ## Key facts about the data source
 
 - API: `https://pugev.com/api/v1/stations?xmin=...&xmax=...&ymin=...&ymax=...`
-- The API **truncates results** when too many stations fit a bounding box — the poller handles this via recursive quadrant splitting (see `pugev.py:collect_stations_recursive`)
-- The poller collects **all of Thailand** using the bounding box `xmin=97.3, xmax=105.7, ymin=5.5, ymax=20.6` (~5,600 stations); it does **not** filter by province
-- Analysis focus (default dashboard filter): Nonthaburi (`code=12`, ~274 stations) and Pathum Thani (`code=13`, ~183 stations)
-- Status values: `available`, `occupied`, `close`, `maintenance`, `specific`, `unknown` — these are mutually exclusive, so per station they sum to the connector count
-- Price, status, power and AC/DC type are all **connector-level** (`evses[].connectors[]`). We store one row per connector per poll in `connector_snapshots`; station-level metrics are derived at read time by the `dash_*` functions
+- The API **truncates results** when too many stations fit a bounding box — the scraper handles this via recursive quadrant splitting (see `pugev.py:collect_stations_recursive`)
+- The scraper collects **all of Thailand** using the bounding box `xmin=97.3, xmax=105.7, ymin=5.5, ymax=20.6` (~5,600 stations); it does **not** filter by province
+- Each scrape is the raw deduped list of station objects, exactly as returned by the API (nested `evses[].connectors[]`, `province`, `opening_times`, etc.)
+- Price, status, power and AC/DC type are all **connector-level** (`evses[].connectors[]`)
 
 ## Stack
 
 | Layer | Technology | Where |
 |---|---|---|
-| Poller | Python + APScheduler | Railway Worker |
-| Database | Supabase (Postgres) | Supabase cloud |
-| Dashboard | Streamlit + Plotly + pydeck | Streamlit Community Cloud |
-| Data download | Supabase Table Editor → CSV | Manual |
+| Scraper | Python + APScheduler | Railway Worker |
+| Storage | Gzipped JSON committed to the `scrapes` branch | GitHub |
 
 ## Environment variables
 
-| Variable | Used by | Description |
-|---|---|---|
-| `SUPABASE_URL` | monitor/main.py, dashboard/app.py | Project URL from Supabase settings |
-| `SUPABASE_SERVICE_KEY` | monitor/main.py | Service role key (write access; bypasses RLS) |
-| `SUPABASE_ANON_KEY` | dashboard/app.py | Anon public key (read-only via RLS) |
-| `POLL_INTERVAL_MIN` | monitor/main.py | Optional, default `30` |
-| `RETENTION_DAYS` | monitor/main.py | Optional, default `30`; snapshots older than this are purged |
+| Variable | Description |
+|---|---|
+| `GITHUB_TOKEN` | **Required.** Token with write access to the repo (to push scrapes) |
+| `SCRAPE_REPO` | Optional, `owner/name`, default `aim-soranut/ev-station-scraper` |
+| `SCRAPE_BRANCH` | Optional, default `scrapes` |
+| `SCRAPE_WORKDIR` | Optional local clone path, default `/tmp/scrape-repo` |
+| `POLL_INTERVAL_MIN` | Optional, default `30` |
+| `RETENTION_DAYS` | Optional, default `14`; older scrape files are `git rm`ed from the branch |
 
 ## Common tasks
 
-**Run the poller locally:**
+**Run the scraper locally:**
 ```bash
 cd monitor
 pip install -r requirements.txt
-SUPABASE_URL=... SUPABASE_SERVICE_KEY=... python main.py
+GITHUB_TOKEN=ghp_... python main.py
 ```
 
-**Run the dashboard locally:**
-```bash
-cd dashboard
-pip install -r requirements.txt
-cp .streamlit/secrets.toml.example .streamlit/secrets.toml   # fill in URL + anon key
-streamlit run app.py
-```
-
-**Download data:**
-Supabase dashboard → SQL Editor → run the pre-joined query from `docs/RUNBOOK.md` → Download CSV
-
-**Set up database:**
-Supabase dashboard → SQL Editor → paste and run `supabase/schema.sql`
+**Download a scrape:**
+GitHub → switch to the `scrapes` branch → `scrapes/` → pick a file → Download →
+`gunzip <file>.json.gz` to get the original JSON.
 
 ## What not to change
 
 - `pugev.py` — reference implementation, do not edit; copy logic into `monitor/main.py` as needed
-- The polling interval (30 min, `POLL_INTERVAL_MIN`) is a balance between data freshness and pugev.com rate limits; do not lower it without testing
-- The dashboard uses the **anon** key only; never put `SUPABASE_SERVICE_KEY` in the dashboard or its secrets
+- The polling interval (30 min, `POLL_INTERVAL_MIN`) balances freshness against pugev.com rate limits; do not lower it without testing
+- The scraper pushes to the **`scrapes` branch only** — never the code branch (that would trigger a redeploy loop on Railway)
+
+## Caveat: git history growth
+
+Committing a scrape every 30 minutes grows git history permanently (gzipped
+~1–2 MB each; deleting old files does not reclaim history). Expect GitHub size
+pressure over time; mitigations are in `docs/RUNBOOK.md`.

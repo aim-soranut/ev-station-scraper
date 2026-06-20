@@ -1,51 +1,62 @@
 """
-Nationwide EV charging station poller for pugev.com.
+Nationwide EV charging station scraper for pugev.com.
 
 Every POLL_INTERVAL_MIN minutes (default 30) it:
-  1. Recursively fetches all stations in Thailand (handling API truncation by
-     splitting the bounding box into quadrants -- logic ported from pugev.py).
-  2. Computes per-station aggregates (status counts, AC/DC price ranges).
-  3. Upserts station info and inserts one snapshot row per station into Supabase.
-  4. Purges snapshots older than RETENTION_DAYS.
+  1. Recursively fetches every station in Thailand (handling API truncation by
+     splitting the bounding box into quadrants -- logic from pugev.py).
+  2. Saves the raw station list (original scraped JSON format) as a gzipped file.
+  3. Commits that file to the `scrapes` branch of the GitHub repo and pushes,
+     so each scrape is downloadable from GitHub.
+  4. Prunes scrape files older than RETENTION_DAYS from the branch.
 
-Province filtering is intentionally NOT done here -- everything is stored and
-the dashboard filters by province.
+No database, no dashboard -- just downloadable JSON snapshots.
 
 Env vars:
-  SUPABASE_URL          (required)
-  SUPABASE_SERVICE_KEY  (required, service_role -- bypasses RLS)
-  POLL_INTERVAL_MIN     (optional, default 30)
-  RETENTION_DAYS        (optional, default 30)
+  GITHUB_TOKEN       (required) PAT/token with write access to the repo
+  SCRAPE_REPO        (optional) "owner/name", default aim-soranut/ev-station-scraper
+  SCRAPE_BRANCH      (optional) branch to commit scrapes to, default "scrapes"
+  SCRAPE_WORKDIR     (optional) local clone path, default /tmp/scrape-repo
+  POLL_INTERVAL_MIN  (optional) default 30
+  RETENTION_DAYS     (optional) default 14; older scrape files are removed
 """
 
 import os
 import sys
+import gzip
+import json
 import time
 import logging
-from datetime import datetime, timezone
+import subprocess
+from datetime import datetime, timezone, timedelta
+from pathlib import Path
 
 import requests
 from apscheduler.schedulers.blocking import BlockingScheduler
 from apscheduler.triggers.interval import IntervalTrigger
-from supabase import create_client
 
 # Full-Thailand bounding box (from pugev.py).
 THAI_XMIN, THAI_XMAX = 97.3, 105.7
 THAI_YMIN, THAI_YMAX = 5.5, 20.6
 
 POLL_INTERVAL_MIN = int(os.environ.get("POLL_INTERVAL_MIN", "30"))
-RETENTION_DAYS = int(os.environ.get("RETENTION_DAYS", "30"))
-SNAPSHOT_CHUNK = 500  # rows per insert call
+RETENTION_DAYS = int(os.environ.get("RETENTION_DAYS", "14"))
+REPO_SLUG = os.environ.get("SCRAPE_REPO", "aim-soranut/ev-station-scraper").strip()
+BRANCH = os.environ.get("SCRAPE_BRANCH", "scrapes").strip()
+WORKDIR = Path(os.environ.get("SCRAPE_WORKDIR", "/tmp/scrape-repo"))
+SCRAPE_SUBDIR = "scrapes"
+FILE_FMT = "%Y%m%dT%H%M%SZ"
 
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)sZ %(levelname)s %(message)s",
     datefmt="%Y-%m-%d %H:%M:%S",
 )
-log = logging.getLogger("poller")
+log = logging.getLogger("scraper")
+
+_TOKEN = (os.environ.get("GITHUB_TOKEN") or "").strip()
 
 
-# ── pugev.com API (ported from pugev.py) ──────────────────────────────────
+# ── pugev.com API (from pugev.py) ──────────────────────────────────────────
 
 def get_url(xmin, xmax, ymin, ymax):
     return (
@@ -69,8 +80,7 @@ def collect_stations_recursive(
 ):
     """Recursively fetch every station in the box, splitting into quadrants
     whenever the API truncates results (count > returned). Returns the full
-    deduped list. (pugev.py leaves the top-level return commented out; here we
-    return it.)"""
+    deduped list of raw station dicts."""
     if stations_list is None:
         stations_list = []
     if seen_ids is None:
@@ -89,7 +99,6 @@ def collect_stations_recursive(
     count = data["data"]["count"]
     stations = data["data"]["stations"]
 
-    # Accept this box only if the API returned all stations for it.
     if len(stations) == count:
         for station in stations:
             sid = station["id"]
@@ -100,13 +109,12 @@ def collect_stations_recursive(
 
     xmid = (xmin + xmax) / 2
     ymid = (ymin + ymax) / 2
-    quadrants = [
+    for qxmin, qxmax, qymin, qymax in [
         (xmin, xmid, ymin, ymid),
         (xmid, xmax, ymin, ymid),
         (xmin, xmid, ymid, ymax),
         (xmid, xmax, ymid, ymax),
-    ]
-    for qxmin, qxmax, qymin, qymax in quadrants:
+    ]:
         collect_stations_recursive(
             session, qxmin, qxmax, qymin, qymax,
             timeout, sleep_seconds,
@@ -116,66 +124,102 @@ def collect_stations_recursive(
     return stations_list
 
 
-# ── Aggregation ────────────────────────────────────────────────────────────
+# ── git helpers ────────────────────────────────────────────────────────────
 
-def _to_num(value):
-    """Best-effort numeric coercion (e.g. power '150' -> 150.0)."""
-    if value is None:
-        return None
-    try:
-        return float(value)
-    except (TypeError, ValueError):
-        return None
+def _remote_url():
+    return f"https://x-access-token:{_TOKEN}@github.com/{REPO_SLUG}.git"
 
 
-def build_rows(station, polled_at):
-    """Return (station_row, [connector_rows]) for one raw station dict.
-
-    Connector-level rows are kept faithful to evses[].connectors[]; station
-    aggregates are derived later in the dashboard's dash_* functions.
-    """
-    province = station.get("province") or {}
-    station_row = {
-        "id": station["id"],
-        "name": station.get("name"),
-        "address": station.get("address"),
-        "latitude": station.get("latitude"),
-        "longitude": station.get("longitude"),
-        "province_code": province.get("code"),
-        "province_name": province.get("name_en"),
-        "source": station.get("source"),
-        # first_seen_at intentionally omitted: DB default sets it on insert and
-        # the upsert leaves it untouched on conflict.
-    }
-
-    connector_rows = []
-    for evse in (station.get("evses") or []):
-        evse_code = evse.get("code")
-        for c in (evse.get("connectors") or []):
-            connector_rows.append({
-                "station_id": station["id"],
-                "polled_at": polled_at,
-                "evse_code": evse_code,
-                "connector_name": c.get("name"),
-                "connector_type": c.get("type"),
-                "power_kw": _to_num(c.get("power")),
-                "ocpp_status": c.get("ocpp_status"),
-                "price": c.get("price"),
-                "status_updated_at": c.get("status_updated_at"),
-            })
-    return station_row, connector_rows
+def _scrub(text):
+    return (text or "").replace(_TOKEN, "***") if _TOKEN else (text or "")
 
 
-def _chunked(seq, size):
-    for i in range(0, len(seq), size):
-        yield seq[i:i + size]
+def git(*args, cwd=WORKDIR, check=True):
+    """Run a git command, scrubbing the token from any output we log."""
+    proc = subprocess.run(
+        ["git", *args], cwd=str(cwd) if cwd else None,
+        capture_output=True, text=True,
+    )
+    if check and proc.returncode != 0:
+        raise RuntimeError(
+            f"git {' '.join(args)} failed: {_scrub(proc.stderr.strip())}"
+        )
+    return proc
+
+
+def ensure_repo():
+    """Make sure WORKDIR is a clone of the repo on the scrapes branch."""
+    if (WORKDIR / ".git").exists():
+        # Re-sync to remote (this worker is the only writer).
+        git("fetch", "origin", BRANCH, check=False)
+        git("checkout", BRANCH, check=False)
+        git("reset", "--hard", f"origin/{BRANCH}", check=False)
+        return
+
+    WORKDIR.parent.mkdir(parents=True, exist_ok=True)
+    url = _remote_url()
+
+    # Try to clone the existing scrapes branch.
+    cloned = git("clone", "--single-branch", "--branch", BRANCH, url, str(WORKDIR),
+                 cwd=None, check=False)
+    if cloned.returncode == 0:
+        _config_identity()
+        return
+
+    # Branch doesn't exist yet: clone default branch, then make an orphan branch.
+    git("clone", "--depth", "1", url, str(WORKDIR), cwd=None)
+    _config_identity()
+    git("checkout", "--orphan", BRANCH)
+    git("rm", "-rf", ".", check=False)
+    (WORKDIR / SCRAPE_SUBDIR).mkdir(parents=True, exist_ok=True)
+    (WORKDIR / "README.md").write_text(
+        "# pugev scrapes\n\nGzipped raw JSON snapshots of pugev.com stations, "
+        "one per poll. Download a file and `gunzip` it to get the original "
+        "scraped JSON.\n"
+    )
+    git("add", "-A")
+    git("commit", "-m", "init scrapes branch")
+    git("push", "-u", "origin", BRANCH)
+
+
+def _config_identity():
+    git("config", "user.email", "scraper@ev-station-scraper.local")
+    git("config", "user.name", "ev-station-scraper")
+
+
+def prune_old():
+    """git rm scrape files older than RETENTION_DAYS (history still retains them)."""
+    cutoff = datetime.now(timezone.utc) - timedelta(days=RETENTION_DAYS)
+    folder = WORKDIR / SCRAPE_SUBDIR
+    removed = 0
+    for f in folder.glob("*.json.gz"):
+        try:
+            ts = datetime.strptime(f.stem.replace(".json", ""), FILE_FMT).replace(
+                tzinfo=timezone.utc)
+        except ValueError:
+            continue
+        if ts < cutoff:
+            git("rm", "-q", f"{SCRAPE_SUBDIR}/{f.name}", check=False)
+            removed += 1
+    return removed
+
+
+def push_with_retry(attempts=4):
+    for i in range(attempts):
+        if git("push", "origin", BRANCH, check=False).returncode == 0:
+            return
+        # Someone/something moved the branch -- rebase and retry.
+        git("fetch", "origin", BRANCH, check=False)
+        git("rebase", f"origin/{BRANCH}", check=False)
+        time.sleep(2 ** i)
+    raise RuntimeError("git push failed after retries")
 
 
 # ── Poll cycle ───────────────────────────────────────────────────────────
 
-def poll_once(supabase):
+def poll_once():
     started = time.monotonic()
-    polled_at = datetime.now(timezone.utc).isoformat()
+    stamp = datetime.now(timezone.utc).strftime(FILE_FMT)
 
     session = requests.Session()
     stats = {"api_calls": 0}
@@ -183,75 +227,50 @@ def poll_once(supabase):
         session, THAI_XMIN, THAI_XMAX, THAI_YMIN, THAI_YMAX, stats=stats
     )
 
-    station_rows, connector_rows = [], []
-    for st in stations:
-        s_row, c_rows = build_rows(st, polled_at)
-        station_rows.append(s_row)
-        connector_rows.extend(c_rows)
+    ensure_repo()
+    rel = f"{SCRAPE_SUBDIR}/{stamp}.json.gz"
+    path = WORKDIR / rel
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with gzip.open(path, "wt", encoding="utf-8") as fh:
+        json.dump(stations, fh, ensure_ascii=False)
+    size_kb = path.stat().st_size / 1024
 
-    # Upsert stations (preserves first_seen_at on conflict).
-    for chunk in _chunked(station_rows, SNAPSHOT_CHUNK):
-        supabase.table("stations").upsert(chunk, on_conflict="id").execute()
-
-    # Insert connector-level snapshots (append-only).
-    inserted = 0
-    for chunk in _chunked(connector_rows, SNAPSHOT_CHUNK):
-        supabase.table("connector_snapshots").insert(chunk).execute()
-        inserted += len(chunk)
-
-    # Retention.
-    purged = "n/a"
-    try:
-        res = supabase.rpc(
-            "purge_old_snapshots", {"retention_days": RETENTION_DAYS}
-        ).execute()
-        purged = res.data
-    except Exception as exc:  # purge failure must not abort the cycle
-        log.warning("purge_old_snapshots failed: %s", exc)
+    pruned = prune_old()
+    git("add", "-A")
+    git("commit", "-m", f"scrape {stamp}: {len(stations)} stations")
+    push_with_retry()
 
     elapsed = time.monotonic() - started
     log.info(
-        "polled %d stations | %d api calls | inserted %d connectors | "
-        "purged %s | %.1fs",
-        len(stations), stats["api_calls"], inserted, purged, elapsed,
+        "scraped %d stations | %d api calls | wrote %s (%.0f KB) | pruned %d | %.1fs",
+        len(stations), stats["api_calls"], rel, size_kb, pruned, elapsed,
     )
 
 
-def run_cycle(supabase):
+def run_cycle():
     """Wrapper so one bad cycle never kills the long-running worker."""
     try:
-        poll_once(supabase)
+        poll_once()
     except Exception:
-        log.exception("poll cycle failed")
-
-
-def _env(name):
-    """Read an env var, trimming stray whitespace/invisible characters
-    (e.g. a U+2028 picked up when pasting a URL)."""
-    val = os.environ.get(name)
-    return val.strip() if val else val
+        log.exception("scrape cycle failed")
 
 
 def main():
-    url = _env("SUPABASE_URL")
-    key = _env("SUPABASE_SERVICE_KEY")
-    if not url or not key:
-        log.error("SUPABASE_URL and SUPABASE_SERVICE_KEY are required")
+    if not _TOKEN:
+        log.error("GITHUB_TOKEN is required (write access to %s)", REPO_SLUG)
         sys.exit(1)
 
-    supabase = create_client(url, key)
     log.info(
-        "starting poller: interval=%dmin retention=%dd",
-        POLL_INTERVAL_MIN, RETENTION_DAYS,
+        "starting scraper: repo=%s branch=%s interval=%dmin retention=%dd",
+        REPO_SLUG, BRANCH, POLL_INTERVAL_MIN, RETENTION_DAYS,
     )
 
-    # Run immediately, then on the interval.
-    run_cycle(supabase)
+    run_cycle()  # run immediately, then on the interval
 
     scheduler = BlockingScheduler(timezone="UTC")
     scheduler.add_job(
         run_cycle, IntervalTrigger(minutes=POLL_INTERVAL_MIN),
-        args=[supabase], max_instances=1, coalesce=True,
+        max_instances=1, coalesce=True,
     )
     try:
         scheduler.start()
